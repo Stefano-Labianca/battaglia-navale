@@ -5,5 +5,5 @@ Battaglia navale sviluppata in C per l'esame di Laboratorio di Informatica 2021/
 [Stefano Labianca](https://github.com/Stefano-Labianca) \
 [Mattia Curri](https://github.com/FrumpyGoose180) \
 [Emanuele Fontana] \
-[Donato Festa](https://github.com/DonatoFe11) \
+[Donato Festa](https://github.com/DonatoFe11) 
 

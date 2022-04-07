@@ -1,5 +1,58 @@
 # Battaglia Navale Enhanced
-Battaglia navale sviluppata in C per l'esame di Laboratorio di Informatica 2021/2022
+Battaglia navale, con varianti rispetto al gioco originale, sviluppata in linguaggio C per l'esame di Laboratorio di Informatica a.a. 2021/2022 per il c.d.l. di Informatica.
+## Regole della battaglia navale classica
+Per giocare a battaglia navale occorrono quattro tabelle (due per giocatore), tutte di uguali 
+dimensioni (16x16). I quadretti della tabella sono identificati da coppie di coordinate, corrispondenti 
+a riga e colonna; tradizionalmente si usano lettere per le colonne e numeri per le righe (perciò le 
+celle sono "A-1", "B-6", e così via). I giocatori si accordano preliminarmente su quante navi disporre 
+e di quali dimensioni. All'inizio, i giocatori devono "posizionare le proprie navi" segnandole su una 
+delle loro due griglie (che terranno nascoste all'avversario per tutta la durata del gioco):
+- Una "nave" occupa un certo numero di quadretti adiacenti in linea retta (orizzontale o verticale) 
+sulla tabella.
+- Due navi non possono toccarsi. Una volta posizionate le navi, il gioco procede a turni. 
+Il giocatore di turno "spara un colpo" dichiarando un quadretto (per esempio, "B-5"). L'avversario 
+controlla sulla propria griglia se quella cella è occupata da una sua nave. In caso affermativo 
+risponde "colpito!" e marca quel quadretto sulla propria tabella; in caso negativo risponde "acqua" o 
+"mancato". 
+- Sulla seconda tabella in dotazione i giocatori prendono nota dei colpi che hanno sparato 
+e del loro esito. Quando un colpo centra l'ultimo quadretto di una nave non ancora affondata, il 
+giocatore che subisce il colpo dovrà dichiarare "colpito e affondato!" e la nave si considera persa. 
+- Vince il giocatore che fa affondare tutte le navi dell'avversario per primo
+Numero e Dimensione delle navi:
+5 tipi diversi: 1 nave da 5 caselle, 2 navi da 4 caselle, 3 navi da 3 caselle, 4 navi da 2 caselle e 5 
+navi da 1 casella, per un totale di 15 navi.
+
+## VARIANTI DEL GIOCO
+- **“Colpo a largo raggio”**: oltre alla casella indicata (ovvero la casella centrale) ha effetto anche 
+sulle caselle intorno (raggio 1 per un totale di 9 caselle). Per ogni singola casella colpita 
+verranno stampate a schermo le coordinate della casella e il messaggio “mancato” se il colpo 
+non ha colpito alcuna nave, “colpito” se si è colpita una nave senza affondarla e “colpito e 
+affondato” se si colpisce l’ultima cella ancora intatta di una nave facendola dunque affondare. 
+Ogni giocatore ha 3 colpi a largo raggio. I risultati del colpo verranno segnati sulla seconda 
+griglia del giocatore
+
+**ESEMPIO DI UTILIZZO**: Specifico la cella B-2. A schermo verranno stampati i seguenti messaggi: 
+A-1 mancato, A-2 mancato, A-3 mancato, B-1 colpito e affondato, B-2 mancato, B-3 mancato, C-1 
+mancato, C-2 mancato, C-3 colpito
+- **“Bombardamento aereo”** per colpire una riga/colonna a scelta: Dopo 10 turni viene sbloccata 
+la possibilità di colpire una riga o una colonna a scelta della griglia dell’avversario. Per ogni 
+singola casella colpita verranno stampate a schermo le coordinate della casella e il
+messaggio “mancato” se il colpo non ha colpito alcuna nave, “colpito” se si è colpita una nave 
+senza affondarla e “colpito e affondato” se si colpisce l’ultima cella ancora intatta di una nave 
+facendola dunque affondare. Utilizzabile solo 1 volta. I risultati del bombardamento aereo
+verranno segnati sulla seconda griglia del giocatore
+
+**ESEMPIO DI UTILIZZO**: Specifico la colonna A. A schermo verranno stampati i seguenti messaggi: 
+A-1 mancato, A-2 mancato, A-3 colpito, A-4 colpito, A-5 colpito e affondato, A-6 mancato, A-7 
+mancato, A-8 mancato, A-9 colpito, A-10 mancato, A-11 mancato, A-12 mancato, A-13 mancato, A-14 mancato, A-15 colpito, A-16 mancato
+- **“Radar”**: E’ in grado di scansionare 9 celle (raggio 1), bisogna specificare la casella centrale.
+Per ogni casella analizzata verranno stampate a schermo le coordinate della cella e il 
+messaggio “vuoto” se non vi è alcuna nave oppure “nave” se vi è una nave. Utilizzabile fin 
+da subito per un totale di 3 utilizzi. I risultati della scansione verranno segnati sulla seconda 
+griglia del giocatore
+
+**ESEMPIO DI UTILIZZO**: Specifico la cella B-2. A schermo verranno stampati i seguenti messaggi: 
+A-1 vuoto, A-2 vuoto, A-3 vuoto, B-1 nave, B-2 vuoto, B-3 vuoto, C-1 vuoto, C-2 vuoto, C-3 nave
 
 # Sviluppatori
 - [Stefano Labianca](https://github.com/Stefano-Labianca) 

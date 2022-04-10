@@ -1,0 +1,27 @@
+gameRound - Segna il turno della partita - Numero naturale - > 0
+next - Indica quale giocatore deve fare la sua mossa - Numero naturale - next = 1 -> Giocatore 2, next = 0 -> Giocatore 1
+ended - Indica se la partita è terminata - Booleano - ended = False -> Partita ancora in corso, ended = True -> Partita terminata
+
+DATO STUTTURATO GRID
+values - Contiene informazioni relative alla mappa di gioco - Array bidimensionale di caratteri - Dimensioni row x column
+rows - Numero di righe della mappa - Numero naturale - row > 0 && row <= 16 
+columns - Numero di colonne - NUmnero naturale - column > 0 && column <= 16
+
+
+DATO STUTTURATO SHIP
+label - Carattere che identifica una nave - Carattere - /
+sunk - Indica se una nave è stata affondata - Booleano - sunk = True -> Nave affondata, sunk = False -> Nave non affondata
+size - Rappresenta lo spazio occupato della nave - Numero naturale - dimension >= 1 && dimension <= 5
+range - Contiene il range di posizioni della nave e il suo orientamento (che può essere orizzontale o verticale) - Stringa - /
+coords - Stringa che contiene le coordinate della nave - Stringa - /
+
+
+DATO STUTTURATO PLAYER
+id - Identifica un giocatore - Numero naturale - /
+playground - Rappresenta la tabella del giocatore - Grid - /
+heatMap - Contiene delle informazioni relative alle conoscenze della mappa dell'avversario - Grid - /
+longShots - Indica il numero di colpi a largo raggio disponibili - Numero naturale - longShot >= 0 && longShot <= 3
+radar - Indica il numero di utilizzi del radar ancora disponibili - Numero naturale - radar >= 0 && radar <= 3
+airstrike - Indica il numero di utilizzi del bombardamento aereo ancora disponibili - Numero naturale - Utilizzabile dal turno 10, airstrike >= 0 && airstrike <= 1
+availableShips - Rappresenta il numero di navi attaualmente disponibili al giocatore - Numero naturale - availableShips >= 0 && availableShips <= 15
+ships" - Contiene le navi del giocatore - Array di Ship - Dimensioni = 15

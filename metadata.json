@@ -14,7 +14,7 @@
     "Ship": {
         "label": "$", // Carattere che identifica una nave - Carattere - /
         "sunk": 1, // Indica se una nave è stata affondata - Booleano - sunk = True -> Nave affondata, sunk = False -> Nave non affondata
-        "dimension": 3, // Rappresenta lo spazio occupato della nave - Numero naturale - dimension >= 1 && dimension <= 5
+        "size": 3, // Rappresenta lo spazio occupato della nave - Numero naturale - dimension >= 1 && dimension <= 5
         "range": "1-4-V", // Contiene il range di posizioni della nave e il suo orientamento (che può essere orizzontale o verticale) - Stringa - /
         "coords": "A-1_A-4" // Stringa che contiene le coordinate della nave - Stringa - /
     },

@@ -6,7 +6,7 @@
     // Dato strutturato della tabella
     "Grid": {
         "values": "Array<Array<char>>", // Contiene informazioni relative alla mappa di gioco - Array bidimensionale di caratteri - Dimensioni row x column
-        "row": 16, // Numero di righe della mappa - Numero naturale - row > 0 && row <= 16 
+        "rows": 16, // Numero di righe della mappa - Numero naturale - row > 0 && row <= 16 
         "columns": 16 // Numero di colonne - NUmnero naturale - column > 0 && column <= 16
     },
 

@@ -10,6 +10,7 @@
  */
 
 #define FIRST_UPPERCASE_ASCII 65
+#define FIRST_NUMBER_ASCII 48
 
 
 typedef struct Vector2D {

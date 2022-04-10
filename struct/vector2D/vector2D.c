@@ -22,7 +22,7 @@ Vector2D setX(Vector2D vector, char x)
 
 Vector2D setY(Vector2D vector, char y)
 {
-    vector.y = y - FIRST_UPPERCASE_ASCII;
+    vector.y = y - FIRST_NUMBER_ASCII;
 
     return vector;
 }
@@ -31,7 +31,7 @@ Vector2D setY(Vector2D vector, char y)
 int getX(Vector2D vector)
 {
     int x = 0;
-    x = vector.x + FIRST_UPPERCASE_ASCII;
+    x = vector.x;
 
     return x;
 }
@@ -40,7 +40,7 @@ int getX(Vector2D vector)
 int getY(Vector2D vector)
 {
     int y = 0;
-    y = vector.y + FIRST_UPPERCASE_ASCII;
+    y = vector.y;
 
     return y;
 }
@@ -49,7 +49,7 @@ int getY(Vector2D vector)
 void vector2DToStr(Vector2D vector, char* coord)
 {
     coord[0] = getX(vector) + FIRST_UPPERCASE_ASCII;
-    coord[1] = getY(vector) + FIRST_UPPERCASE_ASCII;
+    coord[1] = getY(vector) + FIRST_NUMBER_ASCII;
 
     return;
 }

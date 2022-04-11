@@ -56,7 +56,7 @@ A-1 vuoto, A-2 vuoto, A-3 vuoto, B-1 nave, B-2 vuoto, B-3 vuoto, C-1 vuoto, C-2 
 
 # Sviluppatori
 - [Stefano Labianca](https://github.com/Stefano-Labianca) 
-- [Mattia Curri](https://github.com/FrumpyGoose180) 
+- [Mattia Curri](https://github.com/mattiacurri) 
 - [Emanuele Fontana](https://github.com/Fonty02)
 - [Donato Festa](https://github.com/DonatoFe11) 
 

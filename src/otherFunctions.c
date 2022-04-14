@@ -7,10 +7,14 @@
 
 #define LOWER_TO_UPPER 32
 
+enum ROWS_RANGE{ROW_MIN = 1, ROW_MAX = 16};
+
 
 char getColumn();
 char toUpperCase(char letter);
-int isValidRow(char row[]);
+void getRow(char row[]);
+void numerToString(int number, char buffer[]);
+int isValidRow(int row);
 
 
 /**
@@ -62,47 +66,78 @@ char toUpperCase(char letter)
 } 
 
 
-
+/**
+ * @brief Restituisce, sottoforma di stringa, il valore della riga inserito dall'utente. 
+ * 
+ * @param row Contiene il valore della riga inserito dall'utente.
+ */
 void getRow(char row[]) 
 {
+	int numericRow = 0;
+
 	do 
 	{
 		printf("Inserisci la riga di partenza della nave: ");
-		fgets(row, 3, stdin); // TODO: Trovare un modo per dire che la stringa non è valida nel caso mette numeri più alti di 16
-		fflush(stdin);
-	} while (isValidRow(row) == 0);
+		scanf("%d", &numericRow);
+	} while (isValidRow(numericRow) == 0);
+
+	numerToString(numericRow, row);
 
 	return;
 }
 
 
-int isValidRow(char row[]) 
+/**
+ * @brief Verifica se la riga inserita dall'utente sia compresa fra 1 e 16, restituendo
+ * 1 se la riga è valida, altrimenti restituisce 0.
+ * 
+ * @param row Numero della riga da controllare.
+ * @return Valore di conferma se row è valido o no.
+ */
+int isValidRow(int row) 
 {
-	int n = 0;
-	int i = 0;
 	int isValid = 1;
 	
-	while (row[i] != '\0' && isValid == 1) 
-	{
-		if (row[i] < '0' || row[i] > '9') 
-		{
-			isValid = 0;
-		} 
-		
-		else 
-		{
-			n = (row[i] - 48) + n * 10;
-			i++;
-		}
-	}
-
-	if (n < 1 || n > 16) 
+	if (row < ROW_MIN || row > ROW_MAX) 
 	{
 		isValid = 0;
 	}
 
 	return isValid;
 }
+
+
+/**
+ * @brief Converte un numero naturale in una stringa, conservando il valore convertito
+ * nel parametro buffer.
+ * 
+ * @param number Numero da convertire.
+ * @param buffer Array che contiene il valore di number convertito in una stringa.
+ */
+void numerToString(int number, char buffer[])
+{
+	int i = 0;
+	int last = 1;
+	int digit = 0;
+
+	if (number > 9)
+	{
+		i = 1;
+		last = 2;
+	}
+
+	while (number > 0)
+	{
+		buffer[i] = (number % 10) + '0'; // Converto l'ultima cifra del numero in un carattere
+		number = (int) number / 10; // Prendo le cifre successive
+		i--;
+	}
+	
+	buffer[last] = '\0';
+
+	return;
+}
+
 
 //TODO: Migliorare le funzioni
 //TODO: Suddividere le funzioni in file appositi in base al loro scopo -> Consulta file "divisore.txt"
@@ -266,7 +301,7 @@ int isValidRow(char row[])
 // 			playground = setOrizzontal(playground, ship);
 // 		}
 // 		index++;
-// 	}
+// 	}	
 // 	printf("\nMAPPA FIN ORA\n");
 // 	printGrid(playground);
 // 	return playground;

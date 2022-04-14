@@ -1,122 +1,138 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./grid.c"
+#include "./Grid.c"
 #include "./ship.c"
 
 #define SHIP_NUMB 15
 
-typedef struct {
+typedef struct Player {
 	int id;
-	grid playground;
-	grid heatMap;
+	Grid playground;
+	Grid heatMap;
 	int longShots;
 	int radar;
 	int aistrike;
 	int availableShips;
-	ship ships[SHIP_NUMB];
-}player;
+	Ship ships[SHIP_NUMB];
+} Player;
 
-int readId(player player);
-grid readPlayground(player player);
-grid readHeatMap(player player);
-int readLongshots(player player);
-int readRadar(player player);
-int readAirstrike(player player);
-int readAvailableShips(player player);
-ship readShip(player player, int index);
-player writeId(player player, int id);
-player writePlayground(player player, grid playground);
-player writeHeatMap(player player, grid heatMap);
-player writeLongshots(player player, int longShots);
-player writeRadar(player player, int radar);
-player writeAirstrike(player player, int airstrike);
-player writeAvailableShips(player player, int availableShips);
-player writeShip(player player, int index, ship ship);
+int readId(Player player);
+Grid readPlayground(Player player);
+Grid readHeatMap(Player player);
+int readLongshots(Player player);
+int readRadar(Player player);
+int readAirstrike(Player player);
+int readAvailableShips(Player player);
+Ship readShip(Player player, int index);
+Player writeId(Player player, int id);
+Player writePlayground(Player player, Grid playground);
+Player writeHeatMap(Player player, Grid heatMap);
+Player writeLongshots(Player player, int longShots);
+Player writeRadar(Player player, int radar);
+Player writeAirstrike(Player player, int airstrike);
+Player writeAvailableShips(Player player, int availableShips);
+Player writeShip(Player player, int index, Ship ship);
 
-int readId(player player) {
+int readId(Player player)
+{
 	int id;
 	id = player.id;
 	return id;
 }
 
-grid readPlayground(player player) {
-	grid playground;
+Grid readPlayground(Player player)
+{
+	Grid playground;
 	playground = player.playground;
 	return playground;
 }
 
-grid readHeatMap(player player) {
-	grid heatMap;
+Grid readHeatMap(Player player)
+{
+	Grid heatMap;
 	heatMap = player.heatMap;
 	return heatMap;
 }
 
-int readLongshots(player player) {
+int readLongshots(Player player)
+{
 	int longShots;
 	longShots = player.longShots;
 	return longShots;
 }
 
-int readRadar(player player) {
+int readRadar(Player player)
+{
 	int radar;
 	radar = player.radar;
 	return radar;
 }
 
-int readAirstrike(player player) {
+int readAirstrike(Player player)
+{
 	int airstrike;
 	airstrike = player.aistrike;
 	return airstrike;
 }
 
-int readAvailableShips(player player) {
+int readAvailableShips(Player player)
+{
 	int availableShips;
 	availableShips = player.availableShips;
 	return availableShips;
 }
 
-ship readShip(player player, int index) {
-	ship ship;
+Ship readShip(Player player, int index)
+{
+	Ship ship;
 	ship = player.ships[index - 1];
 	return ship;
 }
 
-player writeId(player player, int id) {
+Player writeId(Player player, int id)
+{
 	player.id = id;
 	return player;
 }
 
-player writePlayground(player player, grid playground) {
+Player writePlayground(Player player, Grid playground)
+{
 	player.playground = playground;
 	return player;
 }
 
-player writeHeatMap(player player, grid heatMap) {
+Player writeHeatMap(Player player, Grid heatMap)
+{
 	player.heatMap = heatMap;
 	return player;
 }
 
-player writeLongshots(player player, int longShots) {
+Player writeLongshots(Player player, int longShots)
+{
 	player.longShots = longShots;
 	return player;
 }
 
-player writeRadar(player player, int radar) {
+Player writeRadar(Player player, int radar)
+{
 	player.radar = radar;
 	return player;
 }
 
-player writeAirstrike(player player, int airstrike) {
+Player writeAirstrike(Player player, int airstrike)
+{
 	player.aistrike = airstrike;
 	return player;
 }
 
-player writeAvailableShips(player player, int availableShips) {
+Player writeAvailableShips(Player player, int availableShips)
+{
 	player.availableShips = availableShips;
 	return player;
 }
 
-player writeShip(player player, int index, ship ship) {
+Player writeShip(Player player, int index, Ship ship)
+{
 	player.ships[index - 1] = ship;
 	return player;
 }

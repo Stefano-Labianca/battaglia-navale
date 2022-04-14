@@ -4,7 +4,7 @@
 
 #define DIM_COORDS 6
 
-typedef struct Ship{
+typedef struct Ship {
 	char label;
 	int sunk;
 	int lifePoints;
@@ -26,72 +26,84 @@ Ship writeLifePoints(Ship ship, int lifePoints);
 Ship writeDirection(Ship ship, char direction);
 Ship writeCoords(Ship ship, char coords[]);
 
-char readLabel(Ship ship) {
+char readLabel(Ship ship)
+{
 	char label;
 	label = ship.label;
 
 	return label;
 }
 
-int readSunk(Ship ship) {
+int readSunk(Ship ship)
+{
 	int sunk;
 	sunk = ship.sunk;
 
 	return sunk;
 }
 
-int readSize(Ship ship) {
+int readSize(Ship ship)
+{
 	int size;
 	size = ship.size;
 
 	return size;
 }
 
-int readLifePoints(Ship ship) {
+int readLifePoints(Ship ship)
+{
 	int lifePoints;
 	lifePoints = ship.lifePoints;
 
 	return lifePoints;
 }
 
-char readDirection(Ship ship) {
+char readDirection(Ship ship)
+{
 	char direction;
 	direction = ship.direction;
-	
+
 	return direction;
 }
 
-void readCoords(Ship ship, char coords[]) {
+void readCoords(Ship ship, char coords[])
+{
 	strcpy(coords, ship.coords);
 	return;
 }
 
-Ship writeLabel(Ship ship, char label) {
+Ship writeLabel(Ship ship, char label)
+{
 	ship.label = label;
 	return ship;
 }
 
-Ship writeSunk(Ship ship, int sunk) {
+Ship writeSunk(Ship ship, int sunk)
+{
 	ship.sunk = sunk;
 	return ship;
 }
 
-Ship writeSize(Ship ship, int size) {
+Ship writeSize(Ship ship, int size)
+{
 	ship.size = size;
 	return ship;
 }
 
-Ship writeLifePoints(Ship ship, int lifePoints) {
+Ship writeLifePoints(Ship ship, int lifePoints)
+{
 	ship.lifePoints = lifePoints;
 	return ship;
 }
 
-Ship writeDirection(Ship ship, char direction) {
+Ship writeDirection(Ship ship, char direction)
+{
 	ship.direction = direction;
 	return ship;
 }
 
-Ship writeCoords(Ship ship, char coords[]) {
+Ship writeCoords(Ship ship, char coords[])
+{
 	strcpy(ship.coords, coords);
 	return ship;
 }

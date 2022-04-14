@@ -4,89 +4,94 @@
 
 #define DIM_COORDS 6
 
-typedef struct {
+typedef struct Ship{
 	char label;
 	int sunk;
 	int lifePoints;
 	int size;
 	char direction;
 	char coords[DIM_COORDS];
-} ship;
+} Ship;
 
-char readLabel(ship ship);
-int readSunk(ship ship);
-int readSize(ship ship);
-int readLifePoints(ship ship);
-char readDirection(ship ship);
-void readCoords(ship ship, char coords[]);
-ship writeLabel(ship ship, char label);
-ship writeSunk(ship ship, int sunk);
-ship writeSize(ship ship, int size);
-ship writeLifePoints(ship ship, int lifePoints);
-ship writeDirection(ship ship, char direction);
-ship writeCoords(ship ship, char coords[]);
+char readLabel(Ship ship);
+int readSunk(Ship ship);
+int readSize(Ship ship);
+int readLifePoints(Ship ship);
+char readDirection(Ship ship);
+void readCoords(Ship ship, char coords[]);
+Ship writeLabel(Ship ship, char label);
+Ship writeSunk(Ship ship, int sunk);
+Ship writeSize(Ship ship, int size);
+Ship writeLifePoints(Ship ship, int lifePoints);
+Ship writeDirection(Ship ship, char direction);
+Ship writeCoords(Ship ship, char coords[]);
 
-char readLabel(ship ship) {
+char readLabel(Ship ship) {
 	char label;
 	label = ship.label;
+
 	return label;
 }
 
-int readSunk(ship ship) {
+int readSunk(Ship ship) {
 	int sunk;
 	sunk = ship.sunk;
+
 	return sunk;
 }
 
-int readSize(ship ship) {
+int readSize(Ship ship) {
 	int size;
 	size = ship.size;
+
 	return size;
 }
 
-int readLifePoints(ship ship) {
+int readLifePoints(Ship ship) {
 	int lifePoints;
 	lifePoints = ship.lifePoints;
+
 	return lifePoints;
 }
 
-char readDirection(ship ship) {
+char readDirection(Ship ship) {
 	char direction;
 	direction = ship.direction;
+	
 	return direction;
 }
 
-void readCoords(ship ship, char coords[]) {
+void readCoords(Ship ship, char coords[]) {
 	strcpy(coords, ship.coords);
 	return;
 }
 
-ship writeLabel(ship ship, char label) {
+Ship writeLabel(Ship ship, char label) {
 	ship.label = label;
 	return ship;
 }
 
-ship writeSunk(ship ship, int sunk) {
+Ship writeSunk(Ship ship, int sunk) {
 	ship.sunk = sunk;
 	return ship;
 }
 
-ship writeSize(ship ship, int size) {
+Ship writeSize(Ship ship, int size) {
 	ship.size = size;
 	return ship;
 }
 
-ship writeLifePoints(ship ship, int lifePoints) {
+Ship writeLifePoints(Ship ship, int lifePoints) {
 	ship.lifePoints = lifePoints;
 	return ship;
 }
 
-ship writeDirection(ship ship, char direction) {
+Ship writeDirection(Ship ship, char direction) {
 	ship.direction = direction;
 	return ship;
 }
 
-ship writeCoords(ship ship, char coords[]) {
+Ship writeCoords(Ship ship, char coords[]) {
 	strcpy(ship.coords, coords);
 	return ship;
 }

@@ -8,34 +8,39 @@ typedef struct Grid
 {
 	char values[ROWS][COLS];
 	int rows;
-	int cols;
+	int cols;	
 } Grid;
 
+
 Grid writeRows(Grid grid, int rows);
-Grid writeCols(Grid grid, int cols);
+Grid writeColumns(Grid grid, int cols);
 Grid writeValue(Grid grid, int row, int col, char value);
 Grid createPlayground();
 Grid createHeatMap();
 
 int readRows(Grid grid);
-int readCols(Grid grid);
+int readColumns(Grid grid);
 char readValue(Grid grid, int row, int col);
 void printGrid(Grid grid);
+
 
 int readRows(Grid grid)
 {
 	int rows;
 	rows = grid.rows;
+
 	return rows;
 }
 
-int readCols(Grid grid)
+
+int readColumns(Grid grid)
 {
 	int cols;
 	cols = grid.cols;
 
 	return cols;
 }
+
 
 char readValue(Grid grid, int row, int col)
 {
@@ -45,17 +50,20 @@ char readValue(Grid grid, int row, int col)
 	return value;
 }
 
+
 Grid writeRows(Grid grid, int rows)
 {
 	grid.rows = rows;
 	return grid;
 }
 
-Grid writeCols(Grid grid, int cols)
+
+Grid writeColumns(Grid grid, int cols)
 {
 	grid.cols = cols;
 	return grid;
 }
+
 
 Grid writeValue(Grid grid, int row, int col, char value)
 {
@@ -63,33 +71,36 @@ Grid writeValue(Grid grid, int row, int col, char value)
 	return grid;
 }
 
+
 Grid createPlayground()
 {
-	Grid grid;
-	int i;
-	int j;
-	i = 1;
+	Grid playground;
+	int i = 1;
+	int j = 1;
+	
 	while (i <= ROWS)
 	{
 		j = 1;
 		while (j <= COLS)
 		{
-			grid = writeValue(grid, i, j, '~');
+			playground = writeValue(playground, i, j, '~');
 			j++;
 		}
+
 		i++;
 	}
-	return grid;
+
+	return playground;
 }
+
 
 void printGrid(Grid grid)
 {
-	int i;
-	int j;
-	int k;
-	char c;
-	c = 'A';
-	k = 1;
+	int i = 1;
+	int j = 1;
+	int k = 1;
+	char c = 'A';
+	
 	printf("   ");
 	while (k <= ROWS)
 	{
@@ -98,41 +109,47 @@ void printGrid(Grid grid)
 		k++;
 	}
 	printf("\n");
-	i = 1;
+	
 	while (i <= ROWS)
 	{
+		j = 1;
+
 		if (i <= 9)
 		{
 			printf(" ");
 		}
-		j = 1;
+
 		printf(" %d ", i);
 		while (j <= COLS)
 		{
 			printf(" %c ", readValue(grid, i, j));
 			j++;
 		}
+		
 		printf("\n");
 		i++;
 	}
+
 	return;
 }
 
+
 Grid createHeatMap()
 {
-	Grid grid;
-	int i;
-	int j;
-	i = 1;
+	Grid heatMap;
+	int i = 1;
+	int j = 1;
+	
 	while (i <= ROWS)
 	{
 		j = 1;
 		while (j <= COLS)
 		{
-			grid = writeValue(grid, i, j, '?');
+			heatMap = writeValue(heatMap, i, j, '?');
 			j++;
 		}
 		i++;
 	}
-	return grid;
+	
+	return heatMap;
 }

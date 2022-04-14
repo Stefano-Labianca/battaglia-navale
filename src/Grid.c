@@ -101,7 +101,7 @@ void printGrid(Grid grid)
 	int k = 1;
 	char c = 'A';
 	
-	printf("   ");
+	printf("    ");
 	while (k <= ROWS)
 	{
 		printf(" %c ", c);

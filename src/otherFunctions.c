@@ -5,16 +5,27 @@
 // #include "./Ship.c"
 // #include "./Player.c"
 
+
+//TODO: Migliorare le funzioni
+//TODO: Suddividere le funzioni in file appositi in base al loro scopo -> Consulta file "divisore.txt"
+
+
+
 #define LOWER_TO_UPPER 32
+#define SEPARATOR '-'
+#define MAX_COORD_LEN 7
+
 
 enum ROWS_RANGE{ROW_MIN = 1, ROW_MAX = 16};
 
-
 char getColumn();
 char toUpperCase(char letter);
+char getDirection();
+int isValidRow(int row);
+
 void getRow(char row[]);
 void numerToString(int number, char buffer[]);
-int isValidRow(int row);
+void buildShipCoordinate(char column, char row[], char direction, char coord[]);
 
 
 /**
@@ -34,10 +45,10 @@ char getColumn()
 		col = getchar();
 		col = toUpperCase(col);
 
-		if (!(col >= 'A' && col <= 'P'))
+		if (col < 'A' || col > 'P')
 		{
 			error = 1;
-			printf("\n\nErrore\n\n");
+			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
 		}
 
 		fflush(stdin);
@@ -57,7 +68,7 @@ char getColumn()
  */
 char toUpperCase(char letter)
 {
-	if (letter >= 'a' && letter <= 'p')
+	if (letter >= 'a' && letter <= 'z')
 	{
 		letter -= LOWER_TO_UPPER;
 	}
@@ -79,6 +90,7 @@ void getRow(char row[])
 	{
 		printf("Inserisci la riga di partenza della nave: ");
 		scanf("%d", &numericRow);
+		fflush(stdin); //FIXME: Mettere un controllo migliore nel caso si metta in input un carattere e non un intero
 	} while (isValidRow(numericRow) == 0);
 
 	numerToString(numericRow, row);
@@ -139,50 +151,74 @@ void numerToString(int number, char buffer[])
 }
 
 
-//TODO: Migliorare le funzioni
-//TODO: Suddividere le funzioni in file appositi in base al loro scopo -> Consulta file "divisore.txt"
+/**
+ * @brief Restituisce l'orientamento della nave. Il valore restituito
+ * può essere pari a "V", che definisce l'orientamento verticale, oppure pari 
+ * a "O" che definisce l'orientamento orizzontale.
+ * 
+ * @return Carattere che definisce l'orientamento della nave. 
+ */
+char getDirection() 
+{
+	int errore = 0;
+	char direction = ' ';
+
+	do 
+	{
+		errore = 0;
+		printf("Inserire V per inserire la nave in verticale, oppure O per inserire la nave in orizzontale: ");
+		
+		direction = getchar();
+		direction = toUpperCase(direction);
+
+		if (direction != 'O' && direction != 'V')
+		{
+			errore = 1;
+			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
+		}
+		
+		fflush(stdin);
+	} while (errore == 1);
+
+	return direction;
+}
 
 
-// void getCell(char cell[]) {
-// 	char col;
-// 	char row[3];
-// 	int i;
-// 	int j;
-// 	col = getCol();
-// 	getRow(row);
-// 	i = 0;
-// 	cell[i] = col;
-// 	i++;
-// 	cell[i] = '-';
-// 	i++;
-// 	j = 0;
-// 	while (row[j] != '\0') {
-// 		cell[i] = row[j];
-// 		i++;
-// 		j++;
-// 	}
-// 	cell[i] = '\0';
-// 	return;
-// }
 
-// char getDirection() {
-// 	int errore;
-// 	char direction;
-// 	do {
-// 		errore = 0;
-// 		printf("Inserire v (oppure V) per inserire la nave in verticale, o (oppure O) per inserire la nave in orizzontale ");
-// 		fflush(stdin);
-// 		direction = getchar();
-// 		if (direction == 'o' || direction == 'v') {
-// 			direction -= 32;
-// 		}
+/**
+ * @brief Costruisce una coppia di coordinate, nel formato "colonna-riga-direzione", per poi salvare
+ * il risultato all'interno dell'array coord.
+ * 
+ * @param column Primo valore della coordinata.
+ * @param row Secondo valore della coordinata.
+ * @param direction Direzione della nave.
+ * @param coord Coordinata nel formato "colonna-riga-direzione".
+ */
+void buildShipCoordinate(char column, char row[], char direction, char coord[])
+{
+	int i = 0;
+	int j = 2;
+	
+	coord[i] = column;
+	coord[i + 1] = SEPARATOR;
 
-// 		if (direction != 'V' && direction != 'O') {
-// 			errore = 1;
-// 		}
-// 	} while (errore == 1);
-// 	return direction;
-// }
+	while (row[i] != '\0')
+	{
+		coord[j] = row[i];	
+		i++;
+		j++;
+	}
+
+	coord[j] = SEPARATOR;
+	coord[j + 1] = direction;
+	coord[j + 2] = '\0';
+	
+	return;
+}
+
+
+
+
 
 // Grid setVertical(Grid playground, Ship ship) {
 // 	char cell[6];

@@ -7,8 +7,8 @@
 
 typedef struct Player {
 	int id;
-	Grid playground;
-	Grid heatMap;
+	char playground[16][16];
+	char heatMap[16][16];
 	int longShots;
 	int radar;
 	int aistrike;
@@ -17,21 +17,21 @@ typedef struct Player {
 } Player;
 
 int readId(Player player);
-Grid readPlayground(Player player);
-Grid readHeatMap(Player player);
+
 int readLongshots(Player player);
 int readRadar(Player player);
 int readAirstrike(Player player);
 int readAvailableShips(Player player);
 Ship readShip(Player player, int index);
 Player writeId(Player player, int id);
-Player writePlayground(Player player, Grid playground);
-Player writeHeatMap(Player player, Grid heatMap);
 Player writeLongshots(Player player, int longShots);
 Player writeRadar(Player player, int radar);
 Player writeAirstrike(Player player, int airstrike);
 Player writeAvailableShips(Player player, int availableShips);
 Player writeShip(Player player, int index, Ship ship);
+
+// Player writePlayground(Player player, Grid playground);
+// Player writeHeatMap(Player player, Grid heatMap);
 
 int readId(Player player)
 {
@@ -40,19 +40,6 @@ int readId(Player player)
 	return id;
 }
 
-Grid readPlayground(Player player)
-{
-	Grid playground;
-	playground = player.playground;
-	return playground;
-}
-
-Grid readHeatMap(Player player)
-{
-	Grid heatMap;
-	heatMap = player.heatMap;
-	return heatMap;
-}
 
 int readLongshots(Player player)
 {
@@ -95,17 +82,19 @@ Player writeId(Player player, int id)
 	return player;
 }
 
-Player writePlayground(Player player, Grid playground)
-{
-	player.playground = playground;
-	return player;
-}
+//FIXME: Invece che Grid hai un array 2D di caratteri
 
-Player writeHeatMap(Player player, Grid heatMap)
-{
-	player.heatMap = heatMap;
-	return player;
-}
+// Player writePlayground(Player player, Grid playground)
+// {
+// 	player.playground = playground;
+// 	return player;
+// }
+
+// Player writeHeatMap(Player player, Grid heatMap)
+// {
+// 	player.heatMap = heatMap;
+// 	return player;
+// }
 
 Player writeLongshots(Player player, int longShots)
 {

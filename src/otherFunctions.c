@@ -20,12 +20,11 @@ enum ROWS_RANGE{ROW_MIN = 1, ROW_MAX = 16};
 
 char getColumn();
 char toUpperCase(char letter);
-char getDirection();
 int isValidRow(int row);
 
 void getRow(char row[]);
 void numerToString(int number, char buffer[]);
-void buildShipCoordinate(char column, char row[], char direction, char coord[]);
+void buildShipCoordinate(char column, char row[], char coord[]);
 
 
 /**
@@ -151,50 +150,16 @@ void numerToString(int number, char buffer[])
 }
 
 
-/**
- * @brief Restituisce l'orientamento della nave. Il valore restituito
- * può essere pari a "V", che definisce l'orientamento verticale, oppure pari 
- * a "O" che definisce l'orientamento orizzontale.
- * 
- * @return Carattere che definisce l'orientamento della nave. 
- */
-char getDirection() 
-{
-	int errore = 0;
-	char direction = ' ';
-
-	do 
-	{
-		errore = 0;
-		printf("Inserire V per inserire la nave in verticale, oppure O per inserire la nave in orizzontale: ");
-		
-		direction = getchar();
-		direction = toUpperCase(direction);
-
-		if (direction != 'O' && direction != 'V')
-		{
-			errore = 1;
-			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
-		}
-		
-		fflush(stdin);
-	} while (errore == 1);
-
-	return direction;
-}
-
-
 
 /**
- * @brief Costruisce una coppia di coordinate, nel formato "colonna-riga-direzione", per poi salvare
+ * @brief Costruisce una coppia di coordinate, nel formato "colonna-riga", per poi salvare
  * il risultato all'interno dell'array coord.
  * 
  * @param column Primo valore della coordinata.
  * @param row Secondo valore della coordinata.
- * @param direction Direzione della nave.
- * @param coord Coordinata nel formato "colonna-riga-direzione".
+ * @param coord Coordinata nel formato "colonna-riga".
  */
-void buildShipCoordinate(char column, char row[], char direction, char coord[])
+void buildShipCoordinate(char column, char row[], char coord[])
 {
 	int i = 0;
 	int j = 2;
@@ -209,15 +174,14 @@ void buildShipCoordinate(char column, char row[], char direction, char coord[])
 		j++;
 	}
 
-	coord[j] = SEPARATOR;
-	coord[j + 1] = direction;
-	coord[j + 2] = '\0';
+	coord[j] = '\0';
 	
 	return;
 }
 
 
-
+//FIXME: Eliminare la gestione della direzione delle coordinate
+//TODO: Aggiungere delle funzio che ricavino l'orientamento della nave
 
 
 // Grid setVertical(Grid playground, Ship ship) {

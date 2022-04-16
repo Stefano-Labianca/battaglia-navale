@@ -14,13 +14,13 @@
 #define SEPARATOR '-'
 #define MAX_COORD_LEN 7
 
-
 enum ROWS_RANGE{ROW_MIN = 1, ROW_MAX = 16};
 enum ASCII_DIGIT_RANGE{MIN_DIGIT = 48, MAX_DIGIT = 57};
 
 char getColumn();
 char toUpperCase(char letter);
 char getShipDirection(char first[], char second[]);
+char getDirection();
 
 int isVertical(char firstPoint[], char secondPoint[]);
 int isHorizontal(char firstPoint[], char secondPoint[]);
@@ -186,6 +186,42 @@ void buildShipCoordinate(char column, char row[], char coord[])
 
 
 /**
+ * @brief Restituisce l'orientamento della nave. Il valore restituito
+ * può essere pari a "V", che definisce l'orientamento verticale, oppure pari 
+ * a "O" che definisce l'orientamento orizzontale.
+ * 
+ * @return Carattere che definisce l'orientamento della nave. 
+ */
+char getDirection() 
+{
+	int errore = 0;
+	char direction = ' ';
+
+	do 
+	{
+		errore = 0;
+		printf("Inserire V per inserire la nave in verticale, oppure O per inserire la nave in orizzontale: ");
+		
+		direction = getchar();
+		direction = toUpperCase(direction);
+
+		if (direction != 'O' && direction != 'V')
+		{
+			errore = 1;
+			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
+		}
+		
+		fflush(stdin);
+	} while (errore == 1);
+
+	return direction;
+}
+
+
+
+
+
+/**
  * @brief Funzione che si ricava l'orientamento della nave e 
  * restituisce il valore 'v' per indicare che la nave è in verticale, mentre
  * restituisce il valore 'o' per indicare che la nave è in orizzontale.
@@ -314,7 +350,6 @@ int getLength(char str[])
 	return i;
 }
 
-//TODO: Aggiungere delle funzio che ricavino l'orientamento della nave
 
 
 // Ship createShip(Ship ship, int size, int number) {

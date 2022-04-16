@@ -13,24 +13,36 @@
 #define LOWER_TO_UPPER 32
 #define SEPARATOR '-'
 #define MAX_COORD_LEN 7
+#define MAX_ROW_LEN 3
+#define START_UPPERCASE_ASCII 65
 
-enum ROWS_RANGE{ROW_MIN = 1, ROW_MAX = 16};
+enum TABLE_RANGE{TABLE_MIN = 1, TABLE_MAX = 16};
 enum ASCII_DIGIT_RANGE{MIN_DIGIT = 48, MAX_DIGIT = 57};
 
 char getColumn();
 char toUpperCase(char letter);
 char getShipDirection(char first[], char second[]);
 char getDirection();
+char getCharColumn(int column);
 
 int isVertical(char firstPoint[], char secondPoint[]);
 int isHorizontal(char firstPoint[], char secondPoint[]);
 int stringToNumber(char str[], int len);
 int isValidRow(int row);
 int getLength(char str[]);
+int getIntegerColumn(char column);
+int calculateBoundaries(int start, int end);
 
 void getRow(char row[]);
-void numerToString(int number, char buffer[]);
+void numberToString(int number, char buffer[]);
 void buildShipCoordinate(char column, char row[], char coord[]);
+
+void buildNextCoord(char direction, char startingCoord[], int shipSize, char nextCoord[]);
+void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[]);
+void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[]);
+
+void concatCoordinates(char first[], char second[], char dest[]); //TODO: Da fare ancora
+
 
 
 /**
@@ -98,7 +110,7 @@ void getRow(char row[])
 		fflush(stdin); //FIXME: Mettere un controllo migliore nel caso si metta in input un carattere e non un intero
 	} while (isValidRow(numericRow) == 0);
 
-	numerToString(numericRow, row);
+	numberToString(numericRow, row);
 
 	return;
 }
@@ -115,7 +127,7 @@ int isValidRow(int row)
 {
 	int isValid = 1;
 	
-	if (row < ROW_MIN || row > ROW_MAX) 
+	if (row < TABLE_MIN || row > TABLE_MAX) 
 	{
 		isValid = 0;
 	}
@@ -131,7 +143,7 @@ int isValidRow(int row)
  * @param number Numero da convertire.
  * @param buffer Array che contiene il valore di number convertito in una stringa.
  */
-void numerToString(int number, char buffer[])
+void numberToString(int number, char buffer[])
 {
 	int i = 0;
 	int last = 1;
@@ -194,12 +206,12 @@ void buildShipCoordinate(char column, char row[], char coord[])
  */
 char getDirection() 
 {
-	int errore = 0;
+	int error = 0;
 	char direction = ' ';
 
 	do 
 	{
-		errore = 0;
+		error = 0;
 		printf("Inserire V per inserire la nave in verticale, oppure O per inserire la nave in orizzontale: ");
 		
 		direction = getchar();
@@ -207,18 +219,15 @@ char getDirection()
 
 		if (direction != 'O' && direction != 'V')
 		{
-			errore = 1;
+			error = 1;
 			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
 		}
 		
 		fflush(stdin);
-	} while (errore == 1);
+	} while (error == 1);
 
 	return direction;
 }
-
-
-
 
 
 /**
@@ -349,6 +358,180 @@ int getLength(char str[])
 	
 	return i;
 }
+
+
+/**
+ * @brief Costrutisce e restituisce la successiva coordinata, prendendo in considerazione
+ * la coordinata di partenza, le dimensioni della nave e la sua direzione.
+ * La coordinata costruita verrà salvata all'interno di nextCoord.
+ * 
+ * @param direction Direzione della nave e può avere un valore pari a 'V' o a 'O'.
+ * @param startingCoord Coordinate di partenza della nave.
+ * @param shipSize Dimensioni della nave.
+ * @param nextCoord Coordianta successiva calcolata.
+ */
+void buildNextCoord(char direction, char startingCoord[], int shipSize, char nextCoord[])
+{	
+	if (direction == 'V')
+	{
+		buildVerticalCoord(startingCoord, shipSize, nextCoord);
+	}
+
+	else if (direction == 'O')
+	{
+		buildHorizontalCoord(startingCoord, shipSize, nextCoord);
+	}
+
+	return;
+}
+
+
+/**
+ * @brief Determina e restituisce, all'interno di nextCoord, la coordinata successiva 
+ * a quella di partenza, utilizzando le dimensioni della nave.
+ * 
+ * La nuova coordinata calcolata è quella presa sull'asse delle ordinate.
+ * 
+ * @param startingCoord Coordinata di partenza.
+ * @param shipSize Dimensioni della nave.
+ * @param nextCoord Contiene la coppia di coordinate successive alla prima.
+ */
+void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[])
+{
+	int numericRow = 0;
+	char nextRow[MAX_ROW_LEN];
+	int i = 2;
+	
+	shipSize--;
+	numericRow = stringToNumber(startingCoord, getLength(startingCoord));
+	numericRow = calculateBoundaries(numericRow, shipSize);
+	numberToString(numericRow, nextRow);
+
+	nextCoord[0] = startingCoord[0];
+	nextCoord[1] = SEPARATOR;
+	
+	while (nextRow[i - 2] != '\0') 
+	{
+		nextCoord[i] = nextRow[i - 2];
+		i++;
+	}
+	
+	nextCoord[i] = '\0';
+
+	return;
+}	
+
+
+/**
+ * @brief Determina e restituisce, all'interno di nextCoord, la coordinata successiva 
+ * a quella di partenza, utilizzando le dimensioni della nave.
+ * 
+ * La nuova coordinata calcolata è quella presa sull'asse delle ascisse.
+ * 
+ * @param startingCoord Coordinata di partenza.
+ * @param shipSize Dimensioni della nave.
+ * @param nextCoord Contiene la coppia di coordinate successive alla prima.
+ */
+void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
+{
+	int numericColumn = 0;
+	char startingColumn = ' ';
+	char nextColumn = ' ';
+	int i = 2;
+
+	startingColumn = startingCoord[0];
+	numericColumn = getIntegerColumn(startingColumn);
+	shipSize--;
+
+	numericColumn = calculateBoundaries(numericColumn, shipSize);
+	nextColumn = getCharColumn(numericColumn);
+
+	nextCoord[0] = nextColumn;
+	nextCoord[1] = SEPARATOR;	
+	
+	while (startingCoord[i] != '\0') 
+	{
+		nextCoord[i] = startingCoord[i];
+		i++;
+	}
+	
+	nextCoord[i] = '\0';
+
+	return;	
+}
+
+
+/**
+ * @brief Verifica se due punti rispettano i limiti imposti dalle dimensioni 
+ * della tabella di gioco, calcolando e restituendo il punto di arrivo corretto. 
+ * 
+ * @param start Punto di partenza.
+ * @param end Punto di arrivo ipotetico.
+ * @return Punto di arrivo corretto.
+ */
+int calculateBoundaries(int start, int end)
+{
+	if (start + end > TABLE_MAX)
+	{
+		start -= end;
+	}
+
+	else if (start - end < TABLE_MIN)
+	{
+		start += end;
+	}
+
+	else if (start + end >= TABLE_MIN && start + end <= TABLE_MAX)
+	{
+		start += end;
+	}
+
+	return start;
+}
+
+
+/**
+ * @brief Converte un carattere, associato ad una colonna, e restituisce
+ * la posizione della colonna all'interno della tabella.
+ * 
+ * @param column Carattere da convertire.
+ * @return Posizione della colonna all'interno della tabella.
+ */
+int getIntegerColumn(char column)
+{
+	int numericColumn = 0;
+	numericColumn = column - START_UPPERCASE_ASCII + 1;
+
+	return numericColumn;
+}
+
+
+/**
+ * @brief Converte la posizione di una colonna, e restituisce
+ * il carattere associato ad essa nella tabella di gioco.
+ * 
+ * @param column Valore numerico da convertire.
+ * @return Posizione della colonna convertita nel suo carattere associato.
+ */
+char getCharColumn(int column)
+{
+	char charColumn = ' ';
+	charColumn = column + START_UPPERCASE_ASCII - 1;
+
+	return charColumn;
+}
+
+
+void concatCoordinates(char first[], char second[], char dest[])
+{
+	int i = 0;
+	int j = 0;
+
+	return;
+}
+
+
+
 
 
 

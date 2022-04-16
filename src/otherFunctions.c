@@ -10,17 +10,23 @@
 //TODO: Suddividere le funzioni in file appositi in base al loro scopo -> Consulta file "divisore.txt"
 
 
-
 #define LOWER_TO_UPPER 32
 #define SEPARATOR '-'
 #define MAX_COORD_LEN 7
 
 
 enum ROWS_RANGE{ROW_MIN = 1, ROW_MAX = 16};
+enum ASCII_DIGIT_RANGE{MIN_DIGIT = 48, MAX_DIGIT = 57};
 
 char getColumn();
 char toUpperCase(char letter);
+char getShipDirection(char first[], char second[]);
+
+int isVertical(char firstPoint[], char secondPoint[]);
+int isHorizontal(char firstPoint[], char secondPoint[]);
+int stringToNumber(char str[], int len);
 int isValidRow(int row);
+int getLength(char str[]);
 
 void getRow(char row[]);
 void numerToString(int number, char buffer[]);
@@ -139,7 +145,7 @@ void numerToString(int number, char buffer[])
 
 	while (number > 0)
 	{
-		buffer[i] = (number % 10) + '0'; // Converto l'ultima cifra del numero in un carattere
+		buffer[i] = (number % 10) + MIN_DIGIT; // Converto l'ultima cifra del numero in un carattere
 		number = (int) number / 10; // Prendo le cifre successive
 		i--;
 	}
@@ -148,7 +154,6 @@ void numerToString(int number, char buffer[])
 
 	return;
 }
-
 
 
 /**
@@ -180,61 +185,137 @@ void buildShipCoordinate(char column, char row[], char coord[])
 }
 
 
-//FIXME: Eliminare la gestione della direzione delle coordinate
+/**
+ * @brief Funzione che si ricava l'orientamento della nave e 
+ * restituisce il valore 'v' per indicare che la nave è in verticale, mentre
+ * restituisce il valore 'o' per indicare che la nave è in orizzontale.
+ * 
+ * Se le due coppie di coordinate non sono delle due tipologie precedenti, viene
+ * restituito il valore 'x' per indicare la presenza di un errore con i parametri
+ * passati.
+ * 
+ * @param first Prima coppia di coordinate da verificare.
+ * @param second Seconda coppia di coordinate da verificare
+ * @return Carattere che indica l'orientamento della nave, o un carattere di errore. 
+ */
+char getShipDirection(char first[], char second[])
+{
+	char direction = 'x';
+
+	if (isVertical(first, second))
+	{
+		direction = 'v';
+	}
+
+	else if (isHorizontal(first, second))
+	{
+		direction = 'o';
+	}
+
+	return direction;
+}
+
+
+/**
+ * @brief Determina se le coppie di coordinate passate, creano una retta
+ * verticale, restituendo 1 in caso affermativo, altrimenti restituiscono 0. 
+ * 
+ * @param firstPoint Primo punto della retta.
+ * @param secondPoint Secondo punto della retta.
+ * @return Valore di conferma pari a 0 o a 1.
+ */
+int isVertical(char firstPoint[], char secondPoint[])
+{
+	char firstX = ' ';
+	char secondX = ' ';
+	int result = 0;
+
+	firstX = firstPoint[0];
+	secondX = secondPoint[0];
+
+	if (firstX == secondX)
+	{
+		result = 1;
+	}
+
+	return result;
+}
+
+
+/**
+ * @brief Determina se le coppie di coordinate passate, creano una retta
+ * orizzontale, restituendo 1 in caso affermativo, altrimenti restituiscono 0. 
+ * 
+ * @param firstPoint Primo punto della retta.
+ * @param secondPoint Secondo punto della retta.
+ * @return Valore di conferma pari a 0 o a 1.
+ */
+int isHorizontal(char firstPoint[], char secondPoint[])
+{
+	int firstY = 0;
+	int secondY = 0;
+	int result = 0;
+	
+	firstY = stringToNumber(firstPoint, getLength(firstPoint));
+	secondY = stringToNumber(secondPoint, getLength(secondPoint));
+
+	if (firstY == secondY)
+	{
+		result = 1;
+	}
+
+	return result;
+}
+
+
+/**
+ * @brief Converte una stringa in un numero naturale, andando ad escludere quei caratteri che non fanno parte
+ * del range ASCII delle cifre decimali. Se li viene passata una stringa non valida, viene restituito il 
+ * valore 0, altrimenti viene restituito il valore convertito.
+ * 
+ * @param str Stringa da convertire in un numero naturale.
+ * @param len Lunghezza della stringa da convertire.
+ * @return Numero convertito.
+ */
+int stringToNumber(char str[], int len)
+{
+	int number = 0;
+	int i = 0;
+
+	while (i < len)
+	{
+		if (str[i] >= MIN_DIGIT && str[i] <= MAX_DIGIT)
+		{
+			number = (str[i] - MIN_DIGIT) + number * 10;
+		}
+
+		i++;
+	}
+
+	return number;
+}	
+
+
+/**
+ * @brief Ricava la lunghezza di una stringa.
+ * 
+ * @param str Stringa da calcolare la lunghezza.
+ * @return Lunghezza di una stringa.
+ */
+int getLength(char str[])
+{
+	int i = 0;
+	
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	
+	return i;
+}
+
 //TODO: Aggiungere delle funzio che ricavino l'orientamento della nave
 
-
-// Grid setVertical(Grid playground, Ship ship) {
-// 	char cell[6];
-// 	readCoords(ship, cell);
-// 	int size;
-// 	int row;
-// 	int col;
-// 	int i;
-	
-// 	char label;
-// 	size = readSize(ship);
-// 	row = cell[2] - 48;
-// 	col = cell[0] - 64;
-// 	i = 0;
-// 	label = readLabel(ship);
-// 	if (cell[3] >= '0' && cell[3] <= '9') {
-// 		row *= 10;
-// 		row += cell[3] - 48;
-// 	}
-// 	while (i < size) {
-// 		playground = writeValue(playground, row, col, label);
-// 		row++;
-// 		i++;
-// 	}
-// 	// CONCATENA L ULTIMA CELLA A coordS
-// 	return playground;
-// }
-
-// Grid setOrizzontal(Grid playground, Ship ship) {
-// 	char cell[6];
-// 	readCoords(ship, cell);
-// 	int size;
-// 	int row;
-// 	int col;
-// 	int i;
-// 	;
-// 	char label;
-// 	size = readSize(ship);
-// 	row = cell[2] - 48;
-// 	col = cell[0] - 64;
-// 	if (cell[3] >= '0' && cell[3] <= '9') {
-// 		row *= 10;
-// 		row += cell[3] - 48;
-// 	}
-// 	while (i < size) {
-// 		playground = writeValue(playground, row, col, label);
-// 		col++;
-// 		i++;
-// 	}
-// 	// CONCATENA L ULTIMA CELLA A coordS
-// 	return playground;
-// }
 
 // Ship createShip(Ship ship, int size, int number) {
 // 	char cell[5];

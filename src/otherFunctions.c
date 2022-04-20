@@ -21,12 +21,9 @@ enum ASCII_DIGIT_RANGE{MIN_DIGIT = 48, MAX_DIGIT = 57};
 
 char getColumn();
 char toUpperCase(char letter);
-char getShipDirection(char first[], char second[]);
 char getDirection();
 char getCharColumn(int column);
 
-int isVertical(char firstPoint[], char secondPoint[]);
-int isHorizontal(char firstPoint[], char secondPoint[]);
 int stringToNumber(char str[], int len);
 int isValidRow(int row);
 int getLength(char str[]);
@@ -36,7 +33,6 @@ int calculateBoundaries(int start, int end);
 void getRow(char row[]);
 void numberToString(int number, char buffer[]);
 void buildShipCoordinate(char column, char row[], char coord[]);
-
 void buildNextCoord(char direction, char startingCoord[], int shipSize, char nextCoord[]);
 void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[]);
 void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[]);
@@ -130,6 +126,7 @@ int isValidRow(int row)
 	if (row < TABLE_MIN || row > TABLE_MAX) 
 	{
 		isValid = 0;
+		
 	}
 
 	return isValid;
@@ -227,89 +224,6 @@ char getDirection()
 	} while (error == 1);
 
 	return direction;
-}
-
-
-/**
- * @brief Funzione che si ricava l'orientamento della nave e 
- * restituisce il valore 'v' per indicare che la nave è in verticale, mentre
- * restituisce il valore 'o' per indicare che la nave è in orizzontale.
- * 
- * Se le due coppie di coordinate non sono delle due tipologie precedenti, viene
- * restituito il valore 'x' per indicare la presenza di un errore con i parametri
- * passati.
- * 
- * @param first Prima coppia di coordinate da verificare.
- * @param second Seconda coppia di coordinate da verificare
- * @return Carattere che indica l'orientamento della nave, o un carattere di errore. 
- */
-char getShipDirection(char first[], char second[])
-{
-	char direction = 'x';
-
-	if (isVertical(first, second))
-	{
-		direction = 'v';
-	}
-
-	else if (isHorizontal(first, second))
-	{
-		direction = 'o';
-	}
-
-	return direction;
-}
-
-
-/**
- * @brief Determina se le coppie di coordinate passate, creano una retta
- * verticale, restituendo 1 in caso affermativo, altrimenti restituiscono 0. 
- * 
- * @param firstPoint Primo punto della retta.
- * @param secondPoint Secondo punto della retta.
- * @return Valore di conferma pari a 0 o a 1.
- */
-int isVertical(char firstPoint[], char secondPoint[])
-{
-	char firstX = ' ';
-	char secondX = ' ';
-	int result = 0;
-
-	firstX = firstPoint[0];
-	secondX = secondPoint[0];
-
-	if (firstX == secondX)
-	{
-		result = 1;
-	}
-
-	return result;
-}
-
-
-/**
- * @brief Determina se le coppie di coordinate passate, creano una retta
- * orizzontale, restituendo 1 in caso affermativo, altrimenti restituiscono 0. 
- * 
- * @param firstPoint Primo punto della retta.
- * @param secondPoint Secondo punto della retta.
- * @return Valore di conferma pari a 0 o a 1.
- */
-int isHorizontal(char firstPoint[], char secondPoint[])
-{
-	int firstY = 0;
-	int secondY = 0;
-	int result = 0;
-	
-	firstY = stringToNumber(firstPoint, getLength(firstPoint));
-	secondY = stringToNumber(secondPoint, getLength(secondPoint));
-
-	if (firstY == secondY)
-	{
-		result = 1;
-	}
-
-	return result;
 }
 
 

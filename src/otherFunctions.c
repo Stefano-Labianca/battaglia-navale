@@ -11,10 +11,15 @@
 
 
 #define LOWER_TO_UPPER 32
-#define SEPARATOR '-'
-#define MAX_COORD_LEN 7
-#define MAX_ROW_LEN 3
 #define START_UPPERCASE_ASCII 65
+
+enum COORDS_CONSTANTS {
+	SEPARATOR = '-',  
+	COORD_SEPARETOR = '_',
+	MAX_COORD_LEN = 7, 
+	MAX_ROW_LEN = 3, 
+	MAX_DIM_COORDS = 11
+};
 
 enum TABLE_RANGE{TABLE_MIN = 1, TABLE_MAX = 16};
 enum ASCII_DIGIT_RANGE{MIN_DIGIT = 48, MAX_DIGIT = 57};
@@ -36,7 +41,6 @@ void buildShipCoordinate(char column, char row[], char coord[]);
 void buildNextCoord(char direction, char startingCoord[], int shipSize, char nextCoord[]);
 void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[]);
 void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[]);
-
 void concatCoordinates(char first[], char second[], char dest[]); //TODO: Da fare ancora
 
 
@@ -374,6 +378,7 @@ void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
 	return;	
 }
 
+
 // ? Deciderne l'implementazione
 /**
  * @brief Verifica se due punti rispettano i limiti imposti dalle dimensioni 
@@ -436,10 +441,42 @@ char getCharColumn(int column)
 }
 
 
+/**
+ * @brief Contatena e restituisce il valore di first e second, all'interno 
+ * dell'array dest. Il contenuto delle due coordinate viene suddiviso 
+ * dal simbolo "_".
+ * 
+ * Esempio: "A-1_A-5".
+ * 
+ * @param first Coordinata che contiene la cella di partenza della nave.
+ * @param second Coordinata che contiene la cella di arrivo della nave.
+ * @param dest Contiene il contenuto di first e second.
+ */
 void concatCoordinates(char first[], char second[], char dest[])
 {
 	int i = 0;
 	int j = 0;
+
+	while (first[i] != '\0') 
+	{
+		dest[i] = first[i];
+		i++;
+	}
+
+
+	dest[i] = COORD_SEPARETOR;
+
+	j = i + 1;
+	i = 0;
+
+	while (second[i] != '\0') 
+	{
+		dest[j] = second[i];
+		i++;
+		j++;
+	}
+
+	dest[j] = '\0';
 
 	return;
 }

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define DIM_COORDS 6
+#define DIM_COORDS 11
 
 typedef struct Ship {
 	char label;

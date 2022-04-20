@@ -1,23 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./grid.c"
-#include "./ship.c"
-#include "./player.c"
+// #include "./Grid.c"
+// #include "./Ship.c"
+// #include "./Player.c"
 #include "./otherFunctions.c"
 
 int main(void)
 {
 
-	Grid playground;
-	Grid heatMap;
-	player p;
-	playground = createPlayground();
-	printf("\nSTAMPA DELLA TUA MAPPA\n");
-	printGrid(playground);
-	heatMap = createHeatMap();
-	printf("\nSTAMPA DELLA TUA HEATMAP\n");
-	printGrid(heatMap);
-	playground = fillPlayground(playground, p);
+	char row[3];
+	char coord[MAX_COORD_LEN];
+	char col = getColumn();
+	getRow(row);
+	buildShipCoordinate(col, row, coord);
+
+	char nextCoord[MAX_COORD_LEN];
+	buildNextCoord('O', coord, 4, nextCoord);
+
+	// printf("Prossima Coordinata: %s\n", nextCoord);
+
+	// printf("Colonna Numero: %d \nColonna Carattere: %c\n", getIntegerColumn('K'), getCharColumn(11));
+	char completeCoord[MAX_DIM_COORDS];
+	concatCoordinates(coord, nextCoord, completeCoord);
+	printf("Coodinata Completa: %s\n\n", completeCoord);
+	
+
 	system("pause");
 	return 0;
 }

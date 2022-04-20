@@ -374,7 +374,7 @@ void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
 	return;	
 }
 
-
+// ? Deciderne l'implementazione
 /**
  * @brief Verifica se due punti rispettano i limiti imposti dalle dimensioni 
  * della tabella di gioco, calcolando e restituendo il punto di arrivo corretto. 

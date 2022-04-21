@@ -88,7 +88,7 @@ char getColumn()
 		if (col < 'A' || col > 'P')
 		{
 			error = 1;
-			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
+			printf("\n\nErrore: devi inserire una lettera compresa tra A e P\n\n"); //TODO: Da gestire meglio la stampa dell'errore
 		}
 
 		fflush(stdin);
@@ -100,7 +100,7 @@ char getColumn()
 
 
 /**
- * @brief Restituisce, sottoforma di stringa, il valore della riga inserito dall'utente. 
+ * @brief Restituisce, sotto forma di stringa, il valore della riga inserito dall'utente. 
  * 
  * @param row Contiene il valore della riga inserito dall'utente.
  */
@@ -119,7 +119,6 @@ void getRow(char row[])
 
 	return;
 }
-
 
 /**
  * @brief Verifica se la riga inserita dall'utente sia compresa fra 1 e 16, restituendo
@@ -206,14 +205,14 @@ char getDirection()
 
 
 /**
- * @brief Costrutisce e restituisce la successiva coordinata, prendendo in considerazione
+ * @brief Costruisce e restituisce la successiva coordinata, prendendo in considerazione
  * la coordinata di partenza, le dimensioni della nave e la sua direzione.
  * La coordinata costruita verrà salvata all'interno di nextCoord.
  * 
  * @param direction Direzione della nave e può avere un valore pari a 'V' o a 'O'.
  * @param startingCoord Coordinate di partenza della nave.
  * @param shipSize Dimensioni della nave.
- * @param nextCoord Coordianta successiva calcolata.
+ * @param nextCoord Coordinata successiva calcolata.
  */
 void buildNextCoord(char direction, char startingCoord[], int shipSize, char nextCoord[])
 {	
@@ -369,24 +368,26 @@ char getCharColumn(int column)
 
 
 /**
- * @brief Contatena e restituisce il valore di first e second, all'interno 
+ * @brief Concatena e restituisce il valore di startCell e endCell, all'interno 
  * dell'array dest. Il contenuto delle due coordinate viene suddiviso 
- * dal simbolo "_".
+ * dal simbolo "_". 
  * 
- * Esempio: "A-1_A-5".
+ * Esempio: 
+ * Input: startCell = A-1, endCell = A-5
+ * Output: A-1_A-5
  * 
- * @param first Coordinata che contiene la cella di partenza della nave.
- * @param second Coordinata che contiene la cella di arrivo della nave.
+ * @param startCell Coordinata che contiene la cella di partenza della nave.
+ * @param endCell Coordinata che contiene la cella di arrivo della nave.
  * @param dest Contiene il contenuto di first e second.
  */
-void concatCoordinates(char first[], char second[], char dest[])
+void concatCoordinates(char startCell[], char endCell[], char dest[])
 {
 	int i = 0;
 	int j = 0;
 
-	while (first[i] != '\0') 
+	while (startCell[i] != '\0') 
 	{
-		dest[i] = first[i];
+		dest[i] = startCell[i];
 		i++;
 	}
 
@@ -395,9 +396,9 @@ void concatCoordinates(char first[], char second[], char dest[])
 	j = i + 1;
 	i = 0;
 
-	while (second[i] != '\0') 
+	while (endCell[i] != '\0') 
 	{
-		dest[j] = second[i];
+		dest[j] = endCell[i];
 		i++;
 		j++;
 	}

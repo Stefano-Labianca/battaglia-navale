@@ -4,11 +4,12 @@
 #include "./Ship.c"
 
 #define SHIP_NUMB 15
+#define GRID_SIZE 16 
 
 typedef struct Player {
 	int id;
-	char playground[16][16];
-	char heatMap[16][16];
+	char playground[GRID_SIZE][GRID_SIZE];
+	char heatMap[GRID_SIZE][GRID_SIZE];
 	int longShots;
 	int radar;
 	int aistrike;
@@ -30,8 +31,8 @@ Player writeAirstrike(Player player, int airstrike);
 Player writeAvailableShips(Player player, int availableShips);
 Player writeShip(Player player, int index, Ship ship);
 
-// Player writePlayground(Player player, Grid playground);
-// Player writeHeatMap(Player player, Grid heatMap);
+// Player writePlayground(Player player, char playground[GRID_SIZE][GRID_SIZE]);
+// Player writeHeatMap(Player player, char heatMap[GRID_SIZE][GRID_SIZE]);
 
 int readId(Player player)
 {
@@ -84,13 +85,13 @@ Player writeId(Player player, int id)
 
 //FIXME: Invece che Grid hai un array 2D di caratteri
 
-// Player writePlayground(Player player, Grid playground)
+// Player writePlayground(Player player, char playground[GRID_SIZE][GRID_SIZE])
 // {
-// 	player.playground = playground;
-// 	return player;
+//  	player.playground[][] = playground[][];
+//  	return player;
 // }
 
-// Player writeHeatMap(Player player, Grid heatMap)
+// Player writeHeatMap(Player player, char heatMap[GRID_SIZE][GRID_SIZE])
 // {
 // 	player.heatMap = heatMap;
 // 	return player;

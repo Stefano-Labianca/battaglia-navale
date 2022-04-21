@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include "./Grid.c"
-// #include "./Ship.c"
-// #include "./Player.c"
-#include "./otherFunctions.c"
+#include "./grid.c"
+#include "./ship.c"
+#include "./player.c"
+
 
 int main(void)
 {

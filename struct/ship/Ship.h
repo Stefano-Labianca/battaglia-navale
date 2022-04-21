@@ -1,4 +1,4 @@
-#include "./global/GlobalCostant.h"
+#include "./global/GlobalConstants.h"
 
 enum COORDS_CONSTANTS {
 	SEPARATOR = '-',  

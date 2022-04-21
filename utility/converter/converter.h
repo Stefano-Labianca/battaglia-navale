@@ -1,4 +1,4 @@
-#include "./global/GlobalCostant.h"
+#include "./global/GlobalConstants.h"
 
 int stringToNumber(char str[], int len);
 int getLength(char str[]);

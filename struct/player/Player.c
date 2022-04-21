@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./Grid.c"
 #include "./Ship.c"
 
 #define SHIP_NUMB 15

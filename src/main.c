@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./grid.c"
+// #include "./grid.c"
 #include "./ship.c"
-#include "./player.c"
+// #include "./player.c"
 
 
 int main(void)

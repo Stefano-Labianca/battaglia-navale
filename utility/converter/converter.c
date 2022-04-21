@@ -27,7 +27,9 @@ char toUpperCase(char letter)
  */
 int getLength(char str[])
 {
-	int i = 0;
+	int i;
+	
+	i = 0;
 	
 	while (str[i] != '\0')
 	{
@@ -47,9 +49,13 @@ int getLength(char str[])
  */
 void numberToString(int number, char buffer[])
 {
-	int i = 0;
-	int last = 1;
-	int digit = 0;
+	int i;
+	int last;
+	int digit;
+	
+	i = 0;
+	last = 1;
+	digit = 0;
 
 	if (number > 9)
 	{
@@ -81,8 +87,11 @@ void numberToString(int number, char buffer[])
  */
 int stringToNumber(char str[], int len)
 {
-	int number = 0;
-	int i = 0;
+	int number;
+	int i;
+	
+	i = 0;
+	number = 0;
 
 	while (i < len)
 	{

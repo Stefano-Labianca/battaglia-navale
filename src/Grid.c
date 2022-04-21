@@ -75,8 +75,11 @@ Grid writeValue(Grid grid, int row, int col, char value)
 Grid createPlayground()
 {
 	Grid playground;
-	int i = 1;
-	int j = 1;
+	int i;
+	int j;
+
+	i = 1;
+	j = 1;
 	
 	while (i <= ROWS)
 	{
@@ -96,11 +99,15 @@ Grid createPlayground()
 
 void printGrid(Grid grid)
 {
-	int i = 1;
-	int j = 1;
-	int k = 1;
+	int i;
+	int j;
+	int k;
 	char c = 'A';
 	
+	i = 1;
+	j = 1;
+	k = 1;
+
 	printf("    ");
 	while (k <= ROWS)
 	{
@@ -137,9 +144,12 @@ void printGrid(Grid grid)
 Grid createHeatMap()
 {
 	Grid heatMap;
-	int i = 1;
-	int j = 1;
+	int i;
+	int j;
 	
+	i = 1;
+	j = 1;
+
 	while (i <= ROWS)
 	{
 		j = 1;

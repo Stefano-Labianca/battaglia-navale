@@ -3,7 +3,7 @@
 #include "./grid.c"
 #include "./ship.c"
 #include "./player.c"
-#include "./otherFunctions.c"
+
 
 int main(void)
 {

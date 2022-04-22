@@ -19,6 +19,9 @@ typedef struct Ship {
 } Ship;
 
 
+Ship shipConstructor(char label, int lifePoints, int size, char coords[]);
+
+
 char getLabel(Ship ship);
 int getSize(Ship ship);
 int getLifePoints(Ship ship);

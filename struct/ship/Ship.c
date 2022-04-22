@@ -6,6 +6,31 @@
 #include "../../utility/converter/converter.c"
 
 
+Ship shipConstructor(char label, int lifePoints, int size, char coords[])
+{
+	Ship ship;
+
+	ship = setLabel(ship, label);
+	ship = setLifePoints(ship, lifePoints);
+	ship = setSize(ship, size);
+	ship = setCoords(ship, coords);
+
+	return ship;
+}	
+
+void toString(Ship ship)
+{
+	char label = getLabel(ship);
+	int lifePoints = getLifePoints(ship);
+	int size = getSize(ship);
+
+	printf("Ship{label: %c, lifePoints: %d, size: %d, Coord: %s}\n", label, lifePoints, size, ship.coords);
+
+	return;
+}
+
+
+
 /**
  * @brief Restituisce l'etichetta associata ad una nave, all'interno
  * della mappa di gioco.

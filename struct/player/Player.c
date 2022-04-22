@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./Ship.c"
+#include "../ship/Ship.c"
 #include "./Player.h"
 
 // Player writePlayground(Player player, char playground[GRID_SIZE][GRID_SIZE]);

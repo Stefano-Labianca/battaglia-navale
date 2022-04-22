@@ -77,8 +77,10 @@ Ship writeCoords(Ship ship, char coords[])
  */
 char getColumn() 
 {
-	int error = 0;
+	int error;
 	char col = ' ';
+
+	error = 0;
 
 	do 
 	{
@@ -108,7 +110,9 @@ char getColumn()
  */
 void getRow(char row[]) 
 {
-	int numericRow = 0;
+	int numericRow;
+	
+	numericRow = 0;
 
 	do 
 	{
@@ -154,8 +158,11 @@ int isValidRow(int row)
  */
 void buildShipCoordinate(char column, char row[], char coord[])
 {
-	int i = 0;
-	int j = 2;
+	int i;
+	int j;
+	
+	i = 0;
+	j = 2;
 	
 	coord[i] = column;
 	coord[i + 1] = SEPARATOR;
@@ -182,8 +189,10 @@ void buildShipCoordinate(char column, char row[], char coord[])
  */
 char getDirection() 
 {
-	int error = 0;
+	int error;
 	char direction = ' ';
+
+	error = 0;
 
 	do 
 	{
@@ -244,10 +253,14 @@ void buildNextCoord(char direction, char startingCoord[], int shipSize, char nex
  */
 void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[])
 {
-	int numericRow = 0;
+	int numericRow;
 	char nextRow[MAX_ROW_LEN];
-	int i = 2;
+	int i;
 	
+	numericRow = 0;
+	i = 2;
+
+
 	shipSize--;
 	numericRow = stringToNumber(startingCoord, getLength(startingCoord));
 	numericRow = calculateBoundaries(numericRow, shipSize);
@@ -280,10 +293,13 @@ void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[])
  */
 void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
 {
-	int numericColumn = 0;
+	int numericColumn;
 	char startingColumn = ' ';
 	char nextColumn = ' ';
-	int i = 2;
+	int i;
+
+	numericColumn = 0;
+	i = 2;
 
 	startingColumn = startingCoord[0];
 	numericColumn = getIntegerColumn(startingColumn);
@@ -346,7 +362,8 @@ int calculateBoundaries(int start, int end)
  */
 int getIntegerColumn(char column)
 {
-	int numericColumn = 0;
+	int numericColumn;
+	
 	numericColumn = column - START_UPPERCASE_ASCII + 1;
 
 	return numericColumn;
@@ -363,6 +380,7 @@ int getIntegerColumn(char column)
 char getCharColumn(int column)
 {
 	char charColumn = ' ';
+
 	charColumn = column + START_UPPERCASE_ASCII - 1;
 
 	return charColumn;
@@ -384,8 +402,11 @@ char getCharColumn(int column)
  */
 void concatCoordinates(char startCell[], char endCell[], char dest[])
 {
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
+	
+	i = 0;
+	j = 0;
 
 	while (startCell[i] != '\0') 
 	{

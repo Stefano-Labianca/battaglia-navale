@@ -172,7 +172,7 @@ char getColumn()
 		if (col < 'A' || col > 'P')
 		{
 			error = 1;
-			printf("\n\nErrore: devi inserire una lettera compresa tra A e P\n\n"); //TODO: Da gestire meglio la stampa dell'errore
+			printf("\n\nErrore: devi inserire una lettera compresa tra A e P\n\n"); 
 		}
 
 		fflush(stdin);
@@ -198,7 +198,10 @@ void getRow(char row[])
 	{
 		printf("Inserisci la riga di partenza della nave: ");
 		scanf("%d", &numericRow);
-		fflush(stdin); //FIXME: Mettere un controllo migliore nel caso si metta in input un carattere e non un intero
+		fflush(stdin); 
+		if (isValidRow(numericRow) == 0) {
+			printf("\n\nErrore: devi inserire un numero compreso tra 1 e 16\n\n");
+		}
 	} while (isValidRow(numericRow) == 0);
 
 	numberToString(numericRow, row);
@@ -222,7 +225,6 @@ int isValidRow(int row)
 	if (row < TABLE_MIN || row > TABLE_MAX) 
 	{
 		isValid = 0;
-		
 	}
 
 	return isValid;
@@ -288,7 +290,7 @@ char getDirection()
 		if (direction != 'O' && direction != 'V')
 		{
 			error = 1;
-			printf("\n\nErrore\n\n"); //TODO: Da gestire meglio la stampa dell'errore
+			printf("\n\nErrore: devi inserire la lettera V oppure la lettere O\n\n"); 
 		}
 		
 		fflush(stdin);

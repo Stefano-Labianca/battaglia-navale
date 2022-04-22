@@ -18,7 +18,7 @@ void showRules()
         printf("  %s", buffer);
     }
 
-    printf("\n  -----------------------\n\n");
+    printf("\n  ----------------------------------------------\n\n");
 
     return;
 }

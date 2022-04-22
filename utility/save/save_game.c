@@ -18,7 +18,7 @@ void showGameSlots()
     if (d) 
     {
         printf("\n\n");
-
+        printf("  Salvataggi trovati:\n");
         while ((dir = readdir(d)) != NULL) 
         {
             if ( ( strcmp(dir->d_name,".") !=0)  && ( strcmp(dir->d_name,"..") !=0)  ) 

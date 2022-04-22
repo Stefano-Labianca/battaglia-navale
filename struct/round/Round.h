@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef _ROUND_H
+#define _ROUND_H
 
-#include "./struct/player/Player.c"
+#include "../player/Player.h"
 
 typedef struct Round {
     Player activePlayer;
@@ -17,3 +17,6 @@ Player getPassivePlayer(Round round);
 Round setGameRound(Round round, int gameRound);
 Round setActivePlayer(Round round, Player activePlayer);
 Round setPassivePlayer(Round round, Player passivePlayer);
+
+
+#endif

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 // #include "./grid.c"
-#include "./ship.c"
+#include "../struct/ship/Ship.c"
 // #include "./player.c"
 
 

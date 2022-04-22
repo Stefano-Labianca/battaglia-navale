@@ -3,6 +3,11 @@
  * dei dati delle partite salvate.
  */
 
+#ifndef _SAVE_GAME_H
+#define _SAVE_GAME_H
+
 #define PATH_SAVE_SLOTS "./utility/save/saved_game"
 
 void showGameSlots();
+
+#endif

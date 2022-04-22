@@ -3,6 +3,8 @@
 #include <string.h>
 
 #include "Ship.h"
+// #include "../../utility/converter/converter.h";
+#include "../../utility/converter/converter.c"
 
 
 char readLabel(Ship ship)

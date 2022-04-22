@@ -1,5 +1,11 @@
+#ifndef _PLAYER_H
+#define _PLAYER_H
+
+#include "../ship/Ship.h" 
+
 #define SHIP_NUMB 15
 #define GRID_SIZE 16 
+
 
 typedef struct Player {
 	int id;
@@ -27,3 +33,5 @@ Player writeRadar(Player player, int radar);
 Player writeAirstrike(Player player, int airstrike);
 Player writeAvailableShips(Player player, int availableShips);
 Player writeShip(Player player, int index, Ship ship);
+
+#endif

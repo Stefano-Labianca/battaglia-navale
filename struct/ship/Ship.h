@@ -1,4 +1,7 @@
-#include "./global/GlobalConstants.h"
+#ifndef _SHIP_H
+#define _SHIP_H
+
+#include "../../global/GlobalConstants.h"
 
 enum COORDS_CONSTANTS {
 	SEPARATOR = '-',  
@@ -40,3 +43,4 @@ char getCharColumn(int column);
 int getIntegerColumn(char column);
 
 
+#endif

@@ -19,15 +19,15 @@ typedef struct Ship {
 } Ship;
 
 
-char readLabel(Ship ship);
-int readSize(Ship ship);
-int readLifePoints(Ship ship);
-void readCoords(Ship ship, char coords[]);
+char getLabel(Ship ship);
+int getSize(Ship ship);
+int getLifePoints(Ship ship);
+void getCoords(Ship ship, char coords[]);
 
-Ship writeLabel(Ship ship, char label);
-Ship writeSize(Ship ship, int size);
-Ship writeLifePoints(Ship ship, int lifePoints);
-Ship writeCoords(Ship ship, char coords[]);
+Ship setLabel(Ship ship, char label);
+Ship setSize(Ship ship, int size);
+Ship setLifePoints(Ship ship, int lifePoints);
+Ship setCoords(Ship ship, char coords[]);
 
 char getColumn();
 char getDirection();

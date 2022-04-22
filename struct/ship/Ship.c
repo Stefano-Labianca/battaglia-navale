@@ -3,11 +3,17 @@
 #include <string.h>
 
 #include "Ship.h"
-// #include "../../utility/converter/converter.h";
 #include "../../utility/converter/converter.c"
 
 
-char readLabel(Ship ship)
+/**
+ * @brief Restituisce l'etichetta associata ad una nave, all'interno
+ * della mappa di gioco.
+ * 
+ * @param ship Nave da cui prendere l'etichetta.
+ * @return Carattere che identifica l'etichetta della nave. 
+ */
+char getLabel(Ship ship)
 {
 	char label;
 	label = ship.label;
@@ -16,7 +22,13 @@ char readLabel(Ship ship)
 }
 
 
-int readSize(Ship ship)
+/**
+ * @brief Restituisce le dimensioni della nave.
+ * 
+ * @param ship Nave da cui prendere le sue dimensioni.
+ * @return Dimensioni della nave. 
+ */
+int getSize(Ship ship)
 {
 	int size;
 	size = ship.size;
@@ -25,7 +37,13 @@ int readSize(Ship ship)
 }
 
 
-int readLifePoints(Ship ship)
+/**
+ * @brief Restituisce il numero di punti vita disponibili di una nave.
+ * 
+ * @param ship Nave da cui estrarre i punti vita.
+ * @return Punti vita della nave. 
+ */
+int getLifePoints(Ship ship)
 {
 	int lifePoints;
 	lifePoints = ship.lifePoints;
@@ -34,40 +52,76 @@ int readLifePoints(Ship ship)
 }
 
 
-void readCoords(Ship ship, char coords[])
+/**
+ * @brief Restituisce un array contenente la cella di partenza e di 
+ * arrivo di una nave, contenute nel parametro coords.
+ * 
+ * @param ship Nave da cui prendere la cella di partenza e di arrivo.
+ * @param  coords Contiene le celle della nave.
+ */
+void getCoords(Ship ship, char coords[])
 {
 	strcpy(coords, ship.coords);
 	return;
 }
 
 
-Ship writeLabel(Ship ship, char label)
+/**
+ * @brief Imposta un'etichetta alla nave, che la indentificherà all'interno della 
+ * mappa di gioco, restituendo il dato aggiornato.
+ * 
+ * @param ship Nave a cui assegnare un'etichetta.
+ * @param label Etichetta da assegnare alla nave.
+ * @return Nave aggiornata. 
+ */
+Ship setLabel(Ship ship, char label)
 {
 	ship.label = label;
 	return ship;
 }
 
 
-Ship writeSize(Ship ship, int size)
+/**
+ * @brief Imposta le dimensioni di una nave, restituendo il dato aggiornato.
+ * 
+ * @param ship Nave a cui assegnare delle dimensioni.
+ * @param size Dimensioni della nave.
+ * @return Nave aggiornata. 
+ */
+Ship setSize(Ship ship, int size)
 {
 	ship.size = size;
 	return ship;
 }
 
 
-Ship writeLifePoints(Ship ship, int lifePoints)
+/**
+ * @brief Imposta i punti della nave, restituendo il dato aggiornato.
+ * 
+ * @param ship Nave a cui aggiornare i punti vita.
+ * @param lifePoints Punti vita della nave.
+ * @return Nave aggiornata. 
+ */
+Ship setLifePoints(Ship ship, int lifePoints)
 {
 	ship.lifePoints = lifePoints;
 	return ship;
 }
 
 
-Ship writeCoords(Ship ship, char coords[])
+/**
+ * @brief Imposta la cella di partenza e di arrivo della nave, restituendo il
+ * dato aggiornato.
+ * 
+ * @param ship Nave a cui assegnare la cella di partenza e di arrivo.
+ * @param coords Contiene la cella di partenza e di arrivo della nave. 
+ * @return Nave aggiornata 
+ */
+Ship setCoords(Ship ship, char coords[])
 {
 	strcpy(ship.coords, coords);
 	return ship;
 }
-
 
 
 /**
@@ -78,9 +132,10 @@ Ship writeCoords(Ship ship, char coords[])
 char getColumn() 
 {
 	int error;
-	char col = ' ';
+	char col;
 
 	error = 0;
+	col = ' ';
 
 	do 
 	{
@@ -135,8 +190,10 @@ void getRow(char row[])
  */
 int isValidRow(int row) 
 {
-	int isValid = 1;
+	int isValid;
 	
+	isValid = 1;
+
 	if (row < TABLE_MIN || row > TABLE_MAX) 
 	{
 		isValid = 0;
@@ -190,9 +247,10 @@ void buildShipCoordinate(char column, char row[], char coord[])
 char getDirection() 
 {
 	int error;
-	char direction = ' ';
+	char direction;
 
 	error = 0;
+	direction = ' ';
 
 	do 
 	{
@@ -294,11 +352,13 @@ void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[])
 void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
 {
 	int numericColumn;
-	char startingColumn = ' ';
-	char nextColumn = ' ';
+	char startingColumn;
+	char nextColumn;
 	int i;
 
 	numericColumn = 0;
+	nextColumn = ' ';
+	startingColumn = ' ';
 	i = 2;
 
 	startingColumn = startingCoord[0];
@@ -380,6 +440,7 @@ int getIntegerColumn(char column)
 char getCharColumn(int column)
 {
 	char charColumn = ' ';
+	charColumn = ' ';
 
 	charColumn = column + START_UPPERCASE_ASCII - 1;
 

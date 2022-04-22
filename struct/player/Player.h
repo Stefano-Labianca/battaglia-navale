@@ -19,19 +19,19 @@ typedef struct Player {
 } Player;
 
 
-int readId(Player player);
-int readLongshots(Player player);
-int readRadar(Player player);
-int readAirstrike(Player player);
-int readAvailableShips(Player player);
+int getId(Player player);
+int getLongShots(Player player);
+int getRadar(Player player);
+int getAirstrike(Player player);
+int getAvailableShips(Player player);
+Ship getShip(Player player, int index);
 
 
-Ship readShip(Player player, int index);
-Player writeId(Player player, int id);
-Player writeLongshots(Player player, int longShots);
-Player writeRadar(Player player, int radar);
-Player writeAirstrike(Player player, int airstrike);
-Player writeAvailableShips(Player player, int availableShips);
-Player writeShip(Player player, int index, Ship ship);
+Player setId(Player player, int id);
+Player setLongshots(Player player, int longShotsAmount);
+Player setRadar(Player player, int radarAmount);
+Player setAirstrike(Player player, int airstrikeAmount);
+Player setAvailableShips(Player player, int availableShips);
+Player setShip(Player player, int index, Ship ship);
 
 #endif

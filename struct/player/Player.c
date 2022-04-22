@@ -7,7 +7,13 @@
 // Player writePlayground(Player player, char playground[GRID_SIZE][GRID_SIZE]);
 // Player writeHeatMap(Player player, char heatMap[GRID_SIZE][GRID_SIZE]);
 
-int readId(Player player)
+/**
+ * @brief Restituisce l'indetificatore del giocatore.
+ * 
+ * @param player Giocatore da cui ricavare l'identificatore
+ * @return Identificatore del giocatore 
+ */
+int getId(Player player)
 {
 	int id;
 	id = player.id;
@@ -16,7 +22,14 @@ int readId(Player player)
 }
 
 
-int readLongshots(Player player)
+/**
+ * @brief Restituisce il numero di colpi a lungo raggio 
+ * disponibili al giocatore.
+ * 
+ * @param player Giocatore da cui ricavare il numero di colpi disponibili
+ * @return Numero di colpi a lungo raggio disponibili
+ */
+int getLongShots(Player player)
 {
 	int longShots;
 	longShots = player.longShots;
@@ -24,7 +37,15 @@ int readLongshots(Player player)
 	return longShots;
 }
 
-int readRadar(Player player)
+
+/**
+ * @brief Restituisce il numero di volte in cui può usare
+ * usare il radar
+ * 
+ * @param player Giocatore da cui ricavare la disponibilità di uso del radar
+ * @return Numero di volte in cui può usare il radar
+ */
+int getRadar(Player player)
 {
 	int radar;
 	radar = player.radar;
@@ -32,7 +53,15 @@ int readRadar(Player player)
 	return radar;
 }
 
-int readAirstrike(Player player)
+
+/**
+ * @brief Restituisce il numero di volte in cui è possibile avviare 
+ * il bombardamento aereo.
+ * 
+ * @param player Giocatore da cui ricavare il numero di bombardamenti aerei
+ * @return Numero di bombardamenti aerei disponibili.
+ */
+int getAirstrike(Player player)
 {
 	int airstrike;
 	airstrike = player.aistrike;
@@ -40,7 +69,14 @@ int readAirstrike(Player player)
 	return airstrike;
 }
 
-int readAvailableShips(Player player)
+
+/**
+ * @brief Restituisce il numero attive di un giocatore 
+ * 
+ * @param player Giocatore da cui ricavare il numero di navi attive.
+ * @return Numero di navi attive.
+ */
+int getAvailableShips(Player player)
 {
 	int availableShips;
 	availableShips = player.availableShips;
@@ -48,7 +84,15 @@ int readAvailableShips(Player player)
 	return availableShips;
 }
 
-Ship readShip(Player player, int index)
+
+/**
+ * @brief Restistuisce una nave del giocatore.
+ * 
+ * @param player Giocatore da cui prendere una nave
+ * @param index Indice della nave.
+ * @return Nave scelta.
+ */
+Ship getShip(Player player, int index)
 {
 	Ship ship;
 	ship = player.ships[index - 1];
@@ -56,7 +100,16 @@ Ship readShip(Player player, int index)
 	return ship;
 }
 
-Player writeId(Player player, int id)
+
+/**
+ * @brief Imposta l'indentificatore di un giocatore, restituendo 
+ * il dato aggiornato.
+ * 
+ * @param player Giocatore a cui aggiornare l'identificatore.
+ * @param id Identificatore del giocatore.
+ * @return Giocatore aggiornato. 
+ */
+Player setId(Player player, int id)
 {
 	player.id = id;
 	return player;
@@ -76,31 +129,77 @@ Player writeId(Player player, int id)
 // 	return player;
 // }
 
-Player writeLongshots(Player player, int longShots)
+/**
+ * @brief Imposta il numero di colpi a lungo raggio di 
+ * un giocatore, restituendo il dato aggiornato
+ * 
+ * @param player Giocatore a cui aggiornare il numero di colpi a lungoo raggio
+ * @param longShotsAmount Numero di colpi a lungo raggio da impostare.
+ * @return Giocatore aggiornato
+ */
+Player setLongshots(Player player, int longShotsAmount)
 {
-	player.longShots = longShots;
+	player.longShots = longShotsAmount;
 	return player;
 }
 
-Player writeRadar(Player player, int radar)
+
+/**
+ * @brief Imposta il numero di volte in cui è possibile utilizzare il radar
+ * da un giocatore, restituendo il dato aggiornato.
+ * 
+ * @param player Giocatore a cui aggiurnare il numero di utilizzi del radar.
+ * @param radarAmount Numero di utilizzi del radar.
+ * @return Giocatore aggiornato.
+ */
+Player setRadar(Player player, int radarAmount)
 {
-	player.radar = radar;
+	player.radar = radarAmount;
 	return player;
 }
 
-Player writeAirstrike(Player player, int airstrike)
+
+/**
+ * @brief Imposta il numero di bombardamenti disponibili ad un 
+ * giocatore, restituendo il dato aggiornato.
+ * 
+ * @param player Giocatore a cui aggiornare il numero di bombardamenti disponibili.
+ * @param airstrikeAmount Numero di bombardamenti disponibili.
+ * @return Giocatore aggiornato 
+ */
+Player setAirstrike(Player player, int airstrikeAmount)
 {
-	player.aistrike = airstrike;
+	player.aistrike = airstrikeAmount;
 	return player;
 }
 
-Player writeAvailableShips(Player player, int availableShips)
+
+/**
+ * @brief Imposta il numero di navi attive di un giocatore, restituendo
+ * il dato aggiornato.
+ * 
+ * @param player Giocatore a cui aggiornare il numero di navi attive.
+ * @param availableShips Numero di navi attive.
+ * @return Giocatore aggiornato. 
+ */
+Player setAvailableShips(Player player, int availableShips)
 {
 	player.availableShips = availableShips;
 	return player;
 }
 
-Player writeShip(Player player, int index, Ship ship)
+
+/**
+ * @brief Imposta ad una nave, un suo indice, all'interno di un array di navi
+ * attive del giocatore, restituendo il dato aggiornato.
+ * 
+ * @param player Giocatore a cui aggiungere una nave, in un indice 
+ * specifico della sua lista.
+ * @param index Indice della nave.
+ * @param ship Nave da aggiungere.
+ * @return Giocatore aggiornato.
+ */
+Player setShip(Player player, int index, Ship ship)
 {
 	player.ships[index - 1] = ship;
 	return player;

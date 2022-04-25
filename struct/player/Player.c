@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./Ship.c"
+#include "../ship/Ship.c"
 #include "./Player.h"
 
-// Player writePlayground(Player player, char playground[GRID_SIZE][GRID_SIZE]);
-// Player writeHeatMap(Player player, char heatMap[GRID_SIZE][GRID_SIZE]);
 
 /**
  * @brief Restituisce l'indetificatore del giocatore.
@@ -86,6 +84,66 @@ int getAvailableShips(Player player)
 
 
 /**
+ * @brief Restituisce il valore contenuto nel campo playground, del dato strutturato Player, e
+ * lo salva all'intero del parametro playground.
+ * 
+ * @param player Giocatore da cui estrarre il contenuto della sua mappa di gioco
+ * @param playground Mappa di gioco di un giocatore specifico.
+ */
+void getPlayground(Player player, char playground[TABLE_MAX][TABLE_MAX]) 
+{
+	int i;
+	int j;
+
+	i = 0;
+	
+	while (i < TABLE_MAX)
+	{
+		j = 0;
+		while (j < TABLE_MAX)
+		{
+			playground[i][j] = player.playground[i][j];
+			j++;
+		}
+		
+		i++;
+	}
+
+	return;
+}
+
+
+/**
+ * @brief Restituisce il valore contenuto nel campo heatMap, del dato strutturato Player, e
+ * lo salva all'intero del parametro heatMap.
+ * 
+ * @param player Giocatore da cui estrarre il contenuto della sua mappa di gioco
+ * @param heatMap heat map di un giocatore specifico.
+ */
+void getHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]) 
+{
+	int i;
+	int j;
+	
+	i = 0;
+	
+	while (i < TABLE_MAX)
+	{
+		j=0;
+		while (j < TABLE_MAX)
+		{
+			heatMap[i][j] = player.heatMap[i][j];
+			j++;
+		}
+		i++;
+	}
+	
+	return;
+}
+
+
+
+/**
  * @brief Restistuisce una nave del giocatore.
  * 
  * @param player Giocatore da cui prendere una nave
@@ -115,19 +173,6 @@ Player setId(Player player, int id)
 	return player;
 }
 
-//FIXME: Invece che Grid hai un array 2D di caratteri
-
-// Player writePlayground(Player player, char playground[GRID_SIZE][GRID_SIZE])
-// {
-//  	player.playground[][] = playground[][];
-//  	return player;
-// }
-
-// Player writeHeatMap(Player player, char heatMap[GRID_SIZE][GRID_SIZE])
-// {
-// 	player.heatMap = heatMap;
-// 	return player;
-// }
 
 /**
  * @brief Imposta il numero di colpi a lungo raggio di 
@@ -202,5 +247,63 @@ Player setAvailableShips(Player player, int availableShips)
 Player setShip(Player player, int index, Ship ship)
 {
 	player.ships[index - 1] = ship;
+	return player;
+}
+
+
+/**
+ * @brief Aggiorna il valore del campo playground, del dato strutturato player, con il contenuto
+ * dell'array playground, restituendo il dato strutturato aggiornato.
+ * 
+ * @param player Giocatore da aggiornare.
+ * @param playground Contenuto aggiornato del playground
+ * @return Giocatore aggiornato. 
+ */
+Player setPlayground(Player player, char playground[TABLE_MAX][TABLE_MAX])
+{
+	int i;
+	int j;
+	
+	i = 0;
+	while (i < TABLE_MAX)
+	{
+		j = 0;
+		while (j < TABLE_MAX)
+		{
+			player.playground[i][j] = playground[i][j];
+			j++;
+		}
+		i++;
+	}
+
+	return player;
+}
+
+
+/**
+ * @brief Aggiorna il valore del campo heatmap, del dato strutturato player, con il contenuto
+ * dell'array heatMap, restituendo il dato strutturato aggiornato.
+ * 
+ * @param player Giocatore da aggiornare.
+ * @param heatMap Contenuto aggiornato della heat map.
+ * @return Giocatore aggiornato. 
+ */
+Player setHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]) {
+	int i;
+	int j;
+
+	i = 0;
+	
+	while (i < TABLE_MAX)
+	{
+		j = 0;
+		while (j < TABLE_MAX)
+		{
+			player.heatMap[i][j] = heatMap[i][j];
+			j++;
+		}
+		i++;
+	}
+	
 	return player;
 }

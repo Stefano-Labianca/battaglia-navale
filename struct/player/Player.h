@@ -2,15 +2,15 @@
 #define _PLAYER_H
 
 #include "../ship/Ship.h" 
+#include "../../global/GlobalConstants.h"
 
 #define SHIP_NUMB 15
-#define GRID_SIZE 16 
 
 
 typedef struct Player {
 	int id;
-	char playground[GRID_SIZE][GRID_SIZE];
-	char heatMap[GRID_SIZE][GRID_SIZE];
+	char playground[TABLE_MAX][TABLE_MAX];
+	char heatMap[TABLE_MAX][TABLE_MAX];
 	int longShots;
 	int radar;
 	int aistrike;
@@ -25,6 +25,8 @@ int getRadar(Player player);
 int getAirstrike(Player player);
 int getAvailableShips(Player player);
 Ship getShip(Player player, int index);
+void getPlayground(Player player, char playground[TABLE_MAX][TABLE_MAX]);
+void getHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]);
 
 
 Player setId(Player player, int id);
@@ -33,5 +35,7 @@ Player setRadar(Player player, int radarAmount);
 Player setAirstrike(Player player, int airstrikeAmount);
 Player setAvailableShips(Player player, int availableShips);
 Player setShip(Player player, int index, Ship ship);
+Player setPlayground(Player player, char playground[TABLE_MAX][TABLE_MAX]);
+Player setHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]);
 
 #endif

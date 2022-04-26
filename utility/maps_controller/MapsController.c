@@ -71,7 +71,7 @@ void showMap(char map[TABLE_MAX][TABLE_MAX])
 	startColumnSymbol = 'A';
 	i = 0;
 	
-    printf("   ");
+    printf("    ");
 	while (i < TABLE_MAX) 
     {
 		printf(" %c ", startColumnSymbol);
@@ -103,4 +103,70 @@ void showMap(char map[TABLE_MAX][TABLE_MAX])
 	}
     
     return;
+}
+
+
+/**
+ * @brief Carica una nave in verticale all'interno del playground del giocatore.
+ * 
+ * @param player Giocatore a cui inserire una nave.
+ * @param startColumn Colonna di partenza della nave.
+ * @param startRow Riga di partenza usata della nave.
+ * @param label Etichetta della nave
+ * @param shipSize Dimensioni della nave.
+ * @return Giocatore aggiornato con all'interno del suo playground una nave. 
+ */
+Player loadVerticalAxis(Player player, int startColumn, int startRow, int label, int shipSize)
+{
+	int i;
+	char playground[TABLE_MAX][TABLE_MAX];
+	
+	i = 0;
+	getPlayground(player, playground);
+	
+	startColumn--;
+
+	while (i < shipSize)
+	{
+		playground[startRow][startColumn] = label;
+		startRow++;
+		i++;
+	}
+	
+	player = setPlayground(player, playground);
+
+	return player;
+}
+
+
+/**
+ * @brief Carica una nave in orizzontale all'interno del playground del giocatore.
+ * 
+ * @param player Giocatore a cui inserire una nave.
+ * @param startColumn Colonna di partenza della nave.
+ * @param startRow Riga di partenza usata della nave.
+ * @param label Etichetta della nave
+ * @param shipSize Dimensioni della nave.
+ * @return Giocatore aggiornato con all'interno del suo playground una nave. 
+ */
+Player loadHorizontalAxis(Player player, int startColumn, int startRow, int label, int shipSize)
+{
+	int i;
+	char playground[TABLE_MAX][TABLE_MAX];
+	
+	i = 0;
+	getPlayground(player, playground);
+	
+	startColumn--;
+
+	while (i < shipSize)
+	{
+		playground[startRow][startColumn] = label;
+		startColumn++;
+		i++;
+	}
+	
+	player = setPlayground(player, playground);
+
+	return player;
 }

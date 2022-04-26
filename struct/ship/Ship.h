@@ -8,14 +8,15 @@ enum COORDS_CONSTANTS {
 	COORD_SEPARETOR = '_',
 	MAX_COORD_LEN = 7, 
 	MAX_ROW_LEN = 3, 
-	MAX_DIM_COORDS = 11
+	MAX_COORDS_RANGE = 11
 };
 
 typedef struct Ship {
 	char label;
 	int lifePoints;
 	int size;
-	char coords[MAX_COORD_LEN];
+	char coords[MAX_COORDS_RANGE];
+	char direction;
 } Ship;
 
 
@@ -23,14 +24,17 @@ char getLabel(Ship ship);
 int getSize(Ship ship);
 int getLifePoints(Ship ship);
 void getCoords(Ship ship, char coords[]);
+char getDirection(Ship ship);
 
 Ship setLabel(Ship ship, char label);
 Ship setSize(Ship ship, int size);
 Ship setLifePoints(Ship ship, int lifePoints);
 Ship setCoords(Ship ship, char coords[]);
+Ship setDirection(Ship ship, char direction);
+
 
 char getColumn();
-char getDirection();
+char getShipDirection();
 int isValidRow(int row);
 void getRow(char row[]);
 int calculateBoundaries(int start, int end);
@@ -42,5 +46,7 @@ void concatCoordinates(char first[], char second[], char dest[]);
 char getCharColumn(int column);
 int getIntegerColumn(char column);
 
+int pullColumn(Ship ship);
+int pullRow(Ship ship);
 
 #endif

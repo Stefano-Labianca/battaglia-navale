@@ -61,8 +61,35 @@ int getLifePoints(Ship ship)
  */
 void getCoords(Ship ship, char coords[])
 {
-	strcpy(coords, ship.coords);
+	int i;
+	i = 0;
+	
+	while (ship.coords[i] != '\0')
+	{
+		coords[i] = ship.coords[i];
+		i++;
+	}
+	
+	coords[i]='\0';
+	
 	return;
+}
+
+
+/**
+ * @brief Restituisce la direzione della nave, il valore restituito puo' 
+ * essere pari 'V', nel caso di orientamento verticale, oppure pari a 'O' 
+ * per l'orientamento orizzontale.
+ * 
+ * @param ship Nave da cui prendere l'orientamento.
+ * @return Carattere che rappresenta l'orientamento della nave. 
+ */
+char getDirection(Ship ship)
+{
+	char direction;
+	direction = ship.direction;
+
+	return direction;
 }
 
 
@@ -115,11 +142,36 @@ Ship setLifePoints(Ship ship, int lifePoints)
  * 
  * @param ship Nave a cui assegnare la cella di partenza e di arrivo.
  * @param coords Contiene la cella di partenza e di arrivo della nave. 
- * @return Nave aggiornata 
+ * @return Nave aggiornata.
  */
 Ship setCoords(Ship ship, char coords[])
 {
-	strcpy(ship.coords, coords);
+	int i;
+	i = 0;
+
+	while (coords[i] != '\0')
+	{
+		ship.coords[i] = coords[i];
+		i++;
+	}
+	
+	ship.coords[i] = '\0';
+	
+	return ship;
+}
+
+
+/**
+ * @brief Imposta l'orientamento della nave, restituendo il dato strutturato
+ * modificato.
+ * 
+ * @param ship Nave a cui impostare la direzione.
+ * @param direction Direzione della nave.
+ * @return Nave modificata.
+ */
+Ship setDirection(Ship ship, char direction)
+{
+	ship.direction = direction;
 	return ship;
 }
 
@@ -238,13 +290,14 @@ void buildShipCoordinate(char column, char row[], char coord[])
 
 
 /**
- * @brief Restituisce l'orientamento della nave. Il valore restituito
- * può essere pari a "V", che definisce l'orientamento verticale, oppure pari 
- * a "O" che definisce l'orientamento orizzontale.
+ * @brief Restituisce l'orientamento della nave, preso in input 
+ * dall'utente. Il valore restituito può essere pari a "V", che definisce 
+ * l'orientamento verticale, oppure pari a "O" che definisce 
+ * l'orientamento orizzontale.
  * 
  * @return Carattere che definisce l'orientamento della nave. 
  */
-char getDirection() 
+char getShipDirection() 
 {
 	int error;
 	char direction;
@@ -491,4 +544,60 @@ void concatCoordinates(char startCell[], char endCell[], char dest[])
 
 	return;
 }
+
+
+/**
+ * @brief Estrae e restituisce, sottoforma di numero naturale,  il valore della 
+ * colonna di partenza di una nave. 
+ * 
+ * Il valore restituito varia da 1 a 16.
+ * 
+ * @param ship Nave da cui estrarre il valore della colonna.
+ * @return Rappresentazione numerica della colonna. 
+ */
+int pullColumn(Ship ship)
+{
+	char range[MAX_COORDS_RANGE];
+	int integerColumn;
+
+	getCoords(ship, range);
+	integerColumn = getIntegerColumn(range[0]);
+
+	return integerColumn;
+}
+
+
+/**
+ * @brief Estrae e restituisce, sottoforma di numero naturale,  il valore della 
+ * riga di partenza di una nave. 
+ * 
+ * Il valore restituito varia da 1 a 16.
+ * 
+ * @param ship Nave da cui estrarre il valore della riga.
+ * @return Rappresentazione numerica della riga. 
+ */
+int pullRow(Ship ship)
+{
+	char range[MAX_COORDS_RANGE];
+	char row[MAX_ROW_LEN];
+	int integerRow;
+	int rowLen;
+	int i;
+
+	i = 2;
+	getCoords(ship, range);
+
+	while (range[i] != COORD_SEPARETOR)
+	{
+		row[i - 2] = range[i];
+		i++;
+	}
+	
+	row[i - 2] = '\0';
+	rowLen = getLength(row);
+	integerRow = stringToNumber(row, rowLen);
+
+	return integerRow;
+}
+
 

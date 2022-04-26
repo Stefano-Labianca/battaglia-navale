@@ -1,4 +1,4 @@
-#include "converter.h"
+#include "./converter.h"
 
 /**
  * @brief Trasforma una lettera minuscola in una lettera maiuscola. Se letter è una lettera
@@ -51,11 +51,9 @@ void numberToString(int number, char buffer[])
 {
 	int i;
 	int last;
-	int digit;
 	
 	i = 0;
 	last = 1;
-	digit = 0;
 
 	if (number > 9)
 	{

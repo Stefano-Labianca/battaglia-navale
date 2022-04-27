@@ -1,110 +1,5 @@
 #include "./MapsController.h"
-
-
-/**
- * @brief Inizializza e restituisce il playgroud dei giocatori.
- * 
- * @param playground Playground da inizializzare.
- */
-void createPlayground(char playground[TABLE_MAX][TABLE_MAX])
-{
-    int i;
-	int j;
-
-	i = 0;
-	
-	while (i < TABLE_MAX) 
-	{
-		j = 0;
-		while (j < TABLE_MAX) 
-		{
-			playground[i][j] = WATER; //FIXME: Richiamare la funzione di accesso di Player.c
-			j++;
-		}
-		
-		i++;
-	}
-
-	return;
-}
-
-
-/**
- * @brief Inizializza e restituisce, all'interno del paramentro heatMap, l'heat map 
- * dei giocatori.
- * 
- * @param heatMap Heat map da inizializzare. 
- */
-void createHeatMap(char heatMap[TABLE_MAX][TABLE_MAX])
-{
-	int i;
-	int j;
-
-	i = 0;
-	
-	while (i < TABLE_MAX) 
-	{
-		j = 0;
-		while (j < TABLE_MAX) 
-		{
-			heatMap[i][j] = UNKNOWN; //FIXME: Richiamare la funzione di accesso di Player.c
-			j++;
-		}
-		i++;
-	}
-
-	return;
-}
-
-
-/**
- * @brief Mostra il contenuto di una mappa di gioco.
- * 
- * @param map Mappa di gioco in cui mostrare il contenuto.
- */
-void showMap(char map[TABLE_MAX][TABLE_MAX])
-{
-	int i;
-	int j;
-	char startColumnSymbol;
-
-	startColumnSymbol = 'A';
-	i = 0;
-	
-    printf("    ");
-	while (i < TABLE_MAX) 
-    {
-		printf(" %c ", startColumnSymbol);
-		startColumnSymbol++;
-		i++;
-	}
-
-	printf("\n");
-	i = 0;
-	
-    while (i < TABLE_MAX) 
-    {
-		if (i < 10) 
-        {
-			printf(" ");
-		}
-
-		j = 0;
-		printf(" %d ", i);
-
-		while (j < TABLE_MAX) 
-        {
-			printf(" %c ", map[i][j]); //FIXME: Richiamare la funzione di accesso di Player.c
-			j++;
-		}
-
-		printf("\n");
-		i++;
-	}
-    
-    return;
-}
-
+#include "../converter/converter.c"
 
 /**
  * @brief Carica una nave in verticale all'interno del playground del giocatore.
@@ -112,11 +7,11 @@ void showMap(char map[TABLE_MAX][TABLE_MAX])
  * @param player Giocatore a cui inserire una nave.
  * @param startColumn Colonna di partenza della nave.
  * @param startRow Riga di partenza usata della nave.
- * @param label Etichetta della nave
+ * @param label Etichetta della nave.
  * @param shipSize Dimensioni della nave.
  * @return Giocatore aggiornato con all'interno del suo playground una nave. 
  */
-Player loadVerticalAxis(Player player, int startColumn, int startRow, int label, int shipSize)
+Player loadVerticalAxis(Player player, int startColumn, int startRow, char label, int shipSize)
 {
 	int i;
 	char playground[TABLE_MAX][TABLE_MAX];
@@ -145,11 +40,11 @@ Player loadVerticalAxis(Player player, int startColumn, int startRow, int label,
  * @param player Giocatore a cui inserire una nave.
  * @param startColumn Colonna di partenza della nave.
  * @param startRow Riga di partenza usata della nave.
- * @param label Etichetta della nave
+ * @param label Etichetta della nave.
  * @param shipSize Dimensioni della nave.
  * @return Giocatore aggiornato con all'interno del suo playground una nave. 
  */
-Player loadHorizontalAxis(Player player, int startColumn, int startRow, int label, int shipSize)
+Player loadHorizontalAxis(Player player, int startColumn, int startRow, char label, int shipSize)
 {
 	int i;
 	char playground[TABLE_MAX][TABLE_MAX];
@@ -169,4 +64,224 @@ Player loadHorizontalAxis(Player player, int startColumn, int startRow, int labe
 	player = setPlayground(player, playground);
 
 	return player;
+}
+
+
+int isImpossible(char cell[], char direction, char coords[], int size, char playground[TABLE_MAX][TABLE_MAX])
+{
+	int error;
+	int row;
+	int column;
+
+	error = 0;
+	row = stringToNumber(cell, getLength(cell));
+	column = getIntegerColumn(cell[0]);
+
+	if (checkBoundaries(row, column, size) == 0)
+	{
+		if (checkCollisions(playground, direction, coords, size) == 1)
+		{
+			printf("Coordinate non valide: sei in contatto con un altra nave\n");
+			error = 1;
+		}
+	}
+
+	else
+	{
+		printf("Coordinate non valide: stai violando i confini della mappa\n");
+		error = 1;
+	}
+
+	return error;
+}
+
+
+
+int checkBoundaries(int row, int column, int size)
+{
+	int error;
+	error = 0;
+
+	if ((row + size - 1 > TABLE_MAX) || (column + size - 1 > TABLE_MAX))
+	{
+		error = 1;
+	}
+
+	return error;
+}
+
+
+
+int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char direction, char coords[], int shipSize)
+{
+	int error;
+	error = 0;
+
+	//FIXME: Fare un calcolo migliore della scelta della cella di scansione nel caso
+	// di posizionamento dell nave ai bordi della mappa.
+
+	if (direction == 'V')
+	{
+		if(checkVerticalCollisions(playground, coords, shipSize) == 1)
+		{
+			printf("Coordinate non valide: sei in contatto con un altra nave\n");
+			error = 1;
+		}
+	}
+
+	else if (direction == 'O')
+	{
+		if(checkHorizontalCollisions(playground, coords, shipSize) == 1)
+		{
+			printf("Coordinate non valide: sei in contatto con un altra nave\n");
+			error = 1;
+		}
+	}
+
+	return error;
+}
+
+
+int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shipSize)
+{
+	int error;
+	int startingColumn;
+	char firstCell[MAX_COORD_LEN];
+	char secondCell[MAX_COORD_LEN];
+	int firstRow;
+	int secondRow;
+	int i;
+	int j;
+	int k;
+
+	error = 0;
+	getFirstCell(coords, firstCell);
+	getLastCell(coords, secondCell);
+	startingColumn = getIntegerColumn(firstCell[0]) - 1;
+	firstRow = stringToNumber(firstCell, getLength(firstCell));
+	secondRow = stringToNumber(secondCell, getLength(secondCell));
+	
+	k = 0;
+	i = firstRow - 1;
+	j = startingColumn - 1;
+
+	while (k < SEARCH_RADIUS)
+	{
+		j = startingColumn - 1;
+
+		while (j < startingColumn + shipSize + 1)
+		{
+			if (playground[j][i] != WATER)
+			{
+				k = SEARCH_RADIUS;
+				j = startingColumn + shipSize;
+				error = 1;
+			}
+
+			j++;
+		}
+
+		i++;
+		k++;
+	}
+
+
+	return error;
+}
+
+
+
+int checkHorizontalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shipSize)
+{
+	int error;
+	int startingRow;
+	char firstCell[MAX_COORD_LEN];
+	char secondCell[MAX_COORD_LEN];
+	int firstColumn;
+	int secondColumn;
+	int i;
+	int j;
+	int k;
+
+	error = 0;
+	getFirstCell(coords, firstCell);
+	getLastCell(coords, secondCell);
+
+	startingRow = stringToNumber(firstCell, getLength(firstCell)) - 1;
+	firstColumn = getIntegerColumn(firstCell[0]);
+	secondColumn = getIntegerColumn(secondCell[0]);
+
+	k = SEARCH_RADIUS;
+	i = firstColumn - 1; 
+	j = startingRow;
+
+	while (k > 0)
+	{
+		j = startingRow;
+
+		while (j <= startingRow + shipSize + 1)
+		{
+			if (playground[i][j] != WATER)
+			{
+				k = -1;
+				j = startingRow + shipSize + 1;
+				error = 1;
+			}
+
+			j++;
+		}
+
+		k--;
+		i--;
+	}
+
+	return error;
+}
+
+
+void getFirstCell(char coords[], char cell[])
+{
+	int i;
+	i = 0;
+
+	while (coords[i] != COORD_SEPARETOR)
+	{
+		cell[i] = coords[i];
+		i++;
+	}
+
+	cell[i] = '\0';
+
+	return;
+}
+
+
+void getLastCell(char coords[], char cell[])
+{
+	int i;
+	int j;
+	int underScorePosition;
+
+	i = 0;
+	j = 0;
+	underScorePosition = 0;
+
+	while (coords[i] != COORD_SEPARETOR)
+	{
+		underScorePosition++;
+		i++;
+	}
+	
+	i = underScorePosition + 1;
+
+	while (coords[i] != '\0')
+	{
+		cell[j] = coords[i];
+		j++;
+		i++;
+	}
+
+	cell[j] = '\0';
+
+	return;
 }

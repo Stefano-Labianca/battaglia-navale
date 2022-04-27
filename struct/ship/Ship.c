@@ -3,8 +3,7 @@
 #include <string.h>
 
 #include "Ship.h"
-#include "../../utility/converter/converter.c"
-
+#include "../../utility/maps_controller/MapsController.c"
 
 /**
  * @brief Restituisce l'etichetta associata ad una nave, all'interno
@@ -371,10 +370,7 @@ void buildVerticalCoord(char startingCoord[], int shipSize, char nextCoord[])
 	numericRow = 0;
 	i = 2;
 
-
-	shipSize--;
-	numericRow = stringToNumber(startingCoord, getLength(startingCoord));
-	numericRow = calculateBoundaries(numericRow, shipSize);
+	numericRow = stringToNumber(startingCoord, getLength(startingCoord)) + shipSize - 1;
 	numberToString(numericRow, nextRow);
 
 	nextCoord[0] = startingCoord[0];
@@ -415,10 +411,7 @@ void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
 	i = 2;
 
 	startingColumn = startingCoord[0];
-	numericColumn = getIntegerColumn(startingColumn);
-	shipSize--;
-
-	numericColumn = calculateBoundaries(numericColumn, shipSize);
+	numericColumn = getIntegerColumn(startingColumn) + shipSize - 1;
 	nextColumn = getCharColumn(numericColumn);
 
 	nextCoord[0] = nextColumn;
@@ -435,70 +428,6 @@ void buildHorizontalCoord(char startingCoord[], int shipSize, char nextCoord[])
 	return;	
 }
 
-
-// ? Deciderne l'implementazione
-/**
- * @brief Verifica se due punti rispettano i limiti imposti dalle dimensioni 
- * della tabella di gioco, calcolando e restituendo il punto di arrivo corretto. 
- * 
- * @param start Punto di partenza.
- * @param end Punto di arrivo ipotetico.
- * @return Punto di arrivo corretto.
- */
-int calculateBoundaries(int start, int end)
-{
-	if (start + end > TABLE_MAX)
-	{
-		start -= end;
-	}
-
-	else if (start - end < TABLE_MIN)
-	{
-		start += end;
-	}
-
-	else if (start + end >= TABLE_MIN && start + end <= TABLE_MAX)
-	{
-		start += end;
-	}
-
-	return start;
-}
-
-
-/**
- * @brief Converte un carattere, associato ad una colonna, e restituisce
- * la posizione della colonna all'interno della tabella.
- * 
- * @param column Carattere da convertire.
- * @return Posizione della colonna all'interno della tabella.
- */
-int getIntegerColumn(char column)
-{
-	int numericColumn;
-	
-	numericColumn = column - START_UPPERCASE_ASCII + 1;
-
-	return numericColumn;
-}
-
-
-/**
- * @brief Converte la posizione di una colonna, e restituisce
- * il carattere associato ad essa nella tabella di gioco.
- * 
- * @param column Valore numerico da convertire.
- * @return Posizione della colonna convertita nel suo carattere associato.
- */
-char getCharColumn(int column)
-{
-	char charColumn = ' ';
-	charColumn = ' ';
-
-	charColumn = column + START_UPPERCASE_ASCII - 1;
-
-	return charColumn;
-}
 
 
 /**
@@ -598,6 +527,42 @@ int pullRow(Ship ship)
 	integerRow = stringToNumber(row, rowLen);
 
 	return integerRow;
+}
+
+
+Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
+{
+	Ship ship;
+	char cell[MAX_COORD_LEN];
+	char nextCell[MAX_COORD_LEN];
+	char coords[MAX_COORDS_RANGE];
+
+	char column;
+	char row[MAX_ROW_LEN];
+	char direction;
+
+	printf("IL TUO PLAYGROUND FIN ORA\n");
+	showMap(playground);
+
+	do
+	{
+		column = getColumn();
+		getRow(row);
+		direction = getShipDirection();
+
+		buildShipCoordinate(column, row, cell);			
+		buildNextCoord(direction, cell, size, nextCell);
+		concatCoordinates(cell, nextCell, coords);
+		
+	} while (isImpossible(cell, direction, coords, size, playground) == 1);
+
+	ship = setLabel(ship, (number + START_LOWERCASE_ASCII));
+	ship = setLifePoints(ship, size);
+	ship = setSize(ship, size);
+	ship = setCoords(ship, coords);
+	ship = setDirection(ship, direction);
+
+	return ship;
 }
 
 

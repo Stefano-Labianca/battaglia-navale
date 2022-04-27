@@ -2,4 +2,4 @@
 #define _SEARCH_H
 
 
-#endif
+#endif /* _SEARCH_H */

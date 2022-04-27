@@ -18,4 +18,4 @@ Round setGameRound(Round round, int gameRound);
 Round setActivePlayer(Round round, Player activePlayer);
 Round setPassivePlayer(Round round, Player passivePlayer);
 
-#endif
+#endif /* _ROUND_H */

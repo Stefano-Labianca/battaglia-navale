@@ -4,9 +4,6 @@
 #include "../ship/Ship.h" 
 #include "../../global/GlobalConstants.h"
 
-#define SHIP_NUMB 15
-
-
 typedef struct Player {
 	int id;
 	char playground[TABLE_MAX][TABLE_MAX];
@@ -18,6 +15,10 @@ typedef struct Player {
 	Ship ships[SHIP_NUMB];
 } Player;
 
+
+void createPlayground(char playground[TABLE_MAX][TABLE_MAX]);
+void createHeatMap(char heatMap[TABLE_MAX][TABLE_MAX]);
+void showMap(char map[TABLE_MAX][TABLE_MAX]);
 
 int getId(Player player);
 int getLongShots(Player player);
@@ -38,4 +39,6 @@ Player setShip(Player player, int index, Ship ship);
 Player setPlayground(Player player, char playground[TABLE_MAX][TABLE_MAX]);
 Player setHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]);
 
-#endif
+Player createPlayer(Player player, int id);
+
+#endif /* _PLAYER_H */

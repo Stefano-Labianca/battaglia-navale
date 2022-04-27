@@ -2,20 +2,23 @@
 #define _MAPS_CONTROLLER_H
 
 #include "../../global/GlobalConstants.h"
-#include "../../struct/ship/Ship.h"
-#include "../../struct/player/Player.h"
+#include "../../struct/player/Player.c"
 
-enum PLAYGROUND_SYMBOLS { WATER = '~', PLAYGROUND_HIT = 'X', SUNK = '*' };
-enum HEAT_MAP_SYMBOLS { UNKNOWN = '?',  HEAT_MAP_HIT = '!' };
 
-void createPlayground(char playground[TABLE_MAX][TABLE_MAX]);
-void createHeatMap(char heatMap[TABLE_MAX][TABLE_MAX]);
-void showMap(char map[TABLE_MAX][TABLE_MAX]);
-
-Player loadVerticalAxis(Player player, int startColumn, int startRow, int label, int shipSize);
-Player loadHorizontalAxis(Player player, int startColumn, int startRow, int label, int shipSize);
+Player loadVerticalAxis(Player player, int startColumn, int startRow, char label, int shipSize);
+Player loadHorizontalAxis(Player player, int startColumn, int startRow, char label, int shipSize);
 
 //TODO: Inserire qui le funzioni di inserimento delle navi, con relativi controlli sull'inserimento, ricerca e 
 // e gestione dei vari tipi di attacchi.  
 
-#endif
+int isImpossible(char cell[], char direction, char coords[], int size, char playground[TABLE_MAX][TABLE_MAX]);
+int checkBoundaries(int row, int column, int size);
+int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char direction, char coords[], int shipSize);
+
+int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shiSize);
+int checkHorizontalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shiSize);
+
+void getFirstCell(char coords[], char cell[]);
+void getLastCell(char coords[], char cell[]);
+
+#endif /* _MAPS_CONTROLLER_H */

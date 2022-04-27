@@ -10,4 +10,4 @@
 
 void showGameSlots();
 
-#endif
+#endif /* _SAVE_GAME_H */

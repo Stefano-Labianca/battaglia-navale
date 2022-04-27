@@ -6,4 +6,4 @@
 
 void showRules();
 
-#endif
+#endif /* _RULE_CONTROLLER_H */

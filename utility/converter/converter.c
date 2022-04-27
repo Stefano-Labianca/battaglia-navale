@@ -1,4 +1,11 @@
-#include "./converter.h"
+#include "../../global/GlobalConstants.h"
+
+int stringToNumber(char str[], int len);
+int getLength(char str[]);
+char toUpperCase(char letter);
+void numberToString(int number, char buffer[]);
+char getCharColumn(int column);
+int getIntegerColumn(char column);
 
 /**
  * @brief Trasforma una lettera minuscola in una lettera maiuscola. Se letter è una lettera
@@ -103,3 +110,38 @@ int stringToNumber(char str[], int len)
 
 	return number;
 }	
+
+
+/**
+ * @brief Converte un carattere, associato ad una colonna, e restituisce
+ * la posizione della colonna all'interno della tabella.
+ * 
+ * @param column Carattere da convertire.
+ * @return Posizione della colonna all'interno della tabella.
+ */
+int getIntegerColumn(char column)
+{
+	int numericColumn;
+	
+	numericColumn = column - START_UPPERCASE_ASCII + 1;
+
+	return numericColumn;
+}
+
+
+/**
+ * @brief Converte la posizione di una colonna, e restituisce
+ * il carattere associato ad essa nella tabella di gioco.
+ * 
+ * @param column Valore numerico da convertire.
+ * @return Posizione della colonna convertita nel suo carattere associato.
+ */
+char getCharColumn(int column)
+{
+	char charColumn = ' ';
+	charColumn = ' ';
+
+	charColumn = column + START_UPPERCASE_ASCII - 1;
+
+	return charColumn;
+}

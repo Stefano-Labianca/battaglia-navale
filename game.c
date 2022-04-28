@@ -114,10 +114,16 @@ void showMenu()
  */
 char userChoice()
 {
-    char input = ' ';
-    printf("  Inserisci una scelta valida tra le opzioni disponibili: ");
-    scanf("%c", &input);
-    fflush(stdin);
+    char input;
+    input = ' ';
+
+    do
+    {
+        printf("  Inserisci una scelta valida tra le opzioni disponibili: ");
+        scanf("%c", &input);
+        fflush(stdin);
+    } while (input < '1' || input > '4');
+    
 
     return input;
 }

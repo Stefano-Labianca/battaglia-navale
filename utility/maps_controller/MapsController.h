@@ -13,7 +13,7 @@ Player loadHorizontalAxis(Player player, int startColumn, int startRow, char lab
 // e gestione dei vari tipi di attacchi.  
 
 int isImpossible(char cell[], char direction, char coords[], int size, char playground[TABLE_MAX][TABLE_MAX]);
-int checkBoundaries(int row, int column, int size);
+int checkBoundaries(int row, int column, int size, char direction);
 int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char direction, char coords[], int shipSize);
 
 int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shiSize);

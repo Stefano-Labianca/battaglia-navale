@@ -142,18 +142,18 @@ int isImpossible(char cell[], char direction, char coords[], int size, char play
 	row = stringToNumber(cell, getLength(cell));
 	column = getIntegerColumn(cell[0]);
 
-	if (checkBoundaries(row, column, size) == 0)
+	if (checkBoundaries(row, column, size, direction) == 0)
 	{
 		if (checkCollisions(playground, direction, coords, size) == 1)
 		{
-			printf("Coordinate non valide: sei in contatto con un altra nave\n");
+			printf("\n\nCoordinate non valide: sei in contatto con un altra nave\n\n");
 			error = 1;
 		}
 	}
 
 	else
 	{
-		printf("Coordinate non valide: stai violando i confini della mappa\n");
+		printf("\n\nCoordinate non valide: stai violando i confini della mappa\n\n");
 		error = 1;
 	}
 
@@ -169,16 +169,28 @@ int isImpossible(char cell[], char direction, char coords[], int size, char play
  * @param row Riga di partenza della nave.
  * @param column Colonna di partenza della nave.
  * @param size Dimensioni della nave.
+ * @param direction Direzione della nave.
  * @return Valore numerico pari a 1 o 0, che rappresenta l'esito del controllo. 
  */
-int checkBoundaries(int row, int column, int size)
+int checkBoundaries(int row, int column, int size, char direction)
 {
 	int error;
 	error = 0;
 
-	if ((row + size - 1 > TABLE_MAX) || (column + size - 1 > TABLE_MAX))
+	if (direction == 'V')
 	{
-		error = 1;
+		if (row - 1 + size > TABLE_MAX)
+		{
+			error = 1;
+		}
+	}
+
+	else if (direction == 'O')
+	{
+		if (column - 1 + size > TABLE_MAX)
+		{
+			error = 1;
+		}
 	}
 
 	return error;
@@ -209,120 +221,190 @@ int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char direction, char 
 
 	if (direction == 'V')
 	{
-		if(checkVerticalCollisions(playground, coords, shipSize) == 1)
-		{
-			printf("Coordinate non valide: sei in contatto con un altra nave\n");
-			error = 1;
-		}
+		error = checkVerticalCollisions(playground, coords, shipSize);	
 	}
 
 	else if (direction == 'O')
 	{
-		if(checkHorizontalCollisions(playground, coords, shipSize) == 1)
-		{
-			printf("Coordinate non valide: sei in contatto con un altra nave\n");
-			error = 1;
-		}
+		error = checkHorizontalCollisions(playground, coords, shipSize);
 	}
 
 	return error;
 }
 
 
+/**
+ * @brief Verifica la possibilità di inserire una nave in verticale, all'interno del playground 
+ * di gioco. Restituisce 0 se l'inserimento è avvenuto con successo, altrimenti restituisce 1 
+ * in caso si sia verificato un errore.
+ * 
+ * @param playground Mappa di gioco di un giocatore.
+ * @param coords Range di coordinate di una nave.
+ * @param shipSize Dimensioni della nave.
+ * @return Valore numerico pari a 1 o 0, che rappresentano l'esito del controllo. 
+ */
 int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shipSize)
 {
 	int error;
-	int startingColumn;
 	char firstCell[MAX_COORD_LEN];
-	char secondCell[MAX_COORD_LEN];
-	int firstRow;
-	int secondRow;
+	char lastCoord[MAX_COORD_LEN];
+	int pivotRow;
+	int pivotColumn;
 	int i;
 	int j;
 	int k;
+	int limit;
 
-	error = 0;
+	/**
+	 * Allora breve spiegazione. 
+	 * 
+	 * Il pivot rappresenta un punto dove si inizia la ricerca
+	 * della collisione. Prendiamo la cella di partenza e l'ultima cella della nave, dalla
+	 * cella di partenza, converto in valore numerico le colonne e le righe, così da manipolarle 
+	 * meglio:
+	 * 		firstCell: char[] = ['E', '-', '4']  
+	 * 		relativePivotColumn: int = 5 -> (converto la 'E' nel numero di colonna relativo, ovvero 5)
+	 * 		relativePivotRow: int = 4 -> (converto il '4' nel numero di riga relativo, ovvero 4)
+	 
+	 * Dico relativo perchè si parte tutto da zero e la funzione che converte i valori dati li restituisce
+	 * senza diminuire di 1 i valori dati (big brain power potevi pensarci prima brutto str*nzo)
+	 * 
+	 * Ora converti relativePivotColumn e relativePivotRow nel loro valore assoluto:
+	 * 		absolutePivotColumn: int = relativePivotColumn - 1 = 4 
+	 * 		absolutePivotRow: int = relativePivotRow - 1 = 3 
+	 * 
+	 * Ora ricavati la posizione del pivot, andando in alto a sinistra (in diagonale a sinistra) di una cella rispetto
+	 * alla cella di partenza della nave:
+	 * 		pivotColumn: int = absolutePivotColumn - 1 = 3 
+	 * 		pivotRow: int = absolutePivotRow - 1 = 2 
+	 * 
+	 * Per questo motivo nel codice ho messo -2 :)
+	*/
+
 	getFirstCell(coords, firstCell);
-	getLastCell(coords, secondCell);
-	startingColumn = getIntegerColumn(firstCell[0]) - 1;
-	firstRow = stringToNumber(firstCell, getLength(firstCell));
-	secondRow = stringToNumber(secondCell, getLength(secondCell));
+	getLastCell(coords, lastCoord);
 	
+	pivotColumn = getIntegerColumn(firstCell[0]) - 2;
+	pivotRow = stringToNumber(firstCell, getLength(firstCell)) - 2;
+	
+	i = pivotColumn; // Scansiona le colonne
+	j = pivotRow; // Scansiona le righe
 	k = 0;
-	i = firstRow - 1;
-	j = startingColumn - 1;
+	limit = pivotRow + shipSize + 1;
 
 	while (k < SEARCH_RADIUS)
 	{
-		j = startingColumn - 1;
+		j = pivotRow;
 
-		while (j < startingColumn + shipSize + 1)
-		{
+		while (j <= limit)
+		{	
 			if (playground[j][i] != WATER)
 			{
-				k = SEARCH_RADIUS;
-				j = startingColumn + shipSize;
-				error = 1;
+				if (playground[j][i] >= 'a' && playground[j][i] <= 'p')
+				{
+					error = 1;
+					j = limit;
+					k = SEARCH_RADIUS;
+				}
 			}
-
+			
 			j++;
 		}
-
-		i++;
+		
 		k++;
+		i++;
 	}
-
 
 	return error;
 }
 
 
-
+/**
+ * @brief Verifica la possibilità di inserire una nave in orizzontale, all'interno del playground 
+ * di gioco. Restituisce 0 se l'inserimento è avvenuto con successo, altrimenti restituisce 1 
+ * in caso si sia verificato un errore.
+ * 
+ * @param playground Mappa di gioco di un giocatore.
+ * @param coords Range di coordinate di una nave.
+ * @param shipSize Dimensioni della nave.
+ * @return Valore numerico pari a 1 o 0, che rappresentano l'esito del controllo. 
+ */
 int checkHorizontalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shipSize)
 {
 	int error;
-	int startingRow;
 	char firstCell[MAX_COORD_LEN];
-	char secondCell[MAX_COORD_LEN];
-	int firstColumn;
-	int secondColumn;
+	char lastCoord[MAX_COORD_LEN];
+	int pivotRow;
+	int pivotColumn;
 	int i;
 	int j;
 	int k;
+	int limit;
 
-	error = 0;
+	/**
+	 * Allora breve spiegazione. 
+	 * 
+	 * Il pivot rappresenta un punto dove si inizia la ricerca
+	 * della collisione. Prendiamo la cella di partenza e l'ultima cella della nave, dalla
+	 * cella di partenza, converto in valore numerico le colonne e le righe, così da manipolarle 
+	 * meglio:
+	 * 		firstCell: char[] = ['D', '-', '4']  
+	 * 		relativePivotColumn: int = 4 -> (converto la 'D' nel numero di colonna relativo, ovvero 4)
+	 * 		relativePivotRow: int = 4 -> (converto il '4' nel numero di riga relativo, ovvero 4)
+	 
+	 * Dico relativo perchè si parte tutto da zero e la funzione che converte i valori dati li restituisce
+	 * senza diminuire di 1 i valori dati (big brain power potevi pensarci prima brutto str*nzo)
+	 * 
+	 * Ora converti relativePivotColumn nel loro valore assoluto:
+	 * 		absolutePivotColumn: int = relativePivotColumn - 1 = 3 
+	 * 
+	 * Ora ricavati la posizione del pivot, andando in basso a sinistra (in diagonale a sinistra) di una cella rispetto
+	 * alla cella di partenza della nave:
+	 * 		pivotColumn: int = absolutePivotColumn - 1 = 2 
+	 * 
+	 * Per questo motivo nel codice ho messo -2 alla colonna :)
+	 * 
+	 * Non faccio questo ragionamento per la riga del pivot perchè, se la posizione relativa è 4 e la sua posizione 
+	 * assoluta è 3. Dato che devo andare in basso a sinistra nella ricerca, devo incrementare di uno la riga e 
+	 * quindi 4 -1 + 1 = 4 e allora lascio la posizione relativa della riga.
+	*/
+
 	getFirstCell(coords, firstCell);
-	getLastCell(coords, secondCell);
+	getLastCell(coords, lastCoord);
 
-	startingRow = stringToNumber(firstCell, getLength(firstCell)) - 1;
-	firstColumn = getIntegerColumn(firstCell[0]);
-	secondColumn = getIntegerColumn(secondCell[0]);
+	pivotColumn = getIntegerColumn(firstCell[0]) - 2;
+	pivotRow = stringToNumber(firstCell, getLength(firstCell));
 
-	k = SEARCH_RADIUS;
-	i = firstColumn - 1; 
-	j = startingRow;
+	i = pivotRow; // Scansiona le righe
+	j = pivotColumn; // Scansiona le colonne
+	k = 0;
+	limit = pivotColumn + shipSize + 1;
 
-	while (k > 0)
+	while (k < SEARCH_RADIUS)
 	{
-		j = startingRow;
+		j = pivotColumn;
 
-		while (j <= startingRow + shipSize + 1)
-		{
+		while (j <= limit)
+		{	
 			if (playground[i][j] != WATER)
 			{
-				k = -1;
-				j = startingRow + shipSize + 1;
-				error = 1;
+				if (playground[i][j] >= 'a' && playground[i][j] <= 'p')
+				{
+					error = 1;
+					j = limit;
+					k = SEARCH_RADIUS;
+				}
 			}
 
 			j++;
 		}
 
-		k--;
+		k++;
 		i--;
 	}
+	
 
-	return error;
+	return error;	
 }
 
 

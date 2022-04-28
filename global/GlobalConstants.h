@@ -24,7 +24,13 @@ enum PLAYER_CONSTANTS {
 	MAX_AIR_STRIKE = 1
 };
 
-enum PLAYGROUND_SYMBOLS { WATER = '~', PLAYGROUND_HIT = 'X', SUNK = '*' };
-enum HEAT_MAP_SYMBOLS { UNKNOWN = '?',  HEAT_MAP_HIT = '!' };
+enum MAP_SYMBOLS { 
+	WATER = '~', 
+	PLAYGROUND_HIT = 'X', 
+	SUNK = '*', 
+	MISS = '/',  
+	UNKNOWN = '?', 
+	HEAT_MAP_HIT = '!' 
+};
 
 #endif /* _GLOBAL_CONSTANTS_H */

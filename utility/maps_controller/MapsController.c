@@ -20,6 +20,7 @@ Player loadVerticalAxis(Player player, int startColumn, int startRow, char label
 	getPlayground(player, playground);
 	
 	startColumn--;
+	startRow--;
 
 	while (i < shipSize)
 	{
@@ -53,6 +54,7 @@ Player loadHorizontalAxis(Player player, int startColumn, int startRow, char lab
 	getPlayground(player, playground);
 	
 	startColumn--;
+	startRow--;
 
 	while (i < shipSize)
 	{
@@ -67,6 +69,69 @@ Player loadHorizontalAxis(Player player, int startColumn, int startRow, char lab
 }
 
 
+/**
+ * @brief Permette al giocatore attivo di colpire una cella
+ * della mappa dell'avversario, restituendo il match di gioco
+ * modificato.
+ * 
+ * @param row Riga del colpo.
+ * @param column Colonna del colpo.
+ * @param match Match di gioco da modificare.
+ * @return Match di gioco modificato. 
+ */
+Round hit(int row, int column, Round match)
+{	
+	char passivePlayground[TABLE_MAX][TABLE_MAX];
+	char activeHeatMap[TABLE_MAX][TABLE_MAX];
+	char cell;
+
+	Player passivePlayer;
+	Player activePlayer;
+
+	passivePlayer = getPassivePlayer(match);
+	activePlayer = getActivePlayer(match);
+
+	row--;
+	column--;
+
+	getPlayground(passivePlayer, passivePlayground); 
+	getHeatMap(activePlayer, activeHeatMap);
+	cell = passivePlayground[row][column];
+
+	if (cell >= 'a' && cell <= 'p')
+	{
+		passivePlayground[row][column] = PLAYGROUND_HIT;
+		activeHeatMap[row][column] = HEAT_MAP_HIT;
+	}
+
+	else
+	{
+		passivePlayground[row][column] = MISS;
+		activeHeatMap[row][column] = MISS;
+	}
+
+	passivePlayer = setPlayground(passivePlayer, passivePlayground);
+	activePlayer = setHeatMap(activePlayer, activeHeatMap);
+
+	match = setPassivePlayer(match, passivePlayer);
+	match = setActivePlayer(match, activePlayer);
+
+	return match;
+}
+
+
+/**
+ * @brief Verifica se è possibile inserire, all'interno del playground, posizionare una nave
+ * in una data posizione. La funzione restituisce 1, se non è possibile inserire la nave in una data
+ * posizione, altrimenti restituisce 0 se è possibile inserire la nave in una data posizione.
+ * 
+ * @param cell Posizione di partenza della nave.
+ * @param direction Direzione della nave.
+ * @param coords Range di coordinate della nave.
+ * @param size Dimensioni della nave.
+ * @param playground Mappa di gioco del giocatore.
+ * @return Valore numerico pari a 1 o 0, che rappresenta l'esito del controllo.
+ */
 int isImpossible(char cell[], char direction, char coords[], int size, char playground[TABLE_MAX][TABLE_MAX])
 {
 	int error;
@@ -96,7 +161,16 @@ int isImpossible(char cell[], char direction, char coords[], int size, char play
 }
 
 
-
+/**
+ * @brief Controlla se la posizione della nave, non vada oltre i limiti della mappa
+ * di gioco, restituendo 1 se va oltre i limiti della mappa, altrimenti restituisce 0
+ * se rispetta i limiti della mappa.
+ * 
+ * @param row Riga di partenza della nave.
+ * @param column Colonna di partenza della nave.
+ * @param size Dimensioni della nave.
+ * @return Valore numerico pari a 1 o 0, che rappresenta l'esito del controllo. 
+ */
 int checkBoundaries(int row, int column, int size)
 {
 	int error;
@@ -110,6 +184,8 @@ int checkBoundaries(int row, int column, int size)
 	return error;
 }
 
+
+//FIXME: Risolvere i problemi delle collisioni sulle navi
 
 
 int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char direction, char coords[], int shipSize)

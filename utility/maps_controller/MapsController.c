@@ -187,7 +187,18 @@ int checkBoundaries(int row, int column, int size)
 
 //FIXME: Risolvere i problemi delle collisioni sulle navi
 
-
+/**
+ * @brief Verifica se una nave sta entrando in collisione con un'altra nave o se
+ * supera i confini della mappa di gioco, restituendo 1 se vengono violati uno dei 
+ * due vincoli altrimenti, se vengono rispettati entrambi,	 restituisce 0.
+ * 
+ * @param playground Playground di un giocatore.
+ * @param direction Direzione della nave.
+ * @param coords Range di coordinate di una nave.
+ * @param shipSize Dimensioni della nave.
+ * @return Restituisce un valore numerico pari a 1 o 0, che rappresentano
+ * l'esito della verifica dei vincoli.
+ */
 int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char direction, char coords[], int shipSize)
 {
 	int error;
@@ -315,6 +326,13 @@ int checkHorizontalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords
 }
 
 
+/**
+ * @brief Restituisce la prima cella del range di coordinate di 
+ * una nave, riportandola all'interno del parametro cell.   
+ * 
+ * @param coords Range di coordinate di una nave.
+ * @param cell Array che contiene la prima cella.
+ */
 void getFirstCell(char coords[], char cell[])
 {
 	int i;
@@ -332,6 +350,13 @@ void getFirstCell(char coords[], char cell[])
 }
 
 
+/**
+ * @brief Restituisce l'ultima cella del range di coordinate di 
+ * una nave, riportandola all'interno del parametro cell.   
+ * 
+ * @param coords Range di coordinate di una nave.
+ * @param cell Array che contiene l'ultima cella.
+ */
 void getLastCell(char coords[], char cell[])
 {
 	int i;

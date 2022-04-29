@@ -197,8 +197,6 @@ int checkBoundaries(int row, int column, int size, char direction)
 }
 
 
-//FIXME: Risolvere i problemi delle collisioni sulle navi
-
 /**
  * @brief Verifica se una nave sta entrando in collisione con un'altra nave o se
  * supera i confini della mappa di gioco, restituendo 1 se vengono violati uno dei 
@@ -468,3 +466,84 @@ void getLastCell(char coords[], char cell[])
 
 	return;
 }
+
+
+/**
+ * @brief Permette al giocatore di crearsi la sua flotta di navi, da inserire nel playground di gioco. Alla fine 
+ * dell'inserimento delle navi nella mappa di gioco, verrà restituito il dato strutturato Player modificato.
+ * 
+ * @param player Player a cui far inserire le navi nella sua mappa di gioco.
+ * @return Player con le navi inserite nella mappa di gioco. 
+ */
+Player buildPlayerNavy(Player player)
+{
+	Ship ship;
+	char playground[TABLE_MAX][TABLE_MAX];
+	char shipDirection;
+	char label;
+	int integerColumn;
+	int integerRow;
+	int sizeModifier;
+	int amountModifier;
+	int index;
+	int i;
+	int j;
+
+	/**
+	 * In pratica cosa faccio:
+	 * 		sizeModifier: number = MAX_SHIP_SIZE -> Rappresenta le dimensioni della nave da inserire (MAX_SHIP_AMOUNT = 5); 
+	 * 		amountModifier: number = 1 -> Rappresenta la quantità di navi da inserire, per una specifica dimensione;
+	 * 
+	 * Immaginati di avere due array di numeri, entrambi di lunghezza pari a 5:
+	 * 		sizeCollection: number[] = [5, 4, 3, 2, 1];
+	 * 		amountCollection: number[] = [1, 2, 3, 4, 5];
+	 * 
+	 * sizeCollection, contiene le possibili dimensioni di una nave, mentre amountCollection le possibili dimensioni della nave.
+	 * Attraverso l'uso dell'indice dei due array, possiamo creare un'associazione del tipo size-amount. 
+	 * Per esempio: se index = 0, allora posso creare 1 nave di dimensioni pari a 5.
+	 * 
+	 * Il principio è simile all'uso delle due variabili sizeModifier e amountModifier, solamente che non abbiamo indici di alcun tipo
+	 * ma andiamo ad aumentare gradualmente la quantità di navi da inserire e, nel mentre, diminuiamo il modificatore delle dimensioni.
+	*/
+
+	sizeModifier = MAX_SHIP_SIZE;
+	amountModifier = 1;
+	index = 0;
+	i = 0;
+	j = 0;
+
+	while (i < MAX_SHIP_AMOUNT)
+	{
+		j = 0;
+
+		while (j < amountModifier)
+		{
+			getPlayground(player, playground);
+			ship = createShip(sizeModifier, index, playground);
+			shipDirection = getDirection(ship);
+			label = getLabel(ship);
+			integerColumn = pullColumn(ship);
+			integerRow = pullRow(ship);
+
+			if (shipDirection == 'V')
+			{
+				player = loadVerticalAxis(player, integerColumn, integerRow, label, sizeModifier);
+			}
+
+			else if (shipDirection == 'O')
+			{
+				player = loadHorizontalAxis(player, integerColumn, integerRow, label, sizeModifier);
+			}
+
+			j++;
+			i++;
+			index++;
+		}
+
+		amountModifier++;
+		sizeModifier--;
+	}
+	
+	return player;
+}
+

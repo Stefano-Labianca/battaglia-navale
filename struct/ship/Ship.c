@@ -530,6 +530,15 @@ int pullRow(Ship ship)
 }
 
 
+/**
+ * @brief Costrutisce e restituisce una nave. La funzione verifica anche
+ * se è possibile inserirla all'interno della mappa di gioco del giocatore.
+ * 
+ * @param size Dimensioni della nave.
+ * @param number Numero della nave inserita. 
+ * @param playground Mappa di gioco del giocatore.
+ * @return Nave del giocatore. 
+ */
 Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
 {
 	Ship ship;
@@ -564,5 +573,7 @@ Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
 
 	return ship;
 }
+
+
 
 

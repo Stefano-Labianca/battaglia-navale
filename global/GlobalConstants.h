@@ -5,6 +5,8 @@
 #define START_UPPERCASE_ASCII 65
 #define START_LOWERCASE_ASCII 97
 #define SEARCH_RADIUS 3
+#define MAX_SHIP_AMOUNT 3 //FIXME: Per motivi di test sta a 3 ma deve stare a 15
+#define MAX_SHIP_SIZE 5 
 
 enum TABLE_RANGE { TABLE_MIN = 1, TABLE_MAX = 16 };
 enum ASCII_DIGIT_RANGE { MIN_DIGIT = 48, MAX_DIGIT = 57 };

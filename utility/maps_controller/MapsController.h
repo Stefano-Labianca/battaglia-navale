@@ -8,6 +8,7 @@
 
 Player loadVerticalAxis(Player player, int startColumn, int startRow, char label, int shipSize);
 Player loadHorizontalAxis(Player player, int startColumn, int startRow, char label, int shipSize);
+Player buildPlayerNavy(Player player);
 
 //TODO: Inserire qui le funzioni di inserimento delle navi, con relativi controlli sull'inserimento, ricerca e 
 // e gestione dei vari tipi di attacchi.  

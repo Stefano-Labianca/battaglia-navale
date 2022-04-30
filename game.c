@@ -124,6 +124,5 @@ char userChoice()
         fflush(stdin);
     } while (input < '1' || input > '4');
     
-
     return input;
 }

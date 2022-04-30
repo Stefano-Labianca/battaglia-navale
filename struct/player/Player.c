@@ -26,7 +26,7 @@ Player createPlayer(Player player, int id)
 
 
 /**
- * @brief Restituisce l'indetificatore del giocatore.
+ * @brief Restituisce l'identificatore del giocatore.
  * 
  * @param player Giocatore da cui ricavare l'identificatore
  * @return Identificatore del giocatore 

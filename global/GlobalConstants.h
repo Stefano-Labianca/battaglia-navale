@@ -4,8 +4,8 @@
 #define LOWER_TO_UPPER 32
 #define START_UPPERCASE_ASCII 65
 #define START_LOWERCASE_ASCII 97
-#define SEARCH_RADIUS 3
-#define MAX_SHIP_AMOUNT 3 //FIXME: Per motivi di test sta a 3 ma deve stare a 15
+// #define SEARCH_RADIUS 3
+#define MAX_SHIP_AMOUNT 1 //FIXME: Per motivi di test sta a 2 ma deve stare a 15
 #define MAX_SHIP_SIZE 5 
 
 enum TABLE_RANGE { TABLE_MIN = 1, TABLE_MAX = 16 };
@@ -32,7 +32,8 @@ enum MAP_SYMBOLS {
 	SUNK = '*', 
 	MISS = '/',  
 	UNKNOWN = '?', 
-	HEAT_MAP_HIT = '!' 
+	HEAT_MAP_HIT = '!',
+	HEAT_MAP_SUCCESSFUL_SCAN = '#' 
 };
 
 #endif /* _GLOBAL_CONSTANTS_H */

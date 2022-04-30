@@ -532,6 +532,7 @@ Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
 
 	do
 	{
+		printf("\n-- Insermento navi di dimensioni pari a %d --\n\n", size);
 		column = getColumn();
 		getRow(row);
 		direction = getShipDirection();

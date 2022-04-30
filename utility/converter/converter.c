@@ -52,7 +52,7 @@ int getLength(char str[])
  * nel parametro buffer.
  * 
  * @param number Numero da convertire.
- * @param buffer Array che contiene il valore di number convertito in una stringa.
+ * @param buffer Stringa che contiene il valore di number convertito.
  */
 void numberToString(int number, char buffer[])
 {
@@ -83,7 +83,7 @@ void numberToString(int number, char buffer[])
 
 /**
  * @brief Converte una stringa in un numero naturale, andando ad escludere quei caratteri che non fanno parte
- * del range ASCII delle cifre decimali. Se li viene passata una stringa non valida, viene restituito il 
+ * del range ASCII delle cifre decimali. Se viene passata una stringa non valida, viene restituito il 
  * valore 0, altrimenti viene restituito il valore convertito.
  * 
  * @param str Stringa da convertire in un numero naturale.

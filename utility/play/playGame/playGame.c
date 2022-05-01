@@ -212,7 +212,7 @@ int rowChoice()
 
         scanf("%d", &row);
 
-        if (row < 1 || row > 16)
+        if (row < TABLE_MIN || row > TABLE_MAX)
         {
             error = 1;
             printf("\n\nErrore: inserire un valore di riga valido\n\n");

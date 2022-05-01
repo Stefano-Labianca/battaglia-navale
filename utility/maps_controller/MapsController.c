@@ -189,7 +189,7 @@ Round longShot(int row, int column, Round match)
 	column--;
 	pivotColumn = column - 1;
 	pivotRow = row - 1;
-	if (pivotColumn < 0)
+	if (pivotColumn < TABLE_MIN - 1)
 	{
 		pivotColumn = 0;
 	}
@@ -199,13 +199,13 @@ Round longShot(int row, int column, Round match)
 	}
 	endRow = row + 1;
 	endColumn = column + 1;
-	if (endRow > 15)
+	if (endRow > TABLE_MAX - 1)
 	{
-		endRow = 15;
+		endRow = TABLE_MAX - 1;
 	}
-	if (endColumn > 15)
+	if (endColumn > TABLE_MAX - 1)
 	{
-		endColumn = 15;
+		endColumn = TABLE_MAX - 1;
 	}
 
 	printf("Row=%d\tColumn=%d\nPivotRow=%d\tPivotColumn=%d\tEndRow=%d\tEndColumn=%d\n", row, column, pivotRow, pivotColumn, endRow, endColumn);
@@ -363,23 +363,23 @@ Round radar(Round match, int row, int column) {
 	column--;
 	pivotColumn = column - 1;
 	pivotRow = row - 1;
-	if (pivotColumn < 0)
+	if (pivotColumn < TABLE_MIN - 1)
 	{
-		pivotColumn = 0;
+		pivotColumn = TABLE_MIN - 1;
 	}
-	if (pivotRow < 0)
+	if (pivotRow < TABLE_MIN - 1)
 	{
-		pivotRow = 0;
+		pivotRow = TABLE_MIN - 1;
 	}
 	endRow = row + 1;
 	endColumn = column + 1;
-	if (endRow > 15)
+	if (endRow > TABLE_MAX - 1)
 	{
-		endRow = 15;
+		endRow = TABLE_MAX - 1;
 	}
-	if (endColumn > 15)
+	if (endColumn > TABLE_MAX - 1)
 	{
-		endColumn = 15;
+		endColumn = TABLE_MAX - 1;
 	}
 
 	printf("Row=%d\tColumn=%d\nPivotRow=%d\tPivotColumn=%d\tEndRow=%d\tEndColumn=%d\n", row, column, pivotRow, pivotColumn, endRow, endColumn);
@@ -501,25 +501,25 @@ int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[])
 	pivotColumn = getIntegerColumn(firstCell[0]) - 2;
 	pivotRow = stringToNumber(firstCell, getLength(firstCell)) - 2;
 
-	if (pivotColumn < 0)
+	if (pivotColumn < TABLE_MIN - 1)
 	{
-		pivotColumn = 0;
+		pivotColumn = TABLE_MIN - 1;
 	}
-	if (pivotRow < 0)
+	if (pivotRow < TABLE_MIN - 1)
 	{
-		pivotRow = 0;
+		pivotRow = TABLE_MIN - 1;
 	}
 
 	endColumn = getIntegerColumn(lastCoord[0]);
 	endRow = stringToNumber(lastCoord, getLength(lastCoord));
-	if (endColumn > 15)
+	if (endColumn > TABLE_MAX - 1)
 	{
-		endColumn = 15;
+		endColumn = TABLE_MAX - 1;
 	}
 
-	if (endRow > 15)
+	if (endRow > TABLE_MAX - 1)
 	{
-		endRow = 15;
+		endRow = TABLE_MAX - 1;
 	}
 
 	while (pivotRow <= endRow)

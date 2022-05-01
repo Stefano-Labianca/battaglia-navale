@@ -3,6 +3,7 @@
 
 #include "./Player.h"
 
+
 Player createPlayer(Player player, int id)
 {
 	char playground[TABLE_MAX][TABLE_MAX];
@@ -18,8 +19,6 @@ Player createPlayer(Player player, int id)
 	player = setRadar(player, MAX_RADAR);
 	player = setAirstrike(player, MAX_AIR_STRIKE);
 	player = setAvailableShips(player, SHIP_NUMB);
-	
-	getPlayground(player, playground);
 	
 	return player;
 }
@@ -330,7 +329,7 @@ Player setHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]) {
 
 
 /**
- * @brief Inizializza e restituisce il playgroud dei giocatori.
+ * @brief Inizializza e restituisce il playground dei giocatori.
  * 
  * @param playground Playground da inizializzare.
  */

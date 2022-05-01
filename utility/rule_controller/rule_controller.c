@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "rule_controller.h"
+#include <stdlib.h>
 
-
+#include "./rule_controller.h"
+#include "../../global/GlobalConstants.h"
 /**
  * @brief Mostra le regole di gioco
  */

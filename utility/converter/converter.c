@@ -1,3 +1,4 @@
+#include "../../global/GlobalConstants.h"
 
 /**
  * @brief Trasforma una lettera minuscola in una lettera maiuscola. Se letter è una lettera

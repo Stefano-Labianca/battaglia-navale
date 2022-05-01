@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 
-#include "./Round.h"
+#include "../../struct/round/Round.h"
 
 
 /**
@@ -17,6 +17,12 @@ int getGameRound(Round round)
     return gameRound;
 }
 
+int getWhoPlay(Round round)
+{
+    int whoPlay;
+    whoPlay = round.whoPlay;
+    return whoPlay;
+}
 
 
 /**
@@ -63,6 +69,14 @@ Round setGameRound(Round round, int gameRound)
     round.gameRound = gameRound;
     return round;
 }
+
+
+Round setWhoPlay(Round round, int whoPlay)
+{
+    round.whoPlay = whoPlay;
+    return round;
+}
+
 
 
 /**

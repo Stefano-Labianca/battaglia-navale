@@ -215,7 +215,7 @@ int rowChoice()
         if (row < 1 || row > 16)
         {
             error = 1;
-            printf("\n\nErrore\n\n"); // TODO: Da gestire meglio la stampa dell'errore
+            printf("\n\nErrore: inserire un valore di riga valido\n\n");
         }
 
         fflush(stdin);
@@ -242,7 +242,7 @@ int columnChoice()
         if (column < 'A' || column > 'P')
         {
             error = 1;
-            printf("\n\nErrore\n\n"); // TODO: Da gestire meglio la stampa dell'errore
+            printf("\n\nErrore: inserire un valore di colonna valido\n\n");
         }
 
         fflush(stdin);

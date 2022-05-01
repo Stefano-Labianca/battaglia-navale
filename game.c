@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./utility/rule_controller/rule_controller.c"
-#include "./utility/save/save_game.c"
+#include "./utility/rule_controller/rule_controller.h"
+#include "./utility/save/save_game.h"
+#include "./utility/play/newGame/newGame.h"
+#include "./utility/maps_controller/MapsController.h"
 
 char userChoice();
-
 
 void mainLoop();
 void showMenu();
@@ -38,10 +39,6 @@ int main()
     return EXIT_SUCCESS;
 }
 
-
-    
-
-
 /**
  * @brief Rappresenta il menù principale a cui l'utente può accedere
  * non appena avvia il programma.
@@ -62,7 +59,7 @@ void mainLoop()
 
         if (choice == '1')
         {
-            // Richiama la funzione gameLoop
+            newGame();
         }
 
         else if (choice == '2')
@@ -86,7 +83,6 @@ void mainLoop()
             printf("  Comando non valido\n\n");
         }
     }
-
     return;
 }
 

@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./ship.h"
 
-#include "Ship.h"
-#include "../../utility/maps_controller/MapsController.c"
 
 /**
  * @brief Restituisce l'etichetta associata ad una nave, all'interno
@@ -174,8 +173,6 @@ char getColumn()
 {
 	int error;
 	char col;
-
-	error = 0;
 	col = ' ';
 
 	do
@@ -285,7 +282,6 @@ char getShipDirection()
 	int error;
 	char direction;
 
-	error = 0;
 	direction = ' ';
 
 	do
@@ -548,7 +544,7 @@ Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
 	ship = setSize(ship, size);
 	ship = setCoords(ship, coords);
 
-		ship = setDirection(ship, direction);
+	ship = setDirection(ship, direction);
 
 	return ship;
 }

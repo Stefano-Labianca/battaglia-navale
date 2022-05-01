@@ -1,8 +1,7 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "../ship/Ship.h" 
-#include "../../global/GlobalConstants.h"
+#include "../../struct/ship/Ship.h"
 
 typedef struct Player {
 	int id;

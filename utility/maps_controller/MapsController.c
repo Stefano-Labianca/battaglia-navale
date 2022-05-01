@@ -115,7 +115,6 @@ Round hit(int row, int column, Round match)
 		ship = getShip(passivePlayer, (cell - START_LOWERCASE_ASCII + 1));
 
 		lifePoints = getLifePoints(ship);
-		printf("LA NAVE CON LABEL %c ha %d lifepoints         %c\n ", getLabel(ship), getLifePoints(ship), cell);
 		if (lifePoints == 1)
 		{
 			printf("\n%c-%d: COLPITO E AFFONDATO!\n", (column + START_UPPERCASE_ASCII), (row + 1));
@@ -124,7 +123,7 @@ Round hit(int row, int column, Round match)
 			passivePlayer = setAvailableShips(passivePlayer, passivePlayerShips);
 			getCoords(ship, passivePlayerCoords);
 			direction = getDirection(ship);
-			// printf("COORDS: %s\n", passivePlayerCoords);
+
 			row = pullRow(ship) - 1;	   // - 1 not in pseudo
 			column = pullColumn(ship) - 1; // - 1 not in pseudo
 
@@ -191,11 +190,11 @@ Round longShot(int row, int column, Round match)
 	pivotRow = row - 1;
 	if (pivotColumn < TABLE_MIN - 1)
 	{
-		pivotColumn = 0;
+		pivotColumn = TABLE_MIN - 1;
 	}
-	if (pivotRow < 0)
+	if (pivotRow < TABLE_MIN - 1)
 	{
-		pivotRow = 0;
+		pivotRow = TABLE_MIN - 1;
 	}
 	endRow = row + 1;
 	endColumn = column + 1;
@@ -884,7 +883,6 @@ Player buildPlayerNavy(Player player)
 			getPlayground(player, playground);
 			ship = createShip(sizeModifier, index, playground);
 
-			printf(" LA BASTARDA TROIA E' LA NAVE NUMERO %d\n", index);
 			player = setShip(player, (index + 1), ship);
 
 			shipDirection = getDirection(ship);

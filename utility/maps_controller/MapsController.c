@@ -1,5 +1,10 @@
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "./MapsController.h"
-#include "../converter/converter.c"
+#include "../../global/GlobalConstants.h"
+#include "../../struct/round/Round.h"
+#include "../../struct/player/Player.h"
 
 /**
  * @brief Carica una nave in verticale all'interno del playground del giocatore.
@@ -101,7 +106,7 @@ Round hit(int row, int column, Round match)
 
 	if (passivePlayground[row][column] == WATER || passivePlayground[row][column] == PLAYGROUND_HIT)
 	{
-		activeHeatMap[row][column] = MISS;
+		activeHeatMap[row][column] = WATER;
 		printf("\n%c-%d: ACQUA!\n", (column + START_UPPERCASE_ASCII), (row + 1));
 	}
 
@@ -550,89 +555,89 @@ int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[])
  * @param shipSize Dimensioni della nave.
  * @return Valore numerico pari a 1 o 0, che rappresentano l'esito del controllo.
  */
-int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shipSize)
-{
-	int error;
-	char firstCell[MAX_COORD_LEN];
-	char lastCoord[MAX_COORD_LEN];
-	int pivotRow;
-	int pivotColumn;
-	int i;
-	int endRow;
-	int endColumn;
+// int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[], int shipSize)
+// {
+// 	int error;
+// 	char firstCell[MAX_COORD_LEN];
+// 	char lastCoord[MAX_COORD_LEN];
+// 	int pivotRow;
+// 	int pivotColumn;
+// 	int i;
+// 	int endRow;
+// 	int endColumn;
 
-	/**
-	 * Allora breve spiegazione.
-	 *
-	 * Il pivot rappresenta un punto dove si inizia la ricerca
-	 * della collisione. Prendiamo la cella di partenza e l'ultima cella della nave, dalla
-	 * cella di partenza, converto in valore numerico le colonne e le righe, così da manipolarle
-	 * meglio:
-	 * 		firstCell: char[] = ['E', '-', '4']
-	 * 		relativePivotColumn: int = 5 -> (converto la 'E' nel numero di colonna relativo, ovvero 5)
-	 * 		relativePivotRow: int = 4 -> (converto il '4' nel numero di riga relativo, ovvero 4)
+// 	/**
+// 	 * Allora breve spiegazione.
+// 	 *
+// 	 * Il pivot rappresenta un punto dove si inizia la ricerca
+// 	 * della collisione. Prendiamo la cella di partenza e l'ultima cella della nave, dalla
+// 	 * cella di partenza, converto in valore numerico le colonne e le righe, così da manipolarle
+// 	 * meglio:
+// 	 * 		firstCell: char[] = ['E', '-', '4']
+// 	 * 		relativePivotColumn: int = 5 -> (converto la 'E' nel numero di colonna relativo, ovvero 5)
+// 	 * 		relativePivotRow: int = 4 -> (converto il '4' nel numero di riga relativo, ovvero 4)
 
-	 * Dico relativo perchè parte tutto da zero e la funzione che converte i valori dati li restituisce
-	 * senza diminuire di 1 i valori dati
-	 *
-	 * Ora converti relativePivotColumn e relativePivotRow nel loro valore assoluto:
-	 * 		absolutePivotColumn: int = relativePivotColumn - 1 = 4
-	 * 		absolutePivotRow: int = relativePivotRow - 1 = 3
-	 *
-	 * Ora ricavati la posizione del pivot, andando in alto a sinistra (in diagonale a sinistra) di una cella rispetto
-	 * alla cella di partenza della nave:
-	 * 		pivotColumn: int = absolutePivotColumn - 1 = 3
-	 * 		pivotRow: int = absolutePivotRow - 1 = 2
-	 *
-	 * Per questo motivo nel codice ho messo -2 :)
-	*/
-	error = 0;
-	getFirstCell(coords, firstCell);
-	getLastCell(coords, lastCoord);
+// 	 * Dico relativo perchè parte tutto da zero e la funzione che converte i valori dati li restituisce
+// 	 * senza diminuire di 1 i valori dati
+// 	 *
+// 	 * Ora converti relativePivotColumn e relativePivotRow nel loro valore assoluto:
+// 	 * 		absolutePivotColumn: int = relativePivotColumn - 1 = 4
+// 	 * 		absolutePivotRow: int = relativePivotRow - 1 = 3
+// 	 *
+// 	 * Ora ricavati la posizione del pivot, andando in alto a sinistra (in diagonale a sinistra) di una cella rispetto
+// 	 * alla cella di partenza della nave:
+// 	 * 		pivotColumn: int = absolutePivotColumn - 1 = 3
+// 	 * 		pivotRow: int = absolutePivotRow - 1 = 2
+// 	 *
+// 	 * Per questo motivo nel codice ho messo -2 :)
+// 	*/
+// 	error = 0;
+// 	getFirstCell(coords, firstCell);
+// 	getLastCell(coords, lastCoord);
 
-	pivotColumn = getIntegerColumn(firstCell[0]) - 2;
-	pivotRow = stringToNumber(firstCell, getLength(firstCell)) - 2;
+// 	pivotColumn = getIntegerColumn(firstCell[0]) - 2;
+// 	pivotRow = stringToNumber(firstCell, getLength(firstCell)) - 2;
 
-	if (pivotColumn < 0)
-	{
-		pivotColumn = 0;
-	}
-	if (pivotRow < 0)
-	{
-		pivotRow = 0;
-	}
+// 	if (pivotColumn < 0)
+// 	{
+// 		pivotColumn = 0;
+// 	}
+// 	if (pivotRow < 0)
+// 	{
+// 		pivotRow = 0;
+// 	}
 
-	endColumn = getIntegerColumn(lastCoord[0]);
-	endRow = stringToNumber(lastCoord, getLength(lastCoord));
-	if (endColumn > 15)
-	{
-		endColumn = 15;
-	}
+// 	endColumn = getIntegerColumn(lastCoord[0]);
+// 	endRow = stringToNumber(lastCoord, getLength(lastCoord));
+// 	if (endColumn > 15)
+// 	{
+// 		endColumn = 15;
+// 	}
 
-	if (endRow > 15)
-	{
-		endRow = 15;
-	}
+// 	if (endRow > 15)
+// 	{
+// 		endRow = 15;
+// 	}
 
-	while (pivotRow <= endRow)
-	{
-		i = pivotColumn;
-		while (i <= endColumn)
-		{
-			if (playground[pivotRow][i] != WATER)
-			{
-				if (playground[pivotRow][i] >= 'a' && playground[pivotRow][i] <= 'p')
-				{
-					{
-						error = 1;
-					}
-				}
-			}
+// 	while (pivotRow <= endRow)
+// 	{
+// 		i = pivotColumn;
+// 		while (i <= endColumn)
+// 		{
+// 			if (playground[pivotRow][i] != WATER)
+// 			{
+// 				if (playground[pivotRow][i] >= 'a' && playground[pivotRow][i] <= 'p')
+// 				{
+// 					{
+// 						error = 1;
+// 					}
+// 				}
+// 			}
 
-			i++;
-		}
-		pivotRow++;
-	}
+// 			i++;
+// 		}
+// 		pivotRow++;
+// 	}
 
 	/*if (pivotColumn < 0) {
 		pivotColumn = 0;
@@ -676,8 +681,8 @@ int checkVerticalCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[]
 		i++;
 	}*/
 
-	return error;
-}
+// 	return error;
+// }
 
 /**
  * @brief Verifica la possibilità di inserire una nave in orizzontale, all'interno del playground
@@ -864,7 +869,7 @@ Player buildPlayerNavy(Player player)
 	 * ma andiamo ad aumentare gradualmente la quantità di navi da inserire e, nel mentre, diminuiamo il modificatore delle dimensioni.
 	 */
 
-	sizeModifier = 3;
+	sizeModifier = MAX_SHIP_SIZE;
 	amountModifier = 1;
 	index = 0;
 	i = 0;

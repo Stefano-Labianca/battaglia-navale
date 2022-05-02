@@ -25,6 +25,13 @@ int getWhoPlay(Round round)
 }
 
 
+int getPause(Round round)
+{
+    int pause;
+    pause = round.pause;
+    return pause;
+}
+
 /**
  * @brief Leggere il player attaccante
  * 
@@ -77,7 +84,10 @@ Round setWhoPlay(Round round, int whoPlay)
     return round;
 }
 
-
+Round setPause(Round round, int pause) {
+    round.pause = pause;
+    return round;
+}
 
 /**
  * @brief Modificare il player attaccante

@@ -782,7 +782,7 @@ void getFirstCell(char coords[], char cell[])
 	int i;
 	i = 0;
 
-	while (coords[i] != COORD_SEPARETOR)
+	while (coords[i] != COORD_SEPARATOR)
 	{
 		cell[i] = coords[i];
 		i++;
@@ -810,7 +810,7 @@ void getLastCell(char coords[], char cell[])
 	j = 0;
 	underScorePosition = 0;
 
-	while (coords[i] != COORD_SEPARETOR)
+	while (coords[i] != COORD_SEPARATOR)
 	{
 		underScorePosition++;
 		i++;

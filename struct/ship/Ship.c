@@ -432,7 +432,7 @@ void concatCoordinates(char startCell[], char endCell[], char dest[])
 		i++;
 	}
 
-	dest[i] = COORD_SEPARETOR;
+	dest[i] = COORD_SEPARATOR;
 
 	j = i + 1;
 	i = 0;
@@ -489,7 +489,7 @@ int pullRow(Ship ship)
 	i = 2;
 	getCoords(ship, range);
 
-	while (range[i] != COORD_SEPARETOR)
+	while (range[i] != COORD_SEPARATOR)
 	{
 		row[i - 2] = range[i];
 		i++;

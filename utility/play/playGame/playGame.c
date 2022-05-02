@@ -3,22 +3,23 @@
 
 #include "./playGame.h"
 
-void playGame(Round round)
+void playGame(Round round, int numFile)
 {
     int turn;
     int whoPlay;
+    int pause;
     Player player1;
     Player player2;
-    int end;
     int AvailableShipsControl;
     int idWinner;
+    int end;
     player1 = getActivePlayer(round);
     player2 = getPassivePlayer(round);
     turn = getGameRound(round);
     whoPlay = getWhoPlay(round);
+    pause = getPause(round);
     end = 0;
-
-    while (end == 0)
+    while ((pause == 0) && (end==0))
     {
         if (whoPlay == 1)
         {
@@ -26,9 +27,13 @@ void playGame(Round round)
             round = setActivePlayer(round, player1);
             round = setPassivePlayer(round, player2);
             round = newTurn(round);
-            player1 = getActivePlayer(round);
-            player2 = getPassivePlayer(round);
-            whoPlay = 2;
+            pause = getPause(round);
+            if (pause == 0)
+            {
+                player1 = getActivePlayer(round);
+                player2 = getPassivePlayer(round);
+                whoPlay = 2;
+            }
         }
         else
         {
@@ -36,22 +41,29 @@ void playGame(Round round)
             round = setActivePlayer(round, player2);
             round = setPassivePlayer(round, player1);
             round = newTurn(round);
-            player2 = getActivePlayer(round);
-            player1 = getPassivePlayer(round);
-            whoPlay = 1;
+            pause = getPause(round);
+            if (pause == 0)
+            {
+                player2 = getActivePlayer(round);
+                player1 = getPassivePlayer(round);
+                whoPlay = 1;
+            }
         }
-
-        AvailableShipsControl = getAvailableShips(player2);
-        if (AvailableShipsControl == 0)
+        if (pause == 0)
         {
-            end = 1;
-            idWinner = getId(player1);
-            printf("\n Partita finita: ha vinto il giocatore %d\n", idWinner);
-        }
-        else
-        {
-            turn++;
-            round = setGameRound(round, turn);
+            //saveGame(round);
+            AvailableShipsControl = getAvailableShips(player2);
+            if (AvailableShipsControl == 0)
+            {
+                idWinner = getId(player1);
+                printf("\n Partita finita: ha vinto il giocatore %d\n", idWinner);
+                end = 1;
+            }
+            else
+            {
+                turn++;
+                round = setGameRound(round, turn);
+            }
         }
     }
     return;
@@ -65,6 +77,7 @@ Round newTurn(Round round)
     char activePlayerHeatMap[TABLE_MAX][TABLE_MAX];
 
     int turn;
+    int pause;
     char choice;
     int row;
     int column;
@@ -95,8 +108,8 @@ Round newTurn(Round round)
 
         if (choice == '1')
         {
-            row = rowChoice();
-            column = columnChoice();
+            row = rowChoice()-1;
+            column = columnChoice()-1;
             round = hit(row, column, round);
         }
         else if (choice == '2')
@@ -163,8 +176,8 @@ Round newTurn(Round round)
         }
         else if (choice == '5')
         {
-            // salvataggio
-            // torna al menù principale
+           pause=1;
+           round=setPause(round,pause);
         }
     } while (error == 1);
 

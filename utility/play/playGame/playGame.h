@@ -5,7 +5,7 @@
 #include "../../../struct/round/Round.h"
 #include "../../../utility/converter/converter.h"
 
-void playGame(Round round);
+void playGame(Round round, int numFile);
 Round newTurn(Round round);
 char nextMoveChoice();
 int rowChoice();

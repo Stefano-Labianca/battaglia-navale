@@ -50,6 +50,6 @@ void newGame(int numFile)
     round = setActivePlayer(round, player1);
     round = setPassivePlayer(round, player2);
 
-    playGame(round);
+    playGame(round,numFile);
     return;
 }

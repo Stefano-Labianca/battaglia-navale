@@ -2,6 +2,7 @@
 #define _SHIP_H
 
 #include "../../global/GlobalConstants.h"
+#include "../../utility/converter/converter.h"
 
 typedef struct Ship {
 	char label;

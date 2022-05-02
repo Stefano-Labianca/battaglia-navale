@@ -99,7 +99,6 @@ Round hit(int row, int column, Round match)
 
 	passivePlayer = getPassivePlayer(match);
 	activePlayer = getActivePlayer(match);
-
 	getPlayground(passivePlayer, passivePlayground);
 	getHeatMap(activePlayer, activeHeatMap);
 	cell = passivePlayground[row][column];
@@ -124,8 +123,8 @@ Round hit(int row, int column, Round match)
 			getCoords(ship, passivePlayerCoords);
 			direction = getDirection(ship);
 
-			row = pullRow(ship) - 1;	   // - 1 not in pseudo
-			column = pullColumn(ship) - 1; // - 1 not in pseudo
+			row = pullRow(ship) - 1;	   
+			column = pullColumn(ship) - 1; 
 
 			if (direction == 'V')
 			{
@@ -305,10 +304,10 @@ Round airStrikeColumn(Round match, int column)
 	return match;
 }
 
-Round scan(int row, int column, Round match) {
+Round scan(int row, int column, Round match)
+{
 	char passivePlayground[TABLE_MAX][TABLE_MAX];
 	char activeHeatMap[TABLE_MAX][TABLE_MAX];
-	char cell;
 
 	Player passivePlayer;
 	Player activePlayer;
@@ -340,7 +339,8 @@ Round scan(int row, int column, Round match) {
 	return match;
 }
 
-Round radar(Round match, int row, int column) {
+Round radar(Round match, int row, int column)
+{
 	char passivePlayground[TABLE_MAX][TABLE_MAX];
 	char activeHeatMap[TABLE_MAX][TABLE_MAX];
 
@@ -638,47 +638,47 @@ int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[])
 // 		pivotRow++;
 // 	}
 
-	/*if (pivotColumn < 0) {
-		pivotColumn = 0;
-	}
+/*if (pivotColumn < 0) {
+	pivotColumn = 0;
+}
 
-	if (pivotRow < 0) {
-		pivotRow = 0;
-	}
+if (pivotRow < 0) {
+	pivotRow = 0;
+}
 
-	i = pivotColumn; // Scansiona le colonne
-	j = pivotRow;	 // Scansiona le righe
-	k = 0;
+i = pivotColumn; // Scansiona le colonne
+j = pivotRow;	 // Scansiona le righe
+k = 0;
 
-	limit = pivotRow + shipSize + 1;
+limit = pivotRow + shipSize + 1;
 
-	if (limit > 15) {
-		limit = 15;
-	}
+if (limit > 15) {
+	limit = 15;
+}
 
-	while (k < SEARCH_RADIUS)
+while (k < SEARCH_RADIUS)
+{
+	j = pivotRow;
+
+	while (j <= limit)
 	{
-		j = pivotRow;
-
-		while (j <= limit)
+		printf("[ROW=%d][COL=%d]=%c\n",j,i,playground[j][i]);
+		if (playground[j][i] != WATER)
 		{
-			printf("[ROW=%d][COL=%d]=%c\n",j,i,playground[j][i]);
-			if (playground[j][i] != WATER)
+			if (playground[j][i] >= 'a' && playground[j][i] <= 'p')
 			{
-				if (playground[j][i] >= 'a' && playground[j][i] <= 'p')
-				{
-					error = 1;
-					j = limit;
-					k = SEARCH_RADIUS;
-				}
+				error = 1;
+				j = limit;
+				k = SEARCH_RADIUS;
 			}
-
-			j++;
 		}
 
-		k++;
-		i++;
-	}*/
+		j++;
+	}
+
+	k++;
+	i++;
+}*/
 
 // 	return error;
 // }
@@ -804,19 +804,16 @@ void getLastCell(char coords[], char cell[])
 {
 	int i;
 	int j;
-	int underScorePosition;
 
 	i = 0;
 	j = 0;
-	underScorePosition = 0;
 
 	while (coords[i] != COORD_SEPARATOR)
 	{
-		underScorePosition++;
 		i++;
 	}
 
-	i = underScorePosition + 1;
+	i++;
 
 	while (coords[i] != '\0')
 	{

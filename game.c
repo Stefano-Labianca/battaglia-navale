@@ -10,6 +10,7 @@ char userChoice();
 
 void mainLoop();
 void showMenu();
+int fileChoice();
 
 int main()
 {
@@ -51,7 +52,7 @@ void mainLoop()
 {
     int end = 0;
     char choice = ' ';
-
+    int numFile;
     while (end == 0)
     {
         showMenu();
@@ -59,12 +60,14 @@ void mainLoop()
 
         if (choice == '1')
         {
-            newGame();
+            numFile = fileChoice();
+            newGame(numFile);
         }
 
         else if (choice == '2')
         {
-            showGameSlots();
+            numFile = fileChoice();
+            //loadGame(numFile)
             // TODO: Gestione del caricamento dei dati di una partita salvata
         }
 
@@ -121,4 +124,17 @@ char userChoice()
     } while (input < '1' || input > '4');
     
     return input;
+}
+
+
+int fileChoice()
+{
+    int numFile;
+     do
+    {
+        printf("  Inserisci il numero di salvataggio (da 1 a 7)");
+        scanf("%d", &numFile);
+        fflush(stdin);
+    } while (numFile < 1 || numFile > 7);
+    return numFile;
 }

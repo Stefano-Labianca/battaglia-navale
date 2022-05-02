@@ -93,13 +93,13 @@ Round newTurn(Round round)
     {
         choice = nextMoveChoice();
 
-        if (choice == 1)
+        if (choice == '1')
         {
             row = rowChoice();
             column = columnChoice();
             round = hit(row, column, round);
         }
-        else if (choice == 2)
+        else if (choice == '2')
         {
             if (activePlayerLongShot > 0)
             {
@@ -114,7 +114,7 @@ Round newTurn(Round round)
                 printf("\nErrore: non hai colpi a largo raggio a disposizione\n");
             }
         }
-        else if (choice == 3)
+        else if (choice == '3')
         {
             if (turn > 10)
             {
@@ -146,7 +146,7 @@ Round newTurn(Round round)
                 printf("\n Errore: Sara' possibile utilizzare il bombardamento aereo tra %d\n", 11 - turn);
             }
         }
-        else if (choice == 4)
+        else if (choice == '4')
         {
             if (activePlayerRadar > 0)
             {
@@ -161,7 +161,7 @@ Round newTurn(Round round)
                 printf("\nErrore: non hai il radar a disposizione\n");
             }
         }
-        else if (choice == 5)
+        else if (choice == '5')
         {
             // salvataggio
             // torna al menù principale

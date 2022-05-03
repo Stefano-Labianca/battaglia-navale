@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./utility/rule_controller/rule_controller.h"
-#include "./utility/save/save_game.h"
-#include "./utility/play/newGame/newGame.h"
-#include "./utility/maps_controller/MapsController.h"
+#include "../utility/rule_controller/rule_controller.h"
+#include "../utility/save/save_game.h"
+#include "../utility/play/newGame/newGame.h"
+// #include "./utility/maps_controller/MapsController.h"
 
 char userChoice();
 
@@ -122,7 +122,7 @@ char userChoice()
         scanf("%c", &input);
         fflush(stdin);
     } while (input < '1' || input > '4');
-    
+
     return input;
 }
 

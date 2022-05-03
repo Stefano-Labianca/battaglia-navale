@@ -1,8 +1,10 @@
 #ifndef _SHIP_H
 #define _SHIP_H
 
-#include "../../global/GlobalConstants.h"
-#include "../../utility/converter/converter.h"
+#include "../../utility/checker/Checker.h"
+// #include "../../global/GlobalConstants.h"
+// #include "../player/Player.h"
+
 
 typedef struct Ship {
 	char label;

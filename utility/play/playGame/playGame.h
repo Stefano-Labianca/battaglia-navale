@@ -2,7 +2,6 @@
 #define _PLAY_GAME_H
 
 #include "../../../utility/maps_controller/MapsController.h"
-#include "../../../struct/round/Round.h"
 #include "../../../utility/converter/converter.h"
 
 void playGame(Round round, int numFile);

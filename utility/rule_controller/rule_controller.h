@@ -1,7 +1,7 @@
 #ifndef _RULE_CONTROLLER_H
 #define _RULE_CONTROLLER_H
 
-#include "../../global/GlobalConstants.h"
+// #include "../../global/GlobalConstants.h"
 
 #define RULES_PATH "./rules.txt"
 #define BUFFER_SIZE 256

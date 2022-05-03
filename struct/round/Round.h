@@ -2,6 +2,9 @@
 #define _ROUND_H
 
 #include "../../struct/player/Player.h"
+#include "../../struct/ship/Ship.h"
+
+
 typedef struct Round {
     Player activePlayer;
     Player passivePlayer;

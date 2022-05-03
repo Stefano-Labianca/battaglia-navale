@@ -1,4 +1,8 @@
-#include "../../global/GlobalConstants.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "./converter.h"
+
 
 /**
  * @brief Trasforma una lettera minuscola in una lettera maiuscola. Se letter è una lettera

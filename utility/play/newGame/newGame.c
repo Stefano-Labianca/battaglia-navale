@@ -2,11 +2,7 @@
 #include <stdio.h>
 
 #include "./newGame.h"
-#include "../playGame/playGame.h"
-#include "../../../struct/round/Round.h"
-#include "../../../struct/player/Player.h"
-#include "../../../global/GlobalConstants.h"
-#include "../../maps_controller/MapsController.h"
+
 
 void newGame(int numFile)
 {

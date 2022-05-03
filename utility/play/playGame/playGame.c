@@ -19,7 +19,7 @@ void playGame(Round round, int numFile)
     whoPlay = getWhoPlay(round);
     pause = getPause(round);
     end = 0;
-    while ((pause == 0) && (end==0))
+    while ((pause == 0) && (end == 0))
     {
         if (whoPlay == 1)
         {
@@ -28,6 +28,7 @@ void playGame(Round round, int numFile)
             round = setPassivePlayer(round, player2);
             round = newTurn(round);
             pause = getPause(round);
+            printf("%d", pause);
             if (pause == 0)
             {
                 player1 = getActivePlayer(round);
@@ -42,6 +43,7 @@ void playGame(Round round, int numFile)
             round = setPassivePlayer(round, player1);
             round = newTurn(round);
             pause = getPause(round);
+            printf("%d", pause);
             if (pause == 0)
             {
                 player2 = getActivePlayer(round);
@@ -51,7 +53,7 @@ void playGame(Round round, int numFile)
         }
         if (pause == 0)
         {
-            //saveGame(round);
+            // saveGame(round);
             AvailableShipsControl = getAvailableShips(player2);
             if (AvailableShipsControl == 0)
             {
@@ -108,18 +110,19 @@ Round newTurn(Round round)
 
         if (choice == '1')
         {
-            row = rowChoice()-1;
-            column = columnChoice()-1;
+            column = columnChoice() - 1;
+            row = rowChoice() - 1;
             round = hit(row, column, round);
         }
         else if (choice == '2')
         {
             if (activePlayerLongShot > 0)
             {
-                row = rowChoice();
                 column = columnChoice();
+                row = rowChoice();
                 round = longShot(row, column, round);
                 activePlayer = setLongshots(activePlayer, (activePlayerLongShot - 1));
+                round = setActivePlayer(round, activePlayer);
             }
             else
             {
@@ -139,12 +142,14 @@ Round newTurn(Round round)
                         row = rowChoice();
                         round = airStrikeRow(round, row);
                         activePlayer = setAirstrike(activePlayer, (activePlayerAirStrike - 1));
+                        round = setActivePlayer(round, activePlayer);
                     }
                     else
                     {
                         column = columnChoice();
                         round = airStrikeColumn(round, column);
                         activePlayer = setAirstrike(activePlayer, (activePlayerAirStrike - 1));
+                        round = setActivePlayer(round, activePlayer);
                     }
                 }
                 else
@@ -156,17 +161,18 @@ Round newTurn(Round round)
             else
             {
                 error = 1;
-                printf("\n Errore: Sara' possibile utilizzare il bombardamento aereo tra %d\n", 11 - turn);
+                printf("\n Errore: Sara' possibile utilizzare il bombardamento aereo tra %d turni\n", 11 - turn);
             }
         }
         else if (choice == '4')
         {
             if (activePlayerRadar > 0)
             {
-                row = rowChoice();
                 column = columnChoice();
+                row = rowChoice();
                 round = radar(round, row, column);
                 activePlayer = setRadar(activePlayer, (activePlayerRadar - 1));
+                round = setActivePlayer(round, activePlayer);
             }
             else
             {
@@ -176,12 +182,10 @@ Round newTurn(Round round)
         }
         else if (choice == '5')
         {
-           pause=1;
-           round=setPause(round,pause);
+            pause = 1;
+            round = setPause(round, pause);
         }
     } while (error == 1);
-
-    printf("SCEGLI QUALE CELLA COLPIRE\n");
 
     return round;
 }
@@ -251,7 +255,7 @@ int columnChoice()
         printf("Inserire la colonna da colpire: ");
 
         column = getchar();
-
+        column = toUpperCase(column);
         if (column < 'A' || column > 'P')
         {
             error = 1;

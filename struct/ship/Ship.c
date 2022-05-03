@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "./ship.h"
+
+#include "./Ship.h"
 
 
 /**
@@ -523,12 +524,12 @@ Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
 	char row[MAX_ROW_LEN];
 	char direction;
 
-	printf("IL TUO PLAYGROUND FIN ORA\n");
-	showMap(playground);
+	// printf("IL TUO PLAYGROUND FIN ORA\n");
+	// showMap(playground);
 
 	do
 	{
-		printf("\n-- Insermento navi di dimensioni pari a %d --\n\n", size);
+		printf("\n-- Inserimento navi di dimensioni pari a %d --\n\n", size);
 		column = getColumn();
 		getRow(row);
 		direction = getShipDirection();

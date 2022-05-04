@@ -43,7 +43,6 @@ void playGame(Round round, int numFile)
             round = setPassivePlayer(round, player1);
             round = newTurn(round);
             pause = getPause(round);
-            printf("%d", pause);
             if (pause == 0)
             {
                 player2 = getActivePlayer(round);

@@ -112,8 +112,9 @@ Round hit(int row, int column, Round match)
 	else
 	{
 		ship = getShip(passivePlayer, (cell - START_LOWERCASE_ASCII + 1));
-
 		lifePoints = getLifePoints(ship);
+
+
 		if (lifePoints == 1)
 		{
 			printf("\n%c-%d: COLPITO E AFFONDATO!\n", (column + START_UPPERCASE_ASCII), (row + 1));
@@ -135,6 +136,7 @@ Round hit(int row, int column, Round match)
 					row++;
 				}
 			}
+
 			else
 			{
 				while (passivePlayground[row][column] != WATER)
@@ -145,6 +147,7 @@ Round hit(int row, int column, Round match)
 				}
 			}
 		}
+		
 		else
 		{
 			passivePlayground[row][column] = PLAYGROUND_HIT;
@@ -183,20 +186,25 @@ Round longShot(int row, int column, Round match)
 
 	getPlayground(passivePlayer, passivePlayground);
 	getHeatMap(activePlayer, activeHeatMap);
+
 	row--;
 	column--;
 	pivotColumn = column - 1;
 	pivotRow = row - 1;
+
 	if (pivotColumn < TABLE_MIN - 1)
 	{
 		pivotColumn = TABLE_MIN - 1;
 	}
+	
 	if (pivotRow < TABLE_MIN - 1)
 	{
 		pivotRow = TABLE_MIN - 1;
 	}
+	
 	endRow = row + 1;
 	endColumn = column + 1;
+	
 	if (endRow > TABLE_MAX - 1)
 	{
 		endRow = TABLE_MAX - 1;

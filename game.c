@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../utility/rule_controller/rule_controller.h"
-#include "../utility/save/save_game.h"
-#include "../utility/play/newGame/newGame.h"
+#include "./utility/rule_controller/rule_controller.h"
+#include "./utility/save/save_game.h"
+#include "./utility/play/newGame/newGame.h"
 // #include "./utility/maps_controller/MapsController.h"
 
 char userChoice();
@@ -130,11 +130,12 @@ char userChoice()
 int fileChoice()
 {
     int numFile;
-     do
+    
+    do
     {
         printf("  Inserisci il numero di salvataggio (da 1 a 7)");
         scanf("%d", &numFile);
         fflush(stdin);
-    } while (numFile < 1 || numFile > 7);
+    } while (numFile < FIRST_SLOT || numFile > LAST_SLOT);
     return numFile;
 }

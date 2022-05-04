@@ -13,12 +13,14 @@ void playGame(Round round, int numFile)
     int AvailableShipsControl;
     int idWinner;
     int end;
+
     player1 = getActivePlayer(round);
     player2 = getPassivePlayer(round);
     turn = getGameRound(round);
     whoPlay = getWhoPlay(round);
     pause = getPause(round);
     end = 0;
+    
     while ((pause == 0) && (end == 0))
     {
         if (whoPlay == 1)
@@ -36,6 +38,7 @@ void playGame(Round round, int numFile)
                 whoPlay = 2;
             }
         }
+
         else
         {
             printf("\n\n\nORA GIOCA IL GIOCATORE 2");
@@ -44,6 +47,7 @@ void playGame(Round round, int numFile)
             round = newTurn(round);
             pause = getPause(round);
             printf("%d", pause);
+
             if (pause == 0)
             {
                 player2 = getActivePlayer(round);
@@ -51,6 +55,7 @@ void playGame(Round round, int numFile)
                 whoPlay = 1;
             }
         }
+
         if (pause == 0)
         {
             // saveGame(round);
@@ -61,6 +66,7 @@ void playGame(Round round, int numFile)
                 printf("\n Partita finita: ha vinto il giocatore %d\n", idWinner);
                 end = 1;
             }
+
             else
             {
                 turn++;
@@ -114,6 +120,7 @@ Round newTurn(Round round)
             row = rowChoice() - 1;
             round = hit(row, column, round);
         }
+
         else if (choice == '2')
         {
             if (activePlayerLongShot > 0)
@@ -124,12 +131,14 @@ Round newTurn(Round round)
                 activePlayer = setLongshots(activePlayer, (activePlayerLongShot - 1));
                 round = setActivePlayer(round, activePlayer);
             }
+
             else
             {
                 error = 1;
                 printf("\nErrore: non hai colpi a largo raggio a disposizione\n");
             }
         }
+
         else if (choice == '3')
         {
             if (turn > 10)
@@ -144,6 +153,7 @@ Round newTurn(Round round)
                         activePlayer = setAirstrike(activePlayer, (activePlayerAirStrike - 1));
                         round = setActivePlayer(round, activePlayer);
                     }
+
                     else
                     {
                         column = columnChoice();
@@ -152,18 +162,21 @@ Round newTurn(Round round)
                         round = setActivePlayer(round, activePlayer);
                     }
                 }
+
                 else
                 {
                     error = 1;
                     printf("\nErrore: non hai il bombardamento aereo a disposizione\n");
                 }
             }
+
             else
             {
                 error = 1;
                 printf("\n Errore: Sara' possibile utilizzare il bombardamento aereo tra %d turni\n", 11 - turn);
             }
         }
+
         else if (choice == '4')
         {
             if (activePlayerRadar > 0)
@@ -174,12 +187,14 @@ Round newTurn(Round round)
                 activePlayer = setRadar(activePlayer, (activePlayerRadar - 1));
                 round = setActivePlayer(round, activePlayer);
             }
+
             else
             {
                 error = 1;
                 printf("\nErrore: non hai il radar a disposizione\n");
             }
         }
+
         else if (choice == '5')
         {
             pause = 1;
@@ -226,7 +241,6 @@ int rowChoice()
     {
         error = 0;
         printf("Inserire la riga da colpire: ");
-
         scanf("%d", &row);
 
         if (row < TABLE_MIN || row > TABLE_MAX)
@@ -256,6 +270,7 @@ int columnChoice()
 
         column = getchar();
         column = toUpperCase(column);
+
         if (column < 'A' || column > 'P')
         {
             error = 1;

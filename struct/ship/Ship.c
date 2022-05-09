@@ -524,8 +524,8 @@ Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX])
 	char row[MAX_ROW_LEN];
 	char direction;
 
-	// printf("IL TUO PLAYGROUND FIN ORA\n");
-	// showMap(playground);
+	printf("IL TUO PLAYGROUND FIN ORA\n");
+	showMap(playground);
 
 	do
 	{

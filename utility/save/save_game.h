@@ -6,8 +6,10 @@
 #ifndef _SAVE_GAME_H
 #define _SAVE_GAME_H
 
-#define PATH_SAVE_SLOTS "./utility/save/saved_game"
+#include "../../struct/round/Round.h"
 
-void showGameSlots();
+
+void saveGame(Round round, int numFile);
+
 
 #endif /* _SAVE_GAME_H */

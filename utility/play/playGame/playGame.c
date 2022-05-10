@@ -5,6 +5,7 @@
 
 void playGame(Round round, int numFile)
 {
+    system("cls");
     int turn;
     int whoPlay;
     int pause;
@@ -23,6 +24,7 @@ void playGame(Round round, int numFile)
     
     while ((pause == 0) && (end == 0))
     {
+        system("cls");
         if (whoPlay == 1)
         {
             printf("\n\n\nORA GIOCA IL GIOCATORE 1");
@@ -36,6 +38,7 @@ void playGame(Round round, int numFile)
                 player1 = getActivePlayer(round);
                 player2 = getPassivePlayer(round);
                 whoPlay = 2;
+                round = setWhoPlay(round, whoPlay);
             }
         }
 
@@ -52,12 +55,13 @@ void playGame(Round round, int numFile)
                 player2 = getActivePlayer(round);
                 player1 = getPassivePlayer(round);
                 whoPlay = 1;
+                round = setWhoPlay(round, whoPlay);
             }
         }
 
         if (pause == 0)
         {
-            // saveGame(round);
+            saveGame(round, numFile);
             AvailableShipsControl = getAvailableShips(player2);
             if (AvailableShipsControl == 0)
             {
@@ -127,6 +131,7 @@ Round newTurn(Round round)
                 column = columnChoice();
                 row = rowChoice();
                 round = longShot(row, column, round);
+                activePlayer = getActivePlayer(round);
                 activePlayer = setLongshots(activePlayer, (activePlayerLongShot - 1));
                 round = setActivePlayer(round, activePlayer);
             }
@@ -149,6 +154,7 @@ Round newTurn(Round round)
                     {
                         row = rowChoice();
                         round = airStrikeRow(round, row);
+                        activePlayer = getActivePlayer(round);
                         activePlayer = setAirstrike(activePlayer, (activePlayerAirStrike - 1));
                         round = setActivePlayer(round, activePlayer);
                     }
@@ -183,6 +189,7 @@ Round newTurn(Round round)
                 column = columnChoice();
                 row = rowChoice();
                 round = radar(round, row, column);
+                activePlayer = getActivePlayer(round);
                 activePlayer = setRadar(activePlayer, (activePlayerRadar - 1));
                 round = setActivePlayer(round, activePlayer);
             }

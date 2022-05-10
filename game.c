@@ -4,6 +4,7 @@
 #include "./utility/rule_controller/rule_controller.h"
 #include "./utility/save/save_game.h"
 #include "./utility/play/newGame/newGame.h"
+#include "../utility/play/loadGame/loadGame.h"
 // #include "./utility/maps_controller/MapsController.h"
 
 char userChoice();
@@ -67,7 +68,7 @@ void mainLoop()
         else if (choice == '2')
         {
             numFile = fileChoice();
-            //loadGame(numFile)
+            loadGame(numFile);
             // TODO: Gestione del caricamento dei dati di una partita salvata
         }
 
@@ -85,6 +86,7 @@ void mainLoop()
         {
             printf("  Comando non valido\n\n");
         }
+        system("cls");
     }
     return;
 }

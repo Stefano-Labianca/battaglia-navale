@@ -1,8 +1,8 @@
 
-#ifndef UTILITY_PLAY_LOADGAME_LOADGAME_H_
-#define UTILITY_PLAY_LOADGAME_LOADGAME_H_
+#ifndef LOADGAME_H_
+#define LOADGAME_H_
 
 void loadGame(int numFile);
 
 
-#endif /* UTILITY_PLAY_LOADGAME_LOADGAME_H_ */
+#endif /* LOADGAME_H_ */

@@ -1,45 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "./utility/rule_controller/rule_controller.h"
-#include "./utility/save/save_game.h"
-#include "./utility/play/newGame/newGame.h"
+#include "../utility/rule_controller/rule_controller.h"
+#include "../utility/play/save/save_game.h"
+#include "../utility/play/newGame/newGame.h"
 #include "../utility/play/loadGame/loadGame.h"
-// #include "./utility/maps_controller/MapsController.h"
 
 char userChoice();
 
+void showLogo();
 void mainLoop();
 void showMenu();
 int fileChoice();
 
 int main()
 {
-    printf("                                  _/|                           \n");
-    printf("                                 _|:|                           \n");
-    printf("                               _|:::|                           \n");
-    printf("                         _ /|  |::::|                           \n");
-    printf("                         |::|  |::::|                           \n");
-    printf("                         |::|  |:::::)__                        \n");
-    printf("                       /:|:::: |::::::::|                       \n");
-    printf("                      :::|::::_|::::::::|                       \n");
-    printf("                ____(:::::::::::::::::::|___ _______         __ \n");
-    printf("               (::::::::::::::::::::::::|:::|::::::|  ______|::)\n");
-    printf("     ___________\\:::::::::::::::::::::::::::|:::|___|:::::::::|\n");
-    printf("     \\::::::::::::::::::::::::::::::::::::::::::::::::::::::::|\n");
-    printf("      |:::::::::::::::::::::::::::::::::::::::::::::::::::::::| \n");
-    printf("  ____        _   _              _ _         _   _                  _      \n");
-    printf(" | __ )  __ _| |_| |_ __ _  __ _| (_) __ _  | \\ | | __ ___   ____ _| | ___ \n");
-    printf(" |  _ \\ / _` | __| __/ _` |/ _` | | |/ _` | |  \\| |/ _` \\ \\ / / _` | |/ _ \\ \n");
-    printf(" | |_) | (_| | |_| || (_| | (_| | | | (_| | | |\\  | (_| |\\ V / (_| | |  __/\n");
-    printf(" |____/ \\__,_|\\__|\\__\\__,_|\\__, |_|_|\\__,_| |_| \\_|\\__,_| \\_/ \\__,_|_|\\___|\n");
-    printf("                           |___/                                           \n");
 
     mainLoop();
 
     system("pause");
     return EXIT_SUCCESS;
 }
+
+void showLogo()
+{
+	printf("                                  _/|                           \n");
+	printf("                                 _|:|                           \n");
+	printf("                               _|:::|                           \n");
+	printf("                         _ /|  |::::|                           \n");
+	printf("                         |::|  |::::|                           \n");
+	printf("                         |::|  |:::::)__                        \n");
+	printf("                       /:|:::: |::::::::|                       \n");
+	printf("                      :::|::::_|::::::::|                       \n");
+	printf("                ____(:::::::::::::::::::|___ _______         __ \n");
+	printf("               (::::::::::::::::::::::::|:::|::::::|  ______|::)\n");
+	printf("     ___________\\:::::::::::::::::::::::::::|:::|___|:::::::::|\n");
+	printf("     \\::::::::::::::::::::::::::::::::::::::::::::::::::::::::|\n");
+	printf("      |:::::::::::::::::::::::::::::::::::::::::::::::::::::::| \n");
+	printf("  ____        _   _              _ _         _   _                  _      \n");
+	printf(" | __ )  __ _| |_| |_ __ _  __ _| (_) __ _  | \\ | | __ ___   ____ _| | ___ \n");
+	printf(" |  _ \\ / _` | __| __/ _` |/ _` | | |/ _` | |  \\| |/ _` \\ \\ / / _` | |/ _ \\ \n");
+	printf(" | |_) | (_| | |_| || (_| | (_| | | | (_| | | |\\  | (_| |\\ V / (_| | |  __/\n");
+	printf(" |____/ \\__,_|\\__|\\__\\__,_|\\__, |_|_|\\__,_| |_| \\_|\\__,_| \\_/ \\__,_|_|\\___|\n");
+	printf("                           |___/                                           \n");
+	return;
+}
+
 
 /**
  * @brief Rappresenta il menù principale a cui l'utente può accedere
@@ -54,8 +60,10 @@ void mainLoop()
     int end = 0;
     char choice = ' ';
     int numFile;
+
     while (end == 0)
     {
+    	showLogo();
         showMenu();
         choice = userChoice();
 
@@ -69,7 +77,6 @@ void mainLoop()
         {
             numFile = fileChoice();
             loadGame(numFile);
-            // TODO: Gestione del caricamento dei dati di una partita salvata
         }
 
         else if (choice == '3')
@@ -77,14 +84,9 @@ void mainLoop()
             showRules();
         }
 
-        else if (choice == '4')
-        {
-            end = 1;
-        }
-
         else
         {
-            printf("  Comando non valido\n\n");
+            end = 1;
         }
         system("cls");
     }
@@ -135,7 +137,7 @@ int fileChoice()
     
     do
     {
-        printf("  Inserisci il numero di salvataggio (da 1 a 7)");
+        printf("  Inserisci il numero di salvataggio (da 1 a 7): ");
         scanf("%d", &numFile);
         fflush(stdin);
     } while (numFile < FIRST_SLOT || numFile > LAST_SLOT);

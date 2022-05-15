@@ -1,9 +1,7 @@
 #ifndef _SHIP_H
 #define _SHIP_H
 
-#include "../../utility/checker/Checker.h"
-// #include "../../global/GlobalConstants.h"
-// #include "../player/Player.h"
+#include "../../global/GlobalConstants.h"
 
 
 typedef struct Ship {
@@ -43,5 +41,13 @@ int pullColumn(Ship ship);
 int pullRow(Ship ship);
 
 Ship createShip(int size, int number, char playground[TABLE_MAX][TABLE_MAX]);
+int isImpossible(char cell[], char direction, char coords[], int size, char playground[TABLE_MAX][TABLE_MAX]);
+int checkBoundaries(int row, int column, int size, char direction);
+int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[]);
+
+void getFirstCell(char coords[], char cell[]);
+void getLastCell(char coords[], char cell[]);
+
+void showMap(char map[TABLE_MAX][TABLE_MAX]);
 
 #endif /* _SHIP_H */

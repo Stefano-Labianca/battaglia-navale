@@ -1,7 +1,7 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "../../struct/ship/Ship.h"
+#include "../ship/Ship.h"
 
 typedef struct Player {
 	int id;
@@ -17,7 +17,6 @@ typedef struct Player {
 
 void createPlayground(char playground[TABLE_MAX][TABLE_MAX]);
 void createHeatMap(char heatMap[TABLE_MAX][TABLE_MAX]);
-void showMap(char map[TABLE_MAX][TABLE_MAX]);
 
 int getId(Player player);
 int getLongShots(Player player);

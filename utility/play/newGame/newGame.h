@@ -2,11 +2,11 @@
 #define _NEW_GAME_H
 
 #include "../playGame/playGame.h"
-// #include "../../../struct/round/Round.h"
-// #include "../../../struct/player/Player.h"
-// #include "../../../global/GlobalConstants.h"
-// #include "../../maps_controller/MapsController.h"
+#include "../../../struct/round/Round.h"
 
 void newGame(int numFile);
+Player loadVerticalAxis(Player player, int startColumn, int startRow, char label, int shipSize);
+Player loadHorizontalAxis(Player player, int startColumn, int startRow, char label, int shipSize);
+Player buildPlayerNavy(Player player);
 
 #endif /* _NEW_GAME_H */

@@ -28,7 +28,6 @@ void playGame(Round round, int numFile) {
 			round = setPassivePlayer(round, player2);
 			round = newTurn(round);
 			pause = getPause(round);
-			printf("%d", pause);
 			if (pause == 0) {
 				player1 = getActivePlayer(round);
 				player2 = getPassivePlayer(round);
@@ -60,6 +59,7 @@ void playGame(Round round, int numFile) {
 				printf("\n Partita finita: ha vinto il giocatore %d\n",
 						idWinner);
 				end = 1;
+				clickToContinue();
 			}
 
 			else {
@@ -121,8 +121,7 @@ Round newTurn(Round round) {
 				row = rowChoice();
 				round = longShot(row, column, round);
 				activePlayer = getActivePlayer(round);
-				activePlayer = setLongshots(activePlayer,
-						(activePlayerLongShot - 1));
+				activePlayer = setLongshots(activePlayer, (activePlayerLongShot - 1));
 				round = setActivePlayer(round, activePlayer);
 				clickToContinue();
 			}
@@ -142,8 +141,7 @@ Round newTurn(Round round) {
 						row = rowChoice();
 						round = airStrikeRow(round, row);
 						activePlayer = getActivePlayer(round);
-						activePlayer = setAirstrike(activePlayer,
-								(activePlayerAirStrike - 1));
+						activePlayer = setAirstrike(activePlayer, (activePlayerAirStrike - 1));
 						round = setActivePlayer(round, activePlayer);
 						clickToContinue();
 					}
@@ -152,8 +150,7 @@ Round newTurn(Round round) {
 						column = columnChoice();
 						round = airStrikeColumn(round, column);
 						activePlayer = getActivePlayer(round);
-						activePlayer = setAirstrike(activePlayer,
-								(activePlayerAirStrike - 1));
+						activePlayer = setAirstrike(activePlayer, (activePlayerAirStrike - 1));
 						round = setActivePlayer(round, activePlayer);
 						clickToContinue();
 					}
@@ -302,8 +299,7 @@ Round hit(int row, int column, Round match) {
 	getHeatMap(activePlayer, activeHeatMap);
 	cell = passivePlayground[row][column];
 
-	if (passivePlayground[row][column] == WATER
-			|| passivePlayground[row][column] == PLAYGROUND_HIT) {
+	if (passivePlayground[row][column] == WATER || passivePlayground[row][column] == PLAYGROUND_HIT) {
 		activeHeatMap[row][column] = WATER;
 		printf("\n%c-%d: ACQUA!\n", (column + START_UPPERCASE_ASCII),
 				(row + 1));
@@ -314,8 +310,7 @@ Round hit(int row, int column, Round match) {
 		lifePoints = getLifePoints(ship);
 
 		if (lifePoints == 1) {
-			printf("\n%c-%d: COLPITO E AFFONDATO!\n",
-					(column + START_UPPERCASE_ASCII), (row + 1));
+			printf("\n%c-%d: COLPITO E AFFONDATO!\n", (column + START_UPPERCASE_ASCII), (row + 1));
 			passivePlayerShips = getAvailableShips(passivePlayer);
 			passivePlayerShips--;
 			passivePlayer = setAvailableShips(passivePlayer,
@@ -404,7 +399,6 @@ Round longShot(int row, int column, Round match) {
 	if (endColumn > TABLE_MAX - 1) {
 		endColumn = TABLE_MAX - 1;
 	}
-
 	while (pivotRow <= endRow) {
 		i = pivotColumn;
 		while (i <= endColumn) {

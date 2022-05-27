@@ -38,5 +38,6 @@ Player setPlayground(Player player, char playground[TABLE_MAX][TABLE_MAX]);
 Player setHeatMap(Player player, char heatMap[TABLE_MAX][TABLE_MAX]);
 
 Player createPlayer(Player player, int id);
+void showMap(char map[TABLE_MAX][TABLE_MAX]);
 
 #endif /* _PLAYER_H */

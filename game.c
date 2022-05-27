@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../utility/rule_controller/rule_controller.h"
-#include "../utility/play/save/save_game.h"
-#include "../utility/play/newGame/newGame.h"
-#include "../utility/play/loadGame/loadGame.h"
+#include "./utility/rule_controller/rule_controller.h"
+#include "./utility/play/save/save_game.h"
+#include "./utility/play/newGame/newGame.h"
+#include "./utility/play/loadGame/loadGame.h"
 
 char userChoice();
 
@@ -15,7 +15,7 @@ int fileChoice();
 
 int main()
 {
-
+    system("title BattleShip Enhanced Edition");
     mainLoop();
 
     system("pause");
@@ -37,6 +37,7 @@ void showLogo()
 	printf("     ___________\\:::::::::::::::::::::::::::|:::|___|:::::::::|\n");
 	printf("     \\::::::::::::::::::::::::::::::::::::::::::::::::::::::::|\n");
 	printf("      |:::::::::::::::::::::::::::::::::::::::::::::::::::::::| \n");
+    printf("     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	printf("  ____        _   _              _ _         _   _                  _      \n");
 	printf(" | __ )  __ _| |_| |_ __ _  __ _| (_) __ _  | \\ | | __ ___   ____ _| | ___ \n");
 	printf(" |  _ \\ / _` | __| __/ _` |/ _` | | |/ _` | |  \\| |/ _` \\ \\ / / _` | |/ _ \\ \n");
@@ -84,9 +85,11 @@ void mainLoop()
             showRules();
         }
 
-        else
+        else if (choice == '4')
         {
             end = 1;
+        } else {
+            printf("  Comando non valido\n\n");
         }
         system("cls");
     }

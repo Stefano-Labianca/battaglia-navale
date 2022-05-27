@@ -37,7 +37,7 @@ void playGame(Round round, int numFile) {
 		}
 
 		else {
-			printf("\n\n\nORA GIOCA IL GIOCATORE 2");
+			printf("\n\n\nORA GIOCA IL GIOCATORE 2\n");
 			round = setActivePlayer(round, player2);
 			round = setPassivePlayer(round, player1);
 			round = newTurn(round);

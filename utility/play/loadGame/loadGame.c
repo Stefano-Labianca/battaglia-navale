@@ -9,6 +9,7 @@
 
 void loadGame(int numFile) {
     system("cls");
+	
 	Round round;
 	char extension[] = ".dat";
 	char strNumFile[2];
@@ -17,13 +18,16 @@ void loadGame(int numFile) {
 	numberToString(numFile, strNumFile);
 	strcat(path, strNumFile);
 	strcat(path, extension);
+
 	file = fopen(path, "rb");
 	if (file == NULL) {
 		printf("Errore nel salvataggio!\n ");
 	} else {
 		fread(&round, sizeof(Round), 1, file);
 	}
+	
 	fclose(file);
+	
 	if ((getAvailableShips(getActivePlayer(round)) > 0) && (getAvailableShips(getPassivePlayer(round)) > 0)) {
 		playGame(round,numFile);
 	} else {
@@ -32,5 +36,6 @@ void loadGame(int numFile) {
 		getchar();
 		fflush(stdin);
 	}
+	
 	return;
 }

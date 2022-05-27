@@ -48,6 +48,4 @@ int checkCollisions(char playground[TABLE_MAX][TABLE_MAX], char coords[]);
 void getFirstCell(char coords[], char cell[]);
 void getLastCell(char coords[], char cell[]);
 
-void showMap(char map[TABLE_MAX][TABLE_MAX]);
-
 #endif /* _SHIP_H */

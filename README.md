@@ -2,6 +2,8 @@
 
 Battaglia navale, con varianti rispetto al gioco originale, sviluppata in linguaggio C per l'esame di Laboratorio di Informatica a.a. 2021/2022 per il c.d.l. di Informatica.
 
+Valutazione finale: 30
+
 ## Regole della battaglia navale classica
 
 Per giocare a battaglia navale occorrono quattro tabelle (due per giocatore), tutte di uguali
@@ -67,3 +69,4 @@ A-1 vuoto, A-2 vuoto, A-3 vuoto, B-1 nave, B-2 vuoto, B-3 vuoto, C-1 vuoto, C-2 
 - [Mattia Curri](https://github.com/mattiacurri)
 - [Emanuele Fontana](https://github.com/Fonty02)
 - [Donato Festa](https://github.com/DonatoFe11)
+

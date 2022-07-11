@@ -2,7 +2,7 @@
 
 Battaglia navale, con varianti rispetto al gioco originale, sviluppata in linguaggio C per l'esame di Laboratorio di Informatica a.a. 2021/2022 per il c.d.l. di Informatica.
 
-Valutazione finale: 30
+<b>Valutazione finale</b>: 30
 
 ## Regole della battaglia navale classica
 
